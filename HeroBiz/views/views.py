@@ -20,3 +20,12 @@ def register(request):
 
 def profile(request):
     return render(request, 'users-profile.html')
+
+def appointment(request):
+    return render(request, 'appointment.html')
+
+def record(request):
+    return render(request, 'record.html')
+
+def development(request):
+    return render(request, 'development.html')
