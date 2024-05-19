@@ -16,3 +16,7 @@ def login(request):
 
 def register(request):
     return render(request, 'pages-register.html')
+
+
+def profile(request):
+    return render(request, 'users-profile.html')
