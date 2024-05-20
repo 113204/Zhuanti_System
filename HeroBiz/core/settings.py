@@ -83,11 +83,11 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         # 'ENGINE': 'django.db.backends.mysql',
-        # 'NAME': '113-113204_Zhuanti',
-        # 'USER': '113204_Zhuanti',
-        # 'PASSWORD': '!Z1h1@u3a2n&0t4i',
-        # 'HOST': '140.131.114.242',
-        # 'PORT': '3306',
+        'NAME': '113-113204_Zhuanti',
+        'USER': '113204_Zhuanti',
+        'PASSWORD': '!Z1h1@u3a2n&0t4i',
+        'HOST': '140.131.114.242',
+        'PORT': '3306',
     }
 }
 
