@@ -39,17 +39,44 @@
     <!-- Template Main CSS File -->
     <link href="/static/css/main.css" rel="stylesheet">
     <style>
-    .btn-get {
-        font-size: 16px;
-        font-weight: 400;
-        display: inline-block;
-        padding: 10px 28px;
-        border-radius: 4px;
-        transition: 0.5s;
-        color: var(--color-white);
-        background: var(--color-primary);
-        font-family: var(--font-secondary);
-    }
+        .btn-get {
+            font-size: 16px;
+            font-weight: 400;
+            display: inline-block;
+            padding: 10px 28px;
+            border-radius: 4px;
+            transition: 0.5s;
+            color: var(--color-white);
+            background: var(--color-primary);
+            font-family: var(--font-secondary);
+        }
+
+        #timer {
+            font-family: Arial, sans-serif;
+            font-size: 24px;
+            color: #333;
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        #timer2 {
+            font-family: Arial, sans-serif;
+            font-size: 24px;
+            color: #333;
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        #timer3 {
+            font-family: Arial, sans-serif;
+            font-size: 24px;
+            color: #333;
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 5px;
+        }
 
     </style>
 </head>
@@ -84,10 +111,14 @@
 
 <section id="hero-animated" class="hero-animated d-flex align-items-center">
     <h1>計時器示例</h1>
-    <p id="timer">00:00:00</p>
+    <p id="timer">00</p><p>:</p>
+    <p id="timer2">00</p><p>:</p>
+    <p id="timer3">00</p>
     <a id="startStopButton" onclick="startStopTimer()" class="btn-get">開始</a>&emsp;
     <script>
         var timerElement = document.getElementById('timer');
+        var timerElement2 = document.getElementById('timer2'); // 新增
+        var timerElement3 = document.getElementById('timer3'); // 新增
         var seconds = 0;
         var minutes = 0;
         var hours = 0;
@@ -108,7 +139,9 @@
             var displayMinutes = minutes < 10 ? "0" + minutes : minutes;
             var displayHours = hours < 10 ? "0" + hours : hours;
 
-            timerElement.textContent = displayHours + ":" + displayMinutes + ":" + displaySeconds;
+            timerElement.textContent = displayHours;
+            timerElement2.textContent = displayMinutes; // 新增
+            timerElement3.textContent = displaySeconds; // 新增
         }
 
         function startStopTimer() {
@@ -121,7 +154,6 @@
                 button.textContent = '開始';
             }
         }
-
     </script>
 
     <a id="fullscreenButton" class="btn-get">進入全螢幕</a>
