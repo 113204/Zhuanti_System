@@ -80,12 +80,13 @@
 <section id="hero-animated" class="hero-animated d-flex align-items-center">
     <h1>計時器示例</h1>
     <p id="timer">00:00:00</p>
-
+    <button id="startStopButton" onclick="startStopTimer()">開始</button>
     <script>
         var timerElement = document.getElementById('timer');
         var seconds = 0;
         var minutes = 0;
         var hours = 0;
+        var timerInterval;
 
         function updateTimer() {
             seconds++;
@@ -105,9 +106,18 @@
             timerElement.textContent = displayHours + ":" + displayMinutes + ":" + displaySeconds;
         }
 
-        setInterval(updateTimer, 1000); // 每秒更新一次
+        function startStopTimer() {
+            var button = document.getElementById('startStopButton');
+            if (button.textContent === '開始') {
+                timerInterval = setInterval(updateTimer, 1000); // 每秒更新一次
+                button.textContent = '暫停';
+            } else {
+                clearInterval(timerInterval);
+                button.textContent = '開始';
+            }
+        }
     </script>
-    
+
     <button id="fullscreenButton">進入全螢幕</button>
     <button id="exitFullscreenButton" style="display:none;">退出全螢幕</button>
 
