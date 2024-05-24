@@ -78,64 +78,81 @@
 </header><!-- End Header -->
 
 <section id="hero-animated" class="hero-animated d-flex align-items-center">
-    <div class="container d-flex flex-column justify-content-center align-items-center text-center position-relative"
-         data-aos="zoom-out">
-        <img src="/static/img/hero-carousel/hero-carousel-3.svg" class="img-fluid animated">
-        <h2>紀錄 <span>HeroBiz</span></h2>
-<!--        <div class="hero-container" data-aos="fade-in">-->
-<!--            <h1>Alex Smith</h1>-->
-<!--            <p>I'm <span class="typed" data-typed-items="Designer, Developer, Freelancer, Photographer"></span></p>-->
-<!--        </div>-->
-        <p>Et voluptate esse accusantium accusamus natus reiciendis quidem voluptates similique aut.</p>
-        <div class="d-flex">
-            <a href="#about" class="btn-get-started scrollto">開始運動</a>
-            <!--        <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>-->
-        </div>
-    </div>
+    <h1>計時器示例</h1>
+    <p id="timer">00:00:00</p>
+
+    <script>
+        var timerElement = document.getElementById('timer');
+        var seconds = 0;
+        var minutes = 0;
+        var hours = 0;
+
+        function updateTimer() {
+            seconds++;
+            if (seconds >= 60) {
+                seconds = 0;
+                minutes++;
+                if (minutes >= 60) {
+                    minutes = 0;
+                    hours++;
+                }
+            }
+
+            var displaySeconds = seconds < 10 ? "0" + seconds : seconds;
+            var displayMinutes = minutes < 10 ? "0" + minutes : minutes;
+            var displayHours = hours < 10 ? "0" + hours : hours;
+
+            timerElement.textContent = displayHours + ":" + displayMinutes + ":" + displaySeconds;
+        }
+
+        setInterval(updateTimer, 1000); // 每秒更新一次
+    </script>
+    
+    <button id="fullscreenButton">進入全螢幕</button>
+    <button id="exitFullscreenButton" style="display:none;">退出全螢幕</button>
+
+    <script>
+        document.getElementById('fullscreenButton').addEventListener('click', function() {
+            enterFullscreen();
+        });
+
+        document.getElementById('exitFullscreenButton').addEventListener('click', function() {
+            exitFullscreen();
+        });
+
+        function enterFullscreen() {
+            if (document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen();
+            } else if (document.documentElement.mozRequestFullScreen) { // Firefox
+                document.documentElement.mozRequestFullScreen();
+            } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari and Opera
+                document.documentElement.webkitRequestFullscreen();
+            } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
+                document.documentElement.msRequestFullscreen();
+            }
+            document.getElementById('fullscreenButton').style.display = 'none';
+            document.getElementById('exitFullscreenButton').style.display = 'inline-block';
+        }
+
+        function exitFullscreen() {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.mozCancelFullScreen) { // Firefox
+                document.mozCancelFullScreen();
+            } else if (document.webkitExitFullscreen) { // Chrome, Safari and Opera
+                document.webkitExitFullscreen();
+            } else if (document.msExitFullscreen) { // IE/Edge
+                document.msExitFullscreen();
+            }
+            document.getElementById('fullscreenButton').style.display = 'inline-block';
+            document.getElementById('exitFullscreenButton').style.display = 'none';
+        }
+    </script>
 </section>
 
 <main id="main">
 
-<button id="fullscreenButton">進入全螢幕</button>
-<button id="exitFullscreenButton" style="display:none;">退出全螢幕</button>
 
-<script>
-    document.getElementById('fullscreenButton').addEventListener('click', function() {
-        enterFullscreen();
-    });
-
-    document.getElementById('exitFullscreenButton').addEventListener('click', function() {
-        exitFullscreen();
-    });
-
-    function enterFullscreen() {
-        if (document.documentElement.requestFullscreen) {
-            document.documentElement.requestFullscreen();
-        } else if (document.documentElement.mozRequestFullScreen) { // Firefox
-            document.documentElement.mozRequestFullScreen();
-        } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari and Opera
-            document.documentElement.webkitRequestFullscreen();
-        } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
-            document.documentElement.msRequestFullscreen();
-        }
-        document.getElementById('fullscreenButton').style.display = 'none';
-        document.getElementById('exitFullscreenButton').style.display = 'inline-block';
-    }
-
-    function exitFullscreen() {
-        if (document.exitFullscreen) {
-            document.exitFullscreen();
-        } else if (document.mozCancelFullScreen) { // Firefox
-            document.mozCancelFullScreen();
-        } else if (document.webkitExitFullscreen) { // Chrome, Safari and Opera
-            document.webkitExitFullscreen();
-        } else if (document.msExitFullscreen) { // IE/Edge
-            document.msExitFullscreen();
-        }
-        document.getElementById('fullscreenButton').style.display = 'inline-block';
-        document.getElementById('exitFullscreenButton').style.display = 'none';
-    }
-</script>
 
 <!-- ======= Footer ======= -->
 <footer id="footer" class="footer">
