@@ -12,4 +12,5 @@ urlpatterns = [
     path('appointment/', views.appointment),
     path('record/', views.record),
     path('development/', views.development),
+    path('detect/', views.detect),
 ]

@@ -36,3 +36,7 @@ def record(request):
 
 def development(request):
     return render(request, 'development.html')
+
+
+def detect(request):
+    return render(request, 'detect.html')
