@@ -51,31 +51,14 @@
             font-family: var(--font-secondary);
         }
 
-        #timer {
+        #timer, #timer2, #timer3 {
             font-family: Arial, sans-serif;
             font-size: 24px;
             color: #333;
             background-color: #f0f0f0;
             padding: 10px;
             border-radius: 5px;
-        }
-
-        #timer2 {
-            font-family: Arial, sans-serif;
-            font-size: 24px;
-            color: #333;
-            background-color: #f0f0f0;
-            padding: 10px;
-            border-radius: 5px;
-        }
-
-        #timer3 {
-            font-family: Arial, sans-serif;
-            font-size: 24px;
-            color: #333;
-            background-color: #f0f0f0;
-            padding: 10px;
-            border-radius: 5px;
+            animation: flip 1s infinite;
         }
 
 
@@ -188,61 +171,66 @@
             }
 
     </style>
+    <a id="startStopButton" onclick="startStopTimer()" class="btn-get" style="margin-bottom: 10px;">開始</a>
+    <a id="fullscreenButton" class="btn-get">進入全螢幕</a>
+    <a id="exitFullscreenButton" style="display:none;" class="btn-get">退出全螢幕</a>
 </div>
 
 <section id="hero-animated" class="hero-animated d-flex align-items-center">
-    <h1>計時器示例</h1>
-    <p id="timer">00</p>
-    <p>:</p>
-    <p id="timer2">00</p>
-    <p>:</p>
-    <p id="timer3">00</p>
-    <a id="startStopButton" onclick="startStopTimer()" class="btn-get">開始</a>&emsp;
-    <script>
-        var timerElement = document.getElementById('timer');
-        var timerElement2 = document.getElementById('timer2'); // 新增
-        var timerElement3 = document.getElementById('timer3'); // 新增
-        var seconds = 0;
-        var minutes = 0;
-        var hours = 0;
-        var timerInterval;
+    <p><span id="timer" >00</span>:</p>
+    <p><span id="timer2" >00</span>:</p>
+    <p><span id="timer3" >00</span></p>
+        <script>
+            var timerElement = document.getElementById('timer');
+            var timerElement2 = document.getElementById('timer2');
+            var timerElement3 = document.getElementById('timer3');
+            var seconds = 0;
+            var minutes = 0;
+            var hours = 0;
+            var timerInterval;
 
-        function updateTimer() {
-            seconds++;
-            if (seconds >= 60) {
-                seconds = 0;
-                minutes++;
-                if (minutes >= 60) {
-                    minutes = 0;
-                    hours++;
+            function updateTimer() {
+                seconds++;
+                if (seconds >= 60) {
+                    seconds = 0;
+                    minutes++;
+                    if (minutes >= 60) {
+                        minutes = 0;
+                        hours++;
+                    }
+                }
+
+                var displaySeconds = seconds < 10 ? "0" + seconds : seconds;
+                var displayMinutes = minutes < 10 ? "0" + minutes : minutes;
+                var displayHours = hours < 10 ? "0" + hours : hours;
+
+                // 添加动画类
+                timerElement.textContent = displayHours;
+                timerElement.classList.add('flip-animation');
+                timerElement2.textContent = displayMinutes;
+                timerElement2.classList.add('flip-animation');
+                timerElement3.textContent = displaySeconds;
+                timerElement3.classList.add('flip-animation');
+
+                // 移除动画类，以便下一次触发动画
+                setTimeout(() => {
+                    timerElement.classList.remove('flip-animation');
+                    timerElement2.classList.remove('flip-animation');
+                    timerElement3.classList.remove('flip-animation');
+                }, 1000);
+            }
+
+            function startStopTimer() {
+                var button = document.getElementById('startStopButton');
+                if (button.textContent === '開始') {
+                    timerInterval = setInterval(updateTimer, 1000); // 每秒更新一次
+                    button.textContent = '暫停';
+                } else {
+                    clearInterval(timerInterval);
+                    button.textContent = '開始';
                 }
             }
-
-            var displaySeconds = seconds < 10 ? "0" + seconds : seconds;
-            var displayMinutes = minutes < 10 ? "0" + minutes : minutes;
-            var displayHours = hours < 10 ? "0" + hours : hours;
-
-            timerElement.textContent = displayHours;
-            timerElement2.textContent = displayMinutes; // 新增
-            timerElement3.textContent = displaySeconds; // 新增
-        }
-
-        function startStopTimer() {
-            var button = document.getElementById('startStopButton');
-            if (button.textContent === '開始') {
-                timerInterval = setInterval(updateTimer, 1000); // 每秒更新一次
-                button.textContent = '暫停';
-            } else {
-                clearInterval(timerInterval);
-                button.textContent = '開始';
-            }
-        }
-
-    </script>
-
-    <a id="fullscreenButton" class="btn-get">進入全螢幕</a>
-    <a id="exitFullscreenButton" style="display:none;" class="btn-get">退出全螢幕</a>
-
+        </script>
     <script>
         document.getElementById('fullscreenButton').addEventListener('click', function() {
             enterFullscreen();
