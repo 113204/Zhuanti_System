@@ -11,4 +11,3 @@ from django.db import models
 #     class Meta:
 #         managed = False
 #         db_table = 'User'
-#
