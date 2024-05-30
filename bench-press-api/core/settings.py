@@ -27,8 +27,11 @@ SECRET_KEY = 'django-insecure-$n+425&%ur1wv@l6%3ko^hf_n%8@1z@$kcze(&j7kpq1v6(mjt
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
 ALLOWED_HOSTS = []
+
+# 在Heroku用的連線資訊
+# DEBUG = False
+# ALLOWED_HOSTS = ['bench-press-api.com']
 
 
 # Application definition
@@ -53,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -80,12 +84,11 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.parse(
+        'postgres://uedtdgjg9is2bp:p66e3a268b29703725b594c71ea76ee9925aec5bcbed9b496bc1132dcefe03e31@cdeuajkr4sf66s.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/d8mkjccpkl6f3b')
 }
 
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -124,6 +127,9 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = 'static/'
 
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 

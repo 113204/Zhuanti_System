@@ -7,6 +7,12 @@ name = "pypi"
 django = "*"
 djangorestframework = "*"
 bootstrap4 = "*"
+psycopg = "*"
+psycopg2 = "*"
+gunicorn = "*"
+whitenoise = "*"
+dj-database-url = "*"
+psycopg2-binary = "*"
 
 [dev-packages]
 
