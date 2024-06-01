@@ -8,13 +8,13 @@ from rest_framework.response import Response
 
 from api.models import User
 
-from utils.decorators import user_login_required
+# from utils.decorators import user_login_required
 
 
 # 除了取得資料其他都用post
 # 登出
 @api_view(['POST'])
-@user_login_required
+# @user_login_required
 def logout(request):
     data = request.data
     request.session.flush()
@@ -26,15 +26,15 @@ def logout(request):
 def login(request):
     data = request.data
 
-    if 'user_id' in request.session:
+    if 'email' in request.session:
         return Response({'success': False, 'message': '已登入過'}, status=status.HTTP_403_FORBIDDEN)
 
     try:
-        user = User.objects.get(pk=data['id'], pwd=data['pwd'])
+        user = User.objects.get(pk=data['email'], password=data['password'])
     except:
         return Response({'success': False, 'message': '登入失敗，帳號或密碼錯誤'}, status=status.HTTP_404_NOT_FOUND)
 
-    request.session['user_id'] = user.id
+    request.session['email'] = user.email
     request.session.save()
     return Response({'success': True, 'message': '登入成功', 'sessionid': request.session.session_key})
 
