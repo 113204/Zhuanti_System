@@ -10,7 +10,7 @@ urlpatterns = [
     #登入、登出、註冊
     path('login/', auth_views.login),
     path('logout/', auth_views.logout),
-    path('register/', views.register),
+    path('register/', auth_views.register),
 
     path('profile/', views.profile),
     path('appointment/', views.appointment),

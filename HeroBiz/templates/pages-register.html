@@ -66,38 +66,59 @@
               <div class="card mb-3">
 
                 <div class="card-body">
-
                   <div class="pt-4 pb-2">
                     <h5 class="card-title text-center pb-0 fs-4">Create an Account</h5>
                     <p class="text-center small">Enter your personal details to create account</p>
                   </div>
 
-                  <form class="row g-3 needs-validation" novalidate>
+                  <form class="row g-3 needs-validation" novalidate method="post" >
+                    {% for message in messages %}
+                        <div class="alert alert-success">
+                            <a class="close" href="#" data-dismiss="alert"></a>
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    {% csrf_token %}
                     <div class="col-12">
-                      <label for="yourName" class="form-label">Your Name</label>
-                      <input type="text" name="name" class="form-control" id="yourName" required>
-                      <div class="invalid-feedback">Please, enter your name!</div>
+                      <label for="email" class="form-label"></label>
+                      <input type="email" name="email" class="form-control" id="email" placeholder="電子信箱" required="required">
+<!--                      <div class="invalid-feedback">Please, enter your name!</div>-->
                     </div>
 
                     <div class="col-12">
-                      <label for="yourEmail" class="form-label">Your Email</label>
-                      <input type="email" name="email" class="form-control" id="yourEmail" required>
-                      <div class="invalid-feedback">Please enter a valid Email adddress!</div>
+                      <label for="name" class="form-label"></label>
+                      <input type="text" name="name" class="form-control" id="name" placeholder="暱稱" required="required">
+<!--                      <div class="invalid-feedback">Please enter a valid Email adddress!</div>-->
                     </div>
 
                     <div class="col-12">
-                      <label for="yourUsername" class="form-label">Username</label>
-                      <div class="input-group has-validation">
-                        <span class="input-group-text" id="inputGroupPrepend">@</span>
-                        <input type="text" name="username" class="form-control" id="yourUsername" required>
-                        <div class="invalid-feedback">Please choose a username.</div>
-                      </div>
+                      <label for="pass" class="form-label"></label>
+                      <input type="password" name="pass" class="form-control" id="pass" placeholder="密碼" required="required">
+<!--                        <div class="invalid-feedback">Please choose a username.</div>-->
                     </div>
 
                     <div class="col-12">
-                      <label for="yourPassword" class="form-label">Password</label>
-                      <input type="password" name="password" class="form-control" id="yourPassword" required>
-                      <div class="invalid-feedback">Please enter your password!</div>
+                      <label for="re_pass" class="form-label"></label>
+                      <input type="password" name="re_pass" class="form-control" id="re_pass" placeholder="重複密碼" required="required">
+<!--                        <div class="invalid-feedback">Please choose a username.</div>-->
+                    </div>
+
+                    <div class="col-12">
+                      <label for="gender" class="form-label"></label>
+                      <input type="text" name="gender" class="form-control" id="gender" placeholder="性別" required="required">
+<!--                      <div class="invalid-feedback">Please enter your password!</div>-->
+                    </div>
+
+                    <div class="col-12">
+                      <label for="live" class="form-label"></label>
+                      <input type="text" name="live" class="form-control" id="live" placeholder="居住地址" required="required">
+<!--                      <div class="invalid-feedback">Please enter your password!</div>-->
+                    </div>
+
+                    <div class="col-12">
+                      <label for="phone" class="form-label"></label>
+                      <input type="text" name="phone" class="form-control" id="phone" placeholder="電話號碼，格式請照範例，ex: 0900-000-000" required="required">
+<!--                      <div class="invalid-feedback">Please enter your password!</div>-->
                     </div>
 
                     <div class="col-12">
@@ -107,8 +128,11 @@
                         <div class="invalid-feedback">You must agree before submitting.</div>
                       </div>
                     </div>
+<!--                    <div class="col-12">-->
+<!--                      <button class="btn btn-primary w-100" type="submit">註冊帳號</button>-->
+<!--                    </div>-->
                     <div class="col-12">
-                      <button class="btn btn-primary w-100" type="submit">Create Account</button>
+                      <input type="submit" name="res" id="res" class="btn btn-primary w-100" value="註冊"/>
                     </div>
                     <div class="col-12">
                       <p class="small mb-0">Already have an account? <a href="/login/">Log in</a></p>

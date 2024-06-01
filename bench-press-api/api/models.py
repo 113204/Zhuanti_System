@@ -8,9 +8,9 @@ class User(models.Model):
     name = models.CharField(max_length=45)
     password = models.CharField(max_length=45)
     gender = models.IntegerField()
-    permission = models.IntegerField()
-    address = models.CharField(max_length=150)
+    live = models.CharField(max_length=150)
     phone = models.CharField(max_length=15)
+    permission = models.IntegerField()
 
     class Meta:
         managed = False

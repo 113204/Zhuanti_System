@@ -1,4 +1,6 @@
 import requests
+
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from core.settings import API_URL as root
 from django.contrib import messages
@@ -52,8 +54,49 @@ def logout(request):
         cookies={'sessionid': request.COOKIES['sessionid']}
     )
 
-    ret = redirect('/login/')
+    ret = redirect('/')
     ret.delete_cookie('sessionid')
     ret.delete_cookie('email')
     messages.success(request, '已成功登出')
     return ret
+
+# 註冊
+def register(request):
+    if request.method == 'GET':
+        return render(request, 'pages-register.html')
+
+    email = request.POST['email']
+    name = request.POST['name']
+    password = request.POST['pass']
+    gender = request.POST['gender']
+    live = request.POST['live']
+    phone = request.POST['phone']
+
+    data = {
+        'email': email,
+        'name': name,
+        'password': password,
+        'gender': gender,
+        'live': live,
+        'phone': phone,
+        'permission': 0,
+    }
+
+    r = requests.post(
+        f'{root}/register/',
+        data=data,
+    )
+
+    result = r.json()
+
+    # ret = redirect('/login')
+    # messages.success(request, '已註冊成功')
+    # return ret
+
+    if result['success'] is True:
+        ret = redirect('/login/')
+        messages.success(request, '已註冊成功')
+        return ret
+    else:
+        messages.error(request, '信箱已被註冊或是註冊時欄位格式填寫錯誤，請重新註冊')
+        return redirect('/register/')

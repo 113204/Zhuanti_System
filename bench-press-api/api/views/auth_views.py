@@ -50,11 +50,11 @@ def register(request):
 
     # 新增使用者資料
     try:
-        User.objects.create(id=data['id'], pwd=data['pwd'], name=data['name'],
+        User.objects.create(email=data['email'], name=data['name'], password=data['password'],
                             gender=data['gender'], live=data['live'],
                             # photo=data['photo'],
                             # photo=photo_string,
-                            borth=data['borth'], purview=data['purview'])
+                            phone=data['phone'], permission=data['permission'])
 
         return Response({'success': True, 'message': '註冊成功'})
 
@@ -63,7 +63,7 @@ def register(request):
         return Response({'success': False, 'message': '此帳號已被註冊'}, status=status.HTTP_409_CONFLICT)
 
     except:
-        return Response({'success': False, 'message': '輸入格式錯誤，請確認生日及其他欄位的填寫格式'},
+        return Response({'success': False, 'message': '輸入格式錯誤，請確認電話及其他欄位的填寫格式'},
                         status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
