@@ -70,7 +70,7 @@ def register(request):
     email = request.POST['email']
     name = request.POST['name']
     password = request.POST['pass']
-    gender = request.POST['gender']
+    gender = request.POST.get('gender', None)
     live = request.POST['live']
     phone = request.POST['phone']
     re_pass = request.POST['re_pass']
@@ -78,6 +78,11 @@ def register(request):
     # 驗證電子郵件格式
     if not re.match(r'^[\w\.-]+@[\w\.-]+(\.[\w]+)+$', email):
         messages.error(request, '電子郵件格式錯誤')
+        return redirect('/register/')
+
+    # 驗證密碼格式是否符合要求]
+    if not re.match(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,}$', password):
+        messages.error(request, '密碼格式錯誤，必須包含大小寫字母、數字和特殊字符，且至少8個字符')
         return redirect('/register/')
 
     # 驗證密碼和重複密碼是否匹配
@@ -88,6 +93,11 @@ def register(request):
     # 驗證電話號碼格式
     if not re.match(r'^\d{4}-\d{3}-\d{3}$', phone):
         messages.error(request, '電話號碼格式錯誤，請輸入格式為 XXXX-XXX-XXX 的號碼')
+        return redirect('/register/')
+
+    # 驗證性別是否選擇
+    if not gender:
+        messages.error(request, '請選擇性別')
         return redirect('/register/')
 
     data = {

@@ -92,7 +92,7 @@
                     </div>
 
                     <div class="col-12">
-                      <label for="pass" class="form-label"></label>
+                      <label for="pass" class="form-label">密碼須包含大小寫英文、數字、特殊符號，至少八位</label>
                       <input type="password" name="pass" class="form-control" id="pass" placeholder="密碼" required="required">
 <!--                        <div class="invalid-feedback">Please choose a username.</div>-->
                     </div>
@@ -103,10 +103,19 @@
 <!--                        <div class="invalid-feedback">Please choose a username.</div>-->
                     </div>
 
+<!--                    <div class="col-12">-->
+<!--                      <label for="gender" class="form-label"></label>-->
+<!--                      <input type="text" name="gender" class="form-control" id="gender" placeholder="性別" required="required">-->
+<!--&lt;!&ndash;                      <div class="invalid-feedback">Please enter your password!</div>&ndash;&gt;-->
+<!--                    </div>-->
                     <div class="col-12">
-                      <label for="gender" class="form-label"></label>
-                      <input type="text" name="gender" class="form-control" id="gender" placeholder="性別" required="required">
-<!--                      <div class="invalid-feedback">Please enter your password!</div>-->
+                        <label for="gender" class="form-label"></label>
+                        <select name="gender" id="gender" class="form-select" required="required">
+                            <option value="0" disabled selected>選擇性別</option>
+                            <option value="男性">男性</option>
+                            <option value="女性">女性</option>
+                            <option value="其他">其他</option>
+                        </select>
                     </div>
 
                     <div class="col-12">
