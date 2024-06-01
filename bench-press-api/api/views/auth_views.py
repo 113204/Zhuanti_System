@@ -8,13 +8,13 @@ from rest_framework.response import Response
 
 from api.models import User
 
-# from utils.decorators import user_login_required
+from utils.decorators import user_login_required
 
 
 # 除了取得資料其他都用post
 # 登出
 @api_view(['POST'])
-# @user_login_required
+@user_login_required
 def logout(request):
     data = request.data
     request.session.flush()

@@ -83,12 +83,8 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 DATABASES = {
     'default': {
-        # 'ENGINE': 'django.db.backends.mysql',
-        'NAME': '113-113204_Zhuanti',
-        'USER': '113204_Zhuanti',
-        'PASSWORD': '!Z1h1@u3a2n&0t4i',
-        'HOST': '140.131.114.242',
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -139,3 +135,7 @@ STATICFILES_DIRS = (
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+API_URL = 'http://localhost:9001/api/'
+
+#API_URL = 'https://learn-it-well-estartup-api.herokuapp.com/api/'

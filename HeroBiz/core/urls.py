@@ -1,13 +1,17 @@
 from django.contrib import admin
 from django.urls import path
-from views import views
+from views import views, auth_views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    # path('admin/', admin.site.urls),
     path('test/', views.test),
+    #主頁
     path('', views.index),
-    path('login/', views.login),
+    #登入、登出、註冊
+    path('login/', auth_views.login),
+    path('logout/', auth_views.logout),
     path('register/', views.register),
+
     path('profile/', views.profile),
     path('appointment/', views.appointment),
     path('record/', views.record),
