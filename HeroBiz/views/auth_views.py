@@ -1,12 +1,13 @@
 import requests
+import re
 
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from core.settings import API_URL as root
 from django.contrib import messages
 
-
 root += 'auth'
+
 
 # 登入
 def login(request):
@@ -60,6 +61,7 @@ def logout(request):
     messages.success(request, '已成功登出')
     return ret
 
+
 # 註冊
 def register(request):
     if request.method == 'GET':
@@ -71,6 +73,22 @@ def register(request):
     gender = request.POST['gender']
     live = request.POST['live']
     phone = request.POST['phone']
+    re_pass = request.POST['re_pass']
+
+    # 驗證電子郵件格式
+    if not re.match(r'^[\w\.-]+@[\w\.-]+(\.[\w]+)+$', email):
+        messages.error(request, '電子郵件格式錯誤')
+        return redirect('/register/')
+
+    # 驗證密碼和重複密碼是否匹配
+    if password != re_pass:
+        messages.error(request, '密碼與重複密碼不一致')
+        return redirect('/register/')
+
+    # 驗證電話號碼格式
+    if not re.match(r'^\d{4}-\d{3}-\d{3}$', phone):
+        messages.error(request, '電話號碼格式錯誤，請輸入格式為 XXXX-XXX-XXX 的號碼')
+        return redirect('/register/')
 
     data = {
         'email': email,
