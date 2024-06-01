@@ -40,3 +40,7 @@ def development(request):
 
 def detect(request):
     return render(request, 'detect.html')
+
+
+def wisdomQA(request):
+    return render(request, 'wisdomQA.html')

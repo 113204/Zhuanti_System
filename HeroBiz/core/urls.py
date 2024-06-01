@@ -13,4 +13,5 @@ urlpatterns = [
     path('record/', views.record),
     path('development/', views.development),
     path('detect/', views.detect),
+    path('wisdomQA/', views.wisdomQA),
 ]
