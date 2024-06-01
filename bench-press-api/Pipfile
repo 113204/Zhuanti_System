@@ -15,6 +15,7 @@ dj-database-url = "*"
 psycopg2-binary = "*"
 utils = "*"
 decorators = "*"
+bcrypt = "*"
 
 [dev-packages]
 

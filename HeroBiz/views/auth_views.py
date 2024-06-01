@@ -1,5 +1,6 @@
 import requests
 import re
+import bcrypt
 
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -21,7 +22,6 @@ def login(request):
     if request.method == 'GET':
         return render(request, 'pages-login.html')
 
-    # html中輸入欄位，有id=xxx，把xxx填入至後面''中的文字內
     email = request.POST['your_name']
     password = request.POST['your_pass']
 
@@ -70,6 +70,7 @@ def register(request):
     email = request.POST['email']
     name = request.POST['name']
     password = request.POST['pass']
+    hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')  # 使用 bcrypt 加密密码
     gender = request.POST.get('gender', None)
     live = request.POST['live']
     phone = request.POST['phone']
@@ -103,7 +104,7 @@ def register(request):
     data = {
         'email': email,
         'name': name,
-        'password': password,
+        'password': hashed_password,  # 使用加密后的密码
         'gender': gender,
         'live': live,
         'phone': phone,
@@ -116,10 +117,6 @@ def register(request):
     )
 
     result = r.json()
-
-    # ret = redirect('/login')
-    # messages.success(request, '已註冊成功')
-    # return ret
 
     if result['success'] is True:
         ret = redirect('/login/')

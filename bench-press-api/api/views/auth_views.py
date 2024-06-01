@@ -1,4 +1,5 @@
 import base64
+import bcrypt
 
 from django.db import IntegrityError
 
@@ -30,13 +31,21 @@ def login(request):
         return Response({'success': False, 'message': '已登入過'}, status=status.HTTP_403_FORBIDDEN)
 
     try:
-        user = User.objects.get(pk=data['email'], password=data['password'])
-    except:
-        return Response({'success': False, 'message': '登入失敗，帳號或密碼錯誤'}, status=status.HTTP_404_NOT_FOUND)
+        user = User.objects.get(pk=data['email'])
+        hashed_password_from_db = user.password
 
-    request.session['email'] = user.email
-    request.session.save()
-    return Response({'success': True, 'message': '登入成功', 'sessionid': request.session.session_key})
+        # 使用 bcrypt 的 checkpw 函数验证密码
+        if bcrypt.checkpw(data['password'].encode('utf-8'), hashed_password_from_db.encode('utf-8')):
+            # 密码匹配，进行登录操作
+            request.session['email'] = user.email
+            request.session.save()
+            return Response({'success': True, 'message': '登入成功', 'sessionid': request.session.session_key})
+        else:
+            # 密码不匹配，返回登录页面并显示错误消息
+            return Response({'success': False, 'message': '帳號或密碼錯誤'}, status=status.HTTP_404_NOT_FOUND)
+
+    except User.DoesNotExist:
+        return Response({'success': False, 'message': '登入失敗，帳號或密碼錯誤'}, status=status.HTTP_404_NOT_FOUND)
 
 
 # 註冊
@@ -96,3 +105,4 @@ def forget(request, pk):
                 'id': user.pk
             }
     })
+

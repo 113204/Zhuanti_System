@@ -6,7 +6,7 @@ from django.db import models
 class User(models.Model):
     email = models.CharField(primary_key=True, max_length=45)
     name = models.CharField(max_length=45)
-    password = models.CharField(max_length=45)
+    password = models.CharField(max_length=150)
     gender = models.CharField(max_length=5)
     live = models.CharField(max_length=150)
     phone = models.CharField(max_length=15)
