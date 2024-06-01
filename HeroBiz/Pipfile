@@ -12,10 +12,16 @@ whitenoise = "*"
 dj-database-url = "*"
 psycopg2-binary = "*"
 bcrypt = "*"
+urllib3 = "*"
+charset-normalizer = "*"
+idna = "*"
+certifi = "*"
+pymysql = "*"
+requests = "*"
 
 [dev-packages]
 flake8 = "*"
 flake8-commas = "*"
 
 [requires]
-python_version = "3.8"
+python_version = "3.12"
