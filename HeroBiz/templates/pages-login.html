@@ -67,6 +67,13 @@
                   </div>
 
                   <form class="row g-3 needs-validation" novalidate method="post">
+                     {% for message in messages %}
+                        <div class="alert alert-success">
+                            <a class="close" href="#" data-dismiss="alert"></a>
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+
                     {% csrf_token %}
                     <div class="col-12">
                       <label for="your_name" class="form-label"></label>

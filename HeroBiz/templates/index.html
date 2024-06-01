@@ -88,6 +88,12 @@
 <section id="hero-animated" class="hero-animated d-flex align-items-center">
     <div class="container d-flex flex-column justify-content-center align-items-center text-center position-relative"
          data-aos="zoom-out">
+        {% for message in messages %}
+            <div class="alert alert-success">
+                <a class="close" href="#" data-dismiss="alert"></a>
+                {{ message }}
+            </div>
+        {% endfor %}
         <img src="/static/img/hero-carousel/hero-carousel-3.svg" class="img-fluid animated">
         <h2>開始運動 <span>HeroBiz</span></h2>
 <!--        <div class="hero-container" data-aos="fade-in">-->
