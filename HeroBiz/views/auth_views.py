@@ -1,3 +1,5 @@
+from json import JSONDecodeError
+
 import requests
 import re
 import bcrypt

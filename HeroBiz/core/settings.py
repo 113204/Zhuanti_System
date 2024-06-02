@@ -19,7 +19,6 @@ SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
@@ -30,6 +29,10 @@ SECRET_KEY = 'django-insecure-e+8c72#il&o#l6-d@8xh16m+8nht4l+q@xl%$7q58((t^9xgew
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+# 在Heroku連線時用
+# DEBUG = False
+# ALLOWED_HOSTS = ['bench-press.com']
 
 
 # Application definition
@@ -78,7 +81,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
@@ -88,7 +90,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -108,7 +109,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
@@ -119,7 +119,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
@@ -139,4 +138,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 API_URL = 'http://localhost:9001/api/'
 
-#API_URL = 'https://learn-it-well-estartup-api.herokuapp.com/api/'
+# API_URL = 'https://learn-it-well-estartup-api.herokuapp.com/api/'
