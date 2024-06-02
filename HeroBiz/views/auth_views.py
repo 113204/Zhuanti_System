@@ -43,7 +43,12 @@ def login(request):
         ret = redirect('/')
         ret.set_cookie('sessionid', result['sessionid'])
         ret.set_cookie('email', email)
+        request.session['email'] = email
+        request.session.save()
         messages.success(request, '已成功登入')
+
+        # 打印存储在 COOKIES 中的电子邮件地址
+        print("Email stored in cookies:", request.COOKIES.get('email'))
         return ret
     else:
         messages.error(request, '帳號或密碼錯誤')

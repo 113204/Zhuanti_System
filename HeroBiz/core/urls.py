@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from views import views, auth_views
+from views import views, auth_views, user_views
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
@@ -11,8 +11,9 @@ urlpatterns = [
     path('login/', auth_views.login),
     path('logout/', auth_views.logout),
     path('register/', auth_views.register),
+    #使用者資料
+    path('profile/', user_views.Udetail),
 
-    path('profile/', views.profile),
     path('appointment/', views.appointment),
     path('record/', views.record),
     path('development/', views.development),

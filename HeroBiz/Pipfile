@@ -17,6 +17,7 @@ charset-normalizer = "*"
 idna = "*"
 certifi = "*"
 requests = "*"
+utils = "*"
 
 [dev-packages]
 flake8 = "*"
