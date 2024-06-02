@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 import sys
 import os
-import pymysql
 from pathlib import Path
 
 SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
