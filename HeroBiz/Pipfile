@@ -16,7 +16,6 @@ urllib3 = "*"
 charset-normalizer = "*"
 idna = "*"
 certifi = "*"
-pymysql = "*"
 requests = "*"
 
 [dev-packages]
