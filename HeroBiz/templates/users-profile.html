@@ -108,6 +108,9 @@
                 {{ message }}
                 </div>
                 {% endfor %}
+                <div class="text-center">
+                    <button type="button" class="btn btn-primary" onclick="redirectToChangePassword()">變更密碼</button>
+                </div>
               </div>
             </div>
           </div>
@@ -258,6 +261,10 @@
                         }
                     });
                 });
+
+                function redirectToChangePassword() {
+                    window.location.href = '/changepass/';
+                }
                 </script>
 
 

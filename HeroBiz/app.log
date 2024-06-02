@@ -1,0 +1,3 @@
+2024-06-02 16:13:54,381 - INFO - Watching for file changes with StatReloader
+2024-06-02 16:14:28,130 - ERROR - Error changing password: Expecting value: line 1 column 1 (char 0)
+2024-06-02 16:17:08,351 - INFO - C:\Users\user\Zhuanti_System\HeroBiz\core\settings.py changed, reloading.
