@@ -57,14 +57,22 @@ def login(request):
 
 # 登出
 def logout(request):
+    # 删除本地会话中的 email 键
+    if 'email' in request.session:
+        del request.session['email']
+        request.session.modified = True  # 标记会话已修改
+
+    # 删除本地的 cookies
+    ret = redirect('/')
+    ret.delete_cookie('sessionid')
+    ret.delete_cookie('email')
+
+    # 向服务器发送登出请求
     requests.post(
         f'{root}/logout/',
         cookies={'sessionid': request.COOKIES['sessionid']}
     )
 
-    ret = redirect('/')
-    ret.delete_cookie('sessionid')
-    ret.delete_cookie('email')
     messages.success(request, '已成功登出')
     return ret
 
