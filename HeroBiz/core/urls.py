@@ -14,6 +14,8 @@ urlpatterns = [
     #使用者資料
     path('profile/', user_views.Udetail),
     path('changepass/', user_views.change_password),
+    # 忘記密碼
+    path('forgetpass/', auth_views.forget_password),
 
     path('appointment/', views.appointment),
     path('record/', views.record),

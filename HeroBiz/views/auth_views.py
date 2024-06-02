@@ -140,3 +140,6 @@ def register(request):
     else:
         messages.error(request, '信箱已被註冊或是註冊時欄位格式填寫錯誤，請重新註冊')
         return redirect('/register/')
+
+def forget_password(request):
+        return render(request, 'forget-pass.html')
