@@ -1,7 +1,6 @@
 from django.contrib import admin
 from django.urls import path
 from views import views, auth_views, user_views
-from views.views import favicon
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
