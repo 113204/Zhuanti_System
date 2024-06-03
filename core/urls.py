@@ -23,5 +23,4 @@ urlpatterns = [
     path('development/', views.development),
     path('detect/', views.detect),
     path('wisdomQA/', views.wisdomQA),
-    path('favicon.ico', favicon),
 ]

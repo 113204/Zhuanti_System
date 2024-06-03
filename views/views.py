@@ -48,7 +48,3 @@ def detect(request):
 def wisdomQA(request):
     return render(request, 'wisdomQA.html')
 
-def favicon(request):
-    favicon_path = os.path.join(settings.STATIC_ROOT, 'favicon.ico')
-    with open(favicon_path, 'rb') as f:
-        return HttpResponse(f.read(), content_type='image/vnd.microsoft.icon')
