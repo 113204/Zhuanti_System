@@ -26,13 +26,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-e+8c72#il&o#l6-d@8xh16m+8nht4l+q@xl%$7q58((t^9xgew'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
-#
-# ALLOWED_HOSTS = []
+DEBUG = True
+
+ALLOWED_HOSTS = []
 
 # 在Heroku連線時用
-DEBUG = False
-ALLOWED_HOSTS = ['bench-press.com']
+# DEBUG = False
+# ALLOWED_HOSTS = ['bench-press.com']
 
 
 # Application definition
