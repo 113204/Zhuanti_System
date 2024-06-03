@@ -140,7 +140,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # API_URL = 'http://localhost:9001/api/'
 
-API_URL = ' https://bench-press-api-3be6059af902.herokuapp.com/api/'
+API_URL = 'https://bench-press-api-3be6059af902.herokuapp.com/api/'
 
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # 使用数据库后端存储会话
