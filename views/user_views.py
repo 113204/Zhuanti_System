@@ -25,7 +25,7 @@ def Udetail(request):
         )
         result = r.json()
         user = result['data']
-        return render(request, 'users-profile.html', {'user': user})
+        return render(request, 'test.html', {'user': user})
 
     elif request.method == 'POST':
         name = request.POST.get('name', '')
@@ -45,7 +45,7 @@ def Udetail(request):
                 'phone': phone,
                 'about': about
             }
-            return render(request, 'users-profile.html', {'user': user, 'edit_tab_active': True})
+            return render(request, 'test.html', {'user': user, 'edit_tab_active': True})
 
         # Validate gender is not empty
         if gender == "":
@@ -57,7 +57,7 @@ def Udetail(request):
                 'phone': phone,
                 'about': about
             }
-            return render(request, 'users-profile.html', {'user': user, 'edit_tab_active': True})
+            return render(request, 'test.html', {'user': user, 'edit_tab_active': True})
 
         data = {
             'email': request.session['email'],
