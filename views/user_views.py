@@ -14,7 +14,7 @@ from django.http import HttpResponseNotAllowed
 
 
 
-@user_login_required
+# @user_login_required
 def Udetail(request):
     if request.method == 'GET':
         email = request.session['email']
