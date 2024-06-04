@@ -17,7 +17,7 @@ def login(request):
     # return render(request, 'login.html')
 
     # 設置若已經登入過，所導向的畫面
-    if 'email' in request.COOKIES:
+    if 'email' in request.session:
         messages.success(request, '已成功登入')
         return redirect('/')
 
