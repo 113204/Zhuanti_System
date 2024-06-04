@@ -12,8 +12,8 @@ urlpatterns = [
     path('logout/', auth_views.logout),
     path('register/', auth_views.register),
     #使用者資料
-    path('profile/', user_views.Udetail),
-    path('changepass/', user_views.change_password),
+    path('profile/', auth_views.Udetail),
+    path('changepass/', auth_views.change_password),
     # 忘記密碼
     path('forgetpass/', auth_views.forget_password),
 
