@@ -112,9 +112,9 @@
                     <div class="col text-center">
                         <button type="button" class="btn btn-primary" onclick="redirectToChangePassword()">變更密碼</button>
                     </div>
-<!--                    <div class="col text-center">-->
-<!--                        <button type="button" class="btn btn-primary" onclick="redirectToChangeUser()">修改資料</button>-->
-<!--                    </div>-->
+                    <div class="col text-center">
+                        <button type="button" class="btn btn-primary" onclick="redirectToChangeProfile()">返回前頁</button>
+                    </div>
                 </div>
 
               </div>
@@ -129,60 +129,12 @@
             <div class="card-body pt-3">
               <!-- Bordered Tabs -->
               <ul class="nav nav-tabs nav-tabs-bordered">
-
                 <li class="nav-item">
-                  <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">個人資料</button>
+                  <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">編輯個人資料</button>
                 </li>
-
-                <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">編輯個人資料</button>
-                </li>
-
-<!--                <li class="nav-item">-->
-<!--                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings">Settings</button>-->
-<!--                </li>-->
-
-<!--                <li class="nav-item">-->
-<!--                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">修改密碼</button>-->
-<!--                </li>-->
-
               </ul>
-              <div class="tab-content pt-2">
-
-                <div class="tab-pane fade show active profile-overview" id="profile-overview">
-                  <h5 class="card-title">關於我</h5>
-                  <p class="small fst-italic">{{ user.about }}</p>
-
-                  <h5 class="card-title">個人資料</h5>
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label ">暱稱</div>
-                    <div class="col-lg-9 col-md-8">{{ user.name }}</div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">性別</div>
-                    <div class="col-lg-9 col-md-8">{{ user.gender }}</div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">電話</div>
-                    <div class="col-lg-9 col-md-8">{{ user.phone }}</div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">居住地</div>
-                    <div class="col-lg-9 col-md-8">{{ user.live }}</div>
-                  </div>
-
-                </div>
-
-                <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
-
-                  <!-- Profile Edit Form -->
-                  <form action="/profile/" method="post" id="profile-form">
+                <form action="/editusers/" method="post" id="profile-form">
                   {% csrf_token %}
-
                   <div class="row mb-3">
                     <label for="name" class="col-md-4 col-lg-3 col-form-label">暱稱</label>
                     <div class="col-md-8 col-lg-9">
@@ -254,10 +206,9 @@
                 function redirectToChangePassword() {
                     window.location.href = '/changepass/';
                 }
-                function redirectToChangeUser() {
-                    window.location.href = '/editusers/';
+                function redirectToChangeProfile() {
+                    window.location.href = '/profile/';
                 }
-
                 </script>
 
 

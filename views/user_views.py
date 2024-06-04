@@ -14,14 +14,14 @@ from django.http import HttpResponseNotAllowed
 
 
 
-# @user_login_required
+@user_login_required
 def Udetail(request):
     if request.method == 'GET':
-        email = request.session['email']
+        email = request.COOKIES['email']
         r = requests.get(
             f'{root}user/detail/',
             params={'email': email},
-            cookies={'sessionid': request.session['sessionid']}
+            cookies={'sessionid': request.COOKIES['sessionid']}
         )
         result = r.json()
         user = result['data']
@@ -60,7 +60,7 @@ def Udetail(request):
             return render(request, 'users-profile.html', {'user': user, 'edit_tab_active': True})
 
         data = {
-            'email': request.session['email'],
+            'email': request.COOKIES['email'],
             'name': name,
             'gender': gender,
             'live': live,
@@ -72,7 +72,7 @@ def Udetail(request):
             r = requests.post(
                 f'{root}user/detail/edit/',
                 data=data,
-                cookies={'sessionid': request.session['sessionid']}
+                cookies={'sessionid': request.COOKIES['sessionid']}
             )
             result = r.json()
 

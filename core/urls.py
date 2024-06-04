@@ -14,6 +14,8 @@ urlpatterns = [
     #使用者資料
     path('profile/', user_views.Udetail),
     path('changepass/', user_views.change_password),
+    # path('editusers/', user_views.EditUserDetail),
+
     # 忘記密碼
     path('forgetpass/', auth_views.forget_password),
 
