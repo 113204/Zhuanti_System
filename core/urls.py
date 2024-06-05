@@ -13,7 +13,7 @@ urlpatterns = [
     path('register/', auth_views.register),
     #使用者資料
     path('profile/', user_views.Udetail),
-    path('changepass/', user_views.change_password),
+    path('changepass/', user_views.change_password, name='change_password'),
     # path('editusers/', user_views.EditUserDetail),
 
     # 忘記密碼

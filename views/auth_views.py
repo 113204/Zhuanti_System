@@ -52,7 +52,7 @@ def login(request):
         return ret
     else:
         messages.error(request, '帳號或密碼錯誤')
-        return redirect('/login/')
+        return redirect('/login')
 
 
 # 登出
@@ -94,27 +94,27 @@ def register(request):
     # 驗證電子郵件格式
     if not re.match(r'^[\w\.-]+@[\w\.-]+(\.[\w]+)+$', email):
         messages.error(request, '電子郵件格式錯誤')
-        return redirect('/register/')
+        return redirect('/register')
 
     # 驗證密碼格式是否符合要求]
     if not re.match(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,}$', password):
         messages.error(request, '密碼格式錯誤，必須包含大小寫字母、數字和特殊字符，且至少8個字符')
-        return redirect('/register/')
+        return redirect('/register')
 
     # 驗證密碼和重複密碼是否匹配
     if password != re_pass:
         messages.error(request, '密碼與重複密碼不一致')
-        return redirect('/register/')
+        return redirect('/register')
 
     # 驗證電話號碼格式
     if not re.match(r'^\d{4}-\d{3}-\d{3}$', phone):
         messages.error(request, '電話號碼格式錯誤，請輸入格式為 XXXX-XXX-XXX 的號碼')
-        return redirect('/register/')
+        return redirect('/register')
 
     # 驗證性別是否選擇
     if not gender:
         messages.error(request, '請選擇性別')
-        return redirect('/register/')
+        return redirect('/register')
 
     data = {
         'email': email,
@@ -134,12 +134,12 @@ def register(request):
     result = r.json()
 
     if result['success'] is True:
-        ret = redirect('/login/')
+        ret = redirect('/login')
         messages.success(request, '已註冊成功')
         return ret
     else:
         messages.error(request, '信箱已被註冊或是註冊時欄位格式填寫錯誤，請重新註冊')
-        return redirect('/register/')
+        return redirect('/register')
 
 def forget_password(request):
         return render(request, 'forget-pass.html')
