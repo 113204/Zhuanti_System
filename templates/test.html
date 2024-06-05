@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!--{% load static %}-->
 <html lang="en">
 
 <head>
@@ -35,23 +34,15 @@
     <!-- <link href="/static/css/variables-purple.css" rel="stylesheet"> -->
     <!-- <link href="/static/css/variables-red.css" rel="stylesheet"> -->
     <!-- <link href="/static/css/variables-pink.css" rel="stylesheet"> -->
+
     <!-- Template Main CSS File -->
-    <link href="/static/css/main.css" rel="stylesheet">
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="/static/js/util.js" defer></script>
-    <script src="/static/js/script.js" defer></script>
-
-    <!-- =======================================================
-    * Template Name: HeroBiz
-    * Template URL: https://bootstrapmade.com/herobiz-bootstrap-business-template/
-    * Updated: Mar 17 2024 with Bootstrap v5.3.3
-    * Author: BootstrapMade.com
-    * License: https://bootstrapmade.com/license/
-    ======================================================== -->
+    <link href="/static/css/main.css" rel="stylesheet">
 </head>
 
 <body>
+
 <!-- ======= Header ======= -->
 <header id="header" class="header fixed-top" data-scrollto-offset="0">
     <div class="container-fluid d-flex align-items-center justify-content-between">
@@ -87,24 +78,53 @@
 
     </div>
 </header><!-- End Header -->
-<div class="row" style="display: flex; justify-content: space-between;">
-    <section id="hero-animated" class="hero-animated d-flex align-items-center">
-        <div class="container d-flex flex-column justify-content-center align-items-center text-center position-relative"
-             data-aos="zoom-out">
-            <div>
-                <canvas id="lineChart"></canvas>
+
+<section class="section profile">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-8">
+
+                <div class="card">
+                    <div class="card-body pt-3">
+                        <!-- Bordered Tabs -->
+                        <ul class="nav nav-tabs nav-tabs-bordered">
+
+                            <li class="nav-item">
+                                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">
+                                    折線圖
+                                </button>
+                            </li>
+
+                        </ul>
+                        <div class="tab-content pt-2">
+
+
+                            <!-- Profile Edit Form -->
+                            <form action="/changepass/" method="post" id="profile-form">
+                                <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                                    <section id="hero-animated" class="hero-animated d-flex align-items-center">
+                                        <div class="container d-flex flex-column justify-content-center align-items-center text-center position-relative"
+                                             data-aos="zoom-out">
+                                            <div>
+                                                <canvas id="lineChart"></canvas>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </div>
+                            </form>
+                        </div><!-- End Bordered Tabs -->
+
+                    </div>
+                </div>
+
             </div>
         </div>
-    </section>
-    <section id="hero-animaed" class="hero-animated d-flex align-items-center">
-        <div class="container d-flex flex-column justify-content-center align-items-center text-center position-relative"
-             data-aos="zoom-out">
-            <div>
-                <canvas id="pieChart"></canvas>
-            </div>
-        </div>
-    </section>
-</div>
+    </div>
+</section>
+
+</main><!-- End #main -->
+
+<!-- ======= Footer ======= -->
 <footer id="footer" class="footer">
 
     <div class="footer-content">
@@ -187,21 +207,22 @@
 
 </footer><!-- End Footer -->
 
-<a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-<div id="preloader"></div>
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
 
 <!-- Vendor JS Files -->
+<script src="/static/vendor/apexcharts/apexcharts.min.js"></script>
 <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="/static/vendor/aos/aos.js"></script>
-<script src="/static/vendor/glightbox/js/glightbox.min.js"></script>
-<script src="/static/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-<script src="/static/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="/static/vendor/chart.js/chart.umd.js"></script>
+<script src="/static/vendor/echarts/echarts.min.js"></script>
+<script src="/static/vendor/quill/quill.js"></script>
+<script src="/static/vendor/simple-datatables/simple-datatables.js"></script>
+<script src="/static/vendor/tinymce/tinymce.min.js"></script>
 <script src="/static/vendor/php-email-form/validate.js"></script>
 
 <!-- Template Main JS File -->
 <script src="/static/js/main.js"></script>
-<!-- 第一个图表的渲染脚本 -->
+<!-- JavaScript代码 -->
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const data = {
@@ -240,49 +261,44 @@
     });
 
 </script>
-
-<!-- 第二个图表的渲染脚本 -->
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const DATA_COUNT = 5;
-        const NUMBER_CFG = { count: DATA_COUNT, min: 0, max: 100 };
-        const COLORS = [
-            'rgba(255, 99, 132, 0.5)',
-            'rgba(54, 162, 235, 0.5)',
-            'rgba(255, 206, 86, 0.5)',
-            'rgba(75, 192, 192, 0.5)',
-            'rgba(153, 102, 255, 0.5)',
-            'rgba(255, 159, 64, 0.5)'
-        ];
+                       document.addEventListener('DOMContentLoaded', function () {
+                        const DATA_COUNT = 5;
+                        const NUMBER_CFG = { count: DATA_COUNT, min: 0, max: 100 };
+                        const COLORS = [
+                            'rgba(255, 99, 132, 0.5)',
+                            'rgba(54, 162, 235, 0.5)',
+                            'rgba(255, 206, 86, 0.5)',
+                            'rgba(75, 192, 192, 0.5)',
+                            'rgba(153, 102, 255, 0.5)',
+                            'rgba(255, 159, 64, 0.5)'
+                        ];
 
-        const data = {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple'],
-            datasets: [
-                {
-                    label: 'Dataset 1',
-                    data: Utils.numbers(NUMBER_CFG),
-                    backgroundColor: COLORS,
-                }
-            ]
-        };
-        const config = {
-            type: 'pie',
-            data: data,
-            options: {
-                responsive: true,
-            }
-        };
+                        const data = {
+                            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple'],
+                            datasets: [
+                                {
+                                    label: 'Dataset 1',
+                                    data: Utils.numbers(NUMBER_CFG),
+                                    backgroundColor: COLORS,
+                                }
+                            ]
+                        };
+                        const config = {
+                            type: 'pie',
+                            data: data,
+                            options: {
+                                responsive: true,
+                            }
+                        };
 
-        const myChart = new Chart(
-            document.getElementById('pieChart'),
-            config
-        );
-    });
-
+                        const myChart = new Chart(
+                            document.getElementById('pieChart'),
+                            config
+                        );
+                    });
 
 </script>
-</div>
-</section>
 
 </body>
 
