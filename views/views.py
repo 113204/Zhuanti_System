@@ -2,9 +2,12 @@ import requests
 from django.forms import models
 from django import forms
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, StreamingHttpResponse
 from django.conf import settings
 import os
+import cv2
+import threading
+from views.camera import Posedetect
 
 
 def index(request):
@@ -41,8 +44,19 @@ def development(request):
     return render(request, 'development.html')
 
 
+def detect1(request):
+	return render(request, 'detect.html')
+
+
 def detect(request):
-    return render(request, 'detect.html')
+    return StreamingHttpResponse(gen(Posedetect()),
+                                 content_type='multipart/x-mixed-replace; boundary=frame')
+
+def gen(camera):
+	while True:
+		frame = camera.get_frame()
+		yield (b'--frame\r\n'
+				b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 
 
 def wisdomQA(request):

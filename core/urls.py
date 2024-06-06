@@ -23,5 +23,6 @@ urlpatterns = [
     path('record/', views.record),
     path('development/', views.development),
     path('detect/', views.detect),
+    path('detect1/', views.detect1),
     path('wisdomQA/', views.wisdomQA),
 ]
