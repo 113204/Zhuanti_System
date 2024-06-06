@@ -87,7 +87,7 @@ def register(request):
     password = request.POST['pass']
     hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')  # 使用 bcrypt 加密密码
     gender = request.POST.get('gender', None)
-    live = request.POST['live']
+    # live = request.POST['live']
     phone = request.POST['phone']
     re_pass = request.POST['re_pass']
 
@@ -121,7 +121,7 @@ def register(request):
         'name': name,
         'password': hashed_password,  # 使用加密后的密码
         'gender': gender,
-        'live': live,
+        # 'live': live,
         'phone': phone,
         'permission': 0,
     }

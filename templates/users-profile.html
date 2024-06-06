@@ -164,14 +164,14 @@
                   </div>
 
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label">電話</div>
+                    <div class="col-lg-3 col-md-4 label">緊急連絡人電話</div>
                     <div class="col-lg-9 col-md-8">{{ user.phone }}</div>
                   </div>
 
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">居住地</div>
-                    <div class="col-lg-9 col-md-8">{{ user.live }}</div>
-                  </div>
+<!--                  <div class="row">-->
+<!--                    <div class="col-lg-3 col-md-4 label">居住地</div>-->
+<!--                    <div class="col-lg-9 col-md-8">{{ user.live }}</div>-->
+<!--                  </div>-->
 
                 </div>
 
@@ -204,18 +204,18 @@
                     <div class="invalid-feedback">請選擇性別。</div>
                   </div>
                   <div class="row mb-4">
-                    <label for="phone" class="col-md-4 col-lg-3 col-form-label">電話</label>
+                    <label for="phone" class="col-md-4 col-lg-3 col-form-label">緊急連絡人電話</label>
                     <div class="col-md-8 col-lg-9">
                       <input name="phone" type="text" class="form-control" id="phone" value="{{ user.phone }}">
                       <div class="invalid-feedback">請輸入有效的電話號碼。</div>
                     </div>
                   </div>
-                  <div class="row mb-3">
-                    <label for="live" class="col-md-4 col-lg-3 col-form-label">居住地</label>
-                    <div class="col-md-8 col-lg-9">
-                      <input name="live" type="text" class="form-control" id="live" value="{{ user.live }}">
-                    </div>
-                  </div>
+<!--                  <div class="row mb-3">-->
+<!--                    <label for="live" class="col-md-4 col-lg-3 col-form-label">居住地</label>-->
+<!--                    <div class="col-md-8 col-lg-9">-->
+<!--                      <input name="live" type="text" class="form-control" id="live" value="{{ user.live }}">-->
+<!--                    </div>-->
+<!--                  </div>-->
                   <div class="text-center">
                     <button type="submit" class="btn btn-primary">儲存變更</button>
                   </div>

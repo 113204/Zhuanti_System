@@ -41,7 +41,7 @@ def Udetail(request):
             user = {
                 'name': name,
                 'gender': gender,
-                'live': live,
+                # 'live': live,
                 'phone': phone,
                 'about': about
             }
@@ -53,7 +53,7 @@ def Udetail(request):
             user = {
                 'name': name,
                 'gender': gender,
-                'live': live,
+                # 'live': live,
                 'phone': phone,
                 'about': about
             }
@@ -63,7 +63,7 @@ def Udetail(request):
             'email': request.COOKIES['email'],
             'name': name,
             'gender': gender,
-            'live': live,
+            # 'live': live,
             'phone': phone,
             'about': about
         }
