@@ -2,7 +2,7 @@ import requests
 from django.forms import models
 from django import forms
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, StreamingHttpResponse
 from django.conf import settings
 import os
 from utils.decorators import user_login_required
