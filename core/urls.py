@@ -21,7 +21,12 @@ urlpatterns = [
 
     path('appointment/', views.appointment),
     path('record/', views.record),
+    # 開發團隊
     path('development/', views.development),
-    path('detect/', views.detect),
+
+    # 健身監測
+    path('detect/', views.detect, name='detect'),
+
+    # 智慧問答
     path('wisdomQA/', views.wisdomQA),
 ]

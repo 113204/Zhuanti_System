@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.conf import settings
 import os
+from utils.decorators import user_login_required
 
 
 def index(request):
@@ -32,7 +33,7 @@ def profile(request):
 def appointment(request):
     return render(request, 'appointment.html')
 
-
+@user_login_required
 def record(request):
     return render(request, 'record.html')
 
@@ -41,10 +42,10 @@ def development(request):
     return render(request, 'development.html')
 
 
+@user_login_required
 def detect(request):
     return render(request, 'detect.html')
 
-
+@user_login_required
 def wisdomQA(request):
     return render(request, 'wisdomQA.html')
-
