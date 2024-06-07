@@ -8,6 +8,7 @@ import os
 import cv2
 import threading
 from views.camera import Posedetect
+from utils.decorators import user_login_required
 
 
 def index(request):
@@ -44,10 +45,12 @@ def development(request):
     return render(request, 'development.html')
 
 
+@user_login_required
 def detect1(request):
     return render(request, 'detect.html')
 
 
+@user_login_required
 def detect(request):
     return StreamingHttpResponse(gen(Posedetect()),
                                  content_type='multipart/x-mixed-replace; boundary=frame')
