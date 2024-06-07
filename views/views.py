@@ -45,20 +45,20 @@ def development(request):
 
 
 def detect1(request):
-	return render(request, 'detect.html')
+    return render(request, 'detect.html')
 
 
 def detect(request):
     return StreamingHttpResponse(gen(Posedetect()),
                                  content_type='multipart/x-mixed-replace; boundary=frame')
 
+
 def gen(camera):
-	while True:
-		frame = camera.get_frame()
-		yield (b'--frame\r\n'
-				b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
+    while True:
+        frame = camera.get_frame()
+        yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 
 
 def wisdomQA(request):
     return render(request, 'wisdomQA.html')
-
