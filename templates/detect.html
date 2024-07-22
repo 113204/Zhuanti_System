@@ -96,7 +96,7 @@
 
 <!-- 伸縮bar -->
 <div class="sidebar-contact" style="z-index:2;">
-    <div class="toggle"></div>
+    <!-- <div class="toggle"></div> -->
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="/static/js/studyroomtitle.js"></script>
     <style>
@@ -182,7 +182,8 @@
     <p><span id="timer2" >00</span>:</p>
     <p><span id="timer3" >00</span></p> -->
     <div class="webcam">
-        <img src="{% url 'detect' %}" width="640">
+        <img src="{% url 'detect1' %}" width="480">
+        <p>{{counter}}</p>
     </div>
         <script>
             var timerElement = document.getElementById('timer');

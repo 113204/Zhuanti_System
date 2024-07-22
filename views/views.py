@@ -6,10 +6,11 @@ from django.http import HttpResponse, StreamingHttpResponse
 from django.conf import settings
 import os
 from utils.decorators import user_login_required
+from views.camera import Posedetect
 
 
 def index(request):
-    return render(request, 'index.html')
+    return render(request, 'index.html')    
 
 
 def test(request):
@@ -44,7 +45,21 @@ def development(request):
 
 @user_login_required
 def detect(request):
-    return render(request, 'detect.html')
+
+    pose_detect = Posedetect()
+    counter = pose_detect.counter
+    return render(request, 'detect.html', locals())
+
+def gen(camera):
+	while True:
+		frame = camera.get_frame()
+		yield (b'--frame\r\n'
+				b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
+
+@user_login_required
+def detect1(request):
+    return StreamingHttpResponse(gen(Posedetect()),
+                                 content_type='multipart/x-mixed-replace; boundary=frame')
 
 @user_login_required
 def wisdomQA(request):

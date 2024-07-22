@@ -25,7 +25,9 @@ urlpatterns = [
     path('development/', views.development),
 
     # 健身監測
+    path('detect1/', views.detect1, name='detect1'),
     path('detect/', views.detect, name='detect'),
+    
 
     # 智慧問答
     path('wisdomQA/', views.wisdomQA),
