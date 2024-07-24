@@ -62,5 +62,9 @@ def detect1(request):
                                  content_type='multipart/x-mixed-replace; boundary=frame')
 
 @user_login_required
+def video(request):
+    return render(request, 'video.html')
+
+@user_login_required
 def wisdomQA(request):
     return render(request, 'wisdomQA.html')

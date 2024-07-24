@@ -28,7 +28,9 @@ urlpatterns = [
     path('detect1/', views.detect1, name='detect1'),
     path('detect/', views.detect, name='detect'),
     
-
+    # 教學影片
+    path('video/', views.video),
+    
     # 智慧問答
     path('wisdomQA/', views.wisdomQA),
 ]
