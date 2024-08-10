@@ -25,6 +25,7 @@ urlpatterns = [
     # 文章列表
     path('post/', post_views.Post),
     path('post/detail/<int:no>/', post_views.PostDetail, name='post_detail'),
+
     # 開發團隊
     path('development/', views.development),
 

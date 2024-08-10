@@ -30,18 +30,29 @@ def Post(request):
 # 文章內文
 @user_login_required
 def PostDetail(request, no):
-    # no = request.GET.get('no')
     if not no:
         return HttpResponseBadRequest("Missing 'no' parameter")
 
     post_url = f'{root}post/post/detail/{no}/'
+    post_message_url = f'{root}post/post/message/{no}/'  # 不需要额外传递 nopost
+
     try:
-        r = requests.get(
+        # 获取文章数据
+        post_response = requests.get(
             post_url,
             cookies={'sessionid': request.COOKIES.get('sessionid')}
         )
-        r.raise_for_status()
-        result = r.json()
+        post_response.raise_for_status()
+        post_result = post_response.json()
+
+        # 获取与文章相关的消息数据
+        message_response = requests.get(
+            post_message_url,
+            cookies={'sessionid': request.COOKIES.get('sessionid')}
+        )
+        message_response.raise_for_status()
+        message_result = message_response.json()
+
     except requests.RequestException as e:
         print(f'RequestException: {e}')
         return HttpResponseServerError("Request failed")
@@ -49,9 +60,16 @@ def PostDetail(request, no):
         print(f'JSONDecodeError: {e}')
         return HttpResponseServerError("Failed to decode JSON response")
 
-    if result.get('success'):
-        post = [result['data']]  # 包装成列表以匹配模板
+    # 处理文章数据
+    if post_result.get('success'):
+        post = [post_result['data']]
     else:
         post = []
 
-    return render(request, 'post_detail.html', {'post': post})
+    # 处理消息数据
+    if message_result.get('success'):
+        messages = message_result['data']
+    else:
+        messages = []  # 确保 messages 是一个空列表
+
+    return render(request, 'post_detail.html', {'post': post, 'messages': messages})
