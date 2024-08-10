@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!--{% load static %}-->
 <html lang="en">
 
 <head>
@@ -38,17 +37,10 @@
 
     <!-- Template Main CSS File -->
     <link href="/static/css/main.css" rel="stylesheet">
-
-    <!-- =======================================================
-    * Template Name: HeroBiz
-    * Template URL: https://bootstrapmade.com/herobiz-bootstrap-business-template/
-    * Updated: Mar 17 2024 with Bootstrap v5.3.3
-    * Author: BootstrapMade.com
-    * License: https://bootstrapmade.com/license/
-    ======================================================== -->
 </head>
 
 <body>
+
 <!-- ======= Header ======= -->
 <header id="header" class="header fixed-top" data-scrollto-offset="0">
     <div class="container-fluid d-flex align-items-center justify-content-between">
@@ -86,62 +78,81 @@
     </div>
 </header><!-- End Header -->
 
-    <div class="container mt-4">
+    <section class="section profile">
 
-        <div class="text-center darken-grey-text mb-4">
-            <br><br>
-        </div>
-        <div class="card mb-4">
-            <div class="card-body">
-                <br>
-                <!-- Grid row -->
-                <!--Table-->
-                <div class="vertical-menu">
-                    <table class="table table-striped">
-                        <!--Table head-->
-                        <thead>
-                        <tr>
-<!--                            <th>房號</th>-->
-                            <th>發布者</th>
-                            <th>文章標題</th>
-                            <th>
-                            <center><a href="/addpost/">新增文章</a></center>
-                            </th>
-                        </tr>
-                        </thead>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-8">
 
-                        <tbody>
-                        {% for post in post %}
-                        <tr>
-<!--                            <td>-->
-<!--                                {{post.no}}-->
-<!--                            </td>-->
-                            <td>
-                                {{post.usermail}}
-                            </td>
-                            <td>
-                                {{post.title}}
-                            </td>
-                            <td>
-                                <center><a href="{% url 'post_detail' no=post.no %}">查看文章</a></center>
-                            </td>
+                    <div class="card">
+                        <div class="card-body pt-3">
+                            {% for message in messages %}
+                            <div class="alert alert-success">
+                            <a class="close" href="#" data-dismiss="alert"></a>
+                            {{ message }}
+                            </div>
+                            {% endfor %}
+                            <!-- Bordered Tabs -->
+                            <ul class="nav nav-tabs nav-tabs-bordered">
 
-                        </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
+                                <li class="nav-item">
+                                    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">新增文章</button>
+                                </li>
+
+                            </ul>
+                            <div class="tab-content pt-2">
+
+                                <div class="tab-pane fade show active profile-overview" id="profile-overview">
+
+                                    <!-- Profile Edit Form -->
+                                    <form action="/addpost/" method="post" id="profile-form">
+                                        {% csrf_token %}
+                                        <div class="col-12">
+                                            <label for="email" class="col-md-4 col-lg-3 col-form-label">發表者</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="email" value="{{ user.name }}" readonly>
+                                            </div>
+                                        </div>
+
+<!--                                        <div class="row mb-3">-->
+<!--                                            <label for="oldpass" class="col-md-4 col-lg-3 col-form-label">原先密碼</label>-->
+<!--                                            <div class="col-md-8 col-lg-9">-->
+<!--                                                <input name="oldpass" type="password" class="form-control" id="oldpass">-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+
+                                        <!-- 在合适的位置添加密码显示/隐藏按钮 -->
+                                        <div class="col-12">
+                                            <label for="title" class="form-label">標題</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" name="title" id="title" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="text" class="form-label">內文</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" name="text" id="text" required>
+                                            </div>
+                                        </div>
+                                        <div class="text-center">
+                                            <button type="submit" class="btn btn-primary">張貼文章</button>
+                                        </div>
+                                    </form>
+
+
+                                </div>
+
+                            </div><!-- End Bordered Tabs -->
+
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
-        <hr class="my-4">
+    </section>
 
-        <div class="text-center darken-grey-text mb-4">
-        </div>
-
-    </div>
-
-<main id="main">
-
+  </main><!-- End #main -->
 
 <!-- ======= Footer ======= -->
 <footer id="footer" class="footer">
@@ -226,20 +237,50 @@
 
 </footer><!-- End Footer -->
 
-<a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-<div id="preloader"></div>
+  <!-- Vendor JS Files -->
+  <script src="/static/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/static/vendor/chart.js/chart.umd.js"></script>
+  <script src="/static/vendor/echarts/echarts.min.js"></script>
+  <script src="/static/vendor/quill/quill.js"></script>
+  <script src="/static/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="/static/vendor/tinymce/tinymce.min.js"></script>
+  <script src="/static/vendor/php-email-form/validate.js"></script>
 
-<!-- Vendor JS Files -->
-<script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="/static/vendor/aos/aos.js"></script>
-<script src="/static/vendor/glightbox/js/glightbox.min.js"></script>
-<script src="/static/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-<script src="/static/vendor/swiper/swiper-bundle.min.js"></script>
-<script src="/static/vendor/php-email-form/validate.js"></script>
+  <!-- Template Main JS File -->
+  <script src="/static/js/main.js"></script>
+  <!-- JavaScript代码 -->
+  <script>
+  document.addEventListener("DOMContentLoaded", function() {
+      // toggle the visibility of the password fields
+      const toggleNewPass = document.getElementById("toggleNewPass");
+      const newPass = document.getElementById("newpass");
+      toggleNewPass.addEventListener("click", function() {
+          const type = newPass.getAttribute("type") === "password" ? "text" : "password";
+          newPass.setAttribute("type", type);
+          this.innerHTML = type === "password" ? '<i class="bi bi-eye-slash"></i>' : '<i class="bi bi-eye"></i>';
+      });
 
-<!-- Template Main JS File -->
-<script src="/static/js/main.js"></script>
+      const toggleReNewPass = document.getElementById("toggleReNewPass");
+      const reNewPass = document.getElementById("re_newpass");
+      toggleReNewPass.addEventListener("click", function() {
+          const type = reNewPass.getAttribute("type") === "password" ? "text" : "password";
+          reNewPass.setAttribute("type", type);
+          this.innerHTML = type === "password" ? '<i class="bi bi-eye-slash"></i>' : '<i class="bi bi-eye"></i>';
+      });
+
+      // validate passwords match
+      const form = document.getElementById("profile-form");
+      form.addEventListener("submit", function(event) {
+          if (newPass.value !== reNewPass.value) {
+              event.preventDefault();
+              alert("密碼與確認密碼不同！");
+          }
+      });
+  });
+ </script>
 
 </body>
 
