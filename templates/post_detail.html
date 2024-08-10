@@ -95,39 +95,23 @@
             <div class="card-body">
                 <br>
                 <!-- Grid row -->
-                <!--Table-->
+                <!-- Table -->
                 <div class="vertical-menu">
-                    <table class="table table-striped">
-                        <!--Table head-->
-                        <thead>
-                        <tr>
-<!--                            <th>房號</th>-->
-                            <th>發布者</th>
-                            <th>文章標題</th>
-                            <th></th>
-                        </tr>
-                        </thead>
-
                         <tbody>
-                        {% for post in post %}
-                        <tr>
-<!--                            <td>-->
-<!--                                {{post.no}}-->
-<!--                            </td>-->
-                            <td>
-                                {{post.usermail}}
-                            </td>
-                            <td>
-                                {{post.title}}
-                            </td>
-                            <td>
-                                <center><a href="{% url 'post_detail' no=post.no %}">查看文章</a></center>
-                            </td>
-
-                        </tr>
-                        {% endfor %}
+                            {% for post in post %}
+                            <div class="mb-3">
+                                <div style="font-size: 2em; font-weight: bold;">{{ post.title }}</div>
+                                <div style="font-size: 0.8em; color: gray;">{{ post.usermail }}</div>
+                                <br>
+                                <div style="font-size: 1.2em;">{{ post.text }}</div>
+                                <hr>
+                            </div>
+                            {% empty %}
+                            <tr>
+                                <td colspan="3">No posts available</td>
+                            </tr>
+                            {% endfor %}
                         </tbody>
-                    </table>
                 </div>
             </div>
         </div>
