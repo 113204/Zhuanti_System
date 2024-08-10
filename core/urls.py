@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from views import views, auth_views, user_views
+from views import views, auth_views, user_views, post_views
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
@@ -21,6 +21,10 @@ urlpatterns = [
 
     path('appointment/', views.appointment),
     path('record/', views.record),
+
+    # 文章列表
+    path('post/', post_views.Post),
+
     # 開發團隊
     path('development/', views.development),
 
