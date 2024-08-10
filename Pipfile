@@ -18,6 +18,7 @@ idna = "*"
 certifi = "*"
 requests = "*"
 utils = "*"
+pyttsx3 = "*"
 
 [dev-packages]
 flake8 = "*"
