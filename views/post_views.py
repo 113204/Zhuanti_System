@@ -1,10 +1,13 @@
 import logging
+from datetime import datetime
+import pytz
 
 import bcrypt
 import requests
 import re
 
 from django.contrib import messages
+from django.db.models import Max
 from django.shortcuts import render, redirect
 from requests import JSONDecodeError
 
@@ -25,6 +28,18 @@ def Post(request):
     )
     result = r.json()
     post = result['data']
+
+    # 设置台北时区
+    taipei_tz = pytz.timezone('Asia/Taipei')
+    for p in post:
+        if 'date' in p:
+            # 将 ISO 格式的日期时间字符串解析为 datetime 对象
+            date = datetime.fromisoformat(p['date'].replace('Z', '+00:00'))
+            # 转换为台北时区
+            date = date.astimezone(taipei_tz)
+            # 格式化为指定格式
+            p['formatted_date'] = date.strftime('%Y-%m-%d %H:%M:%S')
+
     return render(request, 'post.html', {'post': post})
 
 # 文章內文
@@ -63,16 +78,38 @@ def PostDetail(request, no):
     # 处理文章数据
     if post_result.get('success'):
         post = [post_result['data']]
+        # 转换日期为台北时间
+        taipei_tz = pytz.timezone('Asia/Taipei')
+        for p in post:
+            if 'date' in p:
+                try:
+                    date = datetime.fromisoformat(p['date'].replace('Z', '+00:00'))
+                    date = date.astimezone(taipei_tz)
+                    p['formatted_date'] = date.strftime('%Y-%m-%d %H:%M:%S')
+                except ValueError as e:
+                    print(f"Error parsing date: {e}")
+                    p['formatted_date'] = p['date']  # 如果解析失败，保留原始日期
     else:
         post = []
 
     # 处理消息数据
     if message_result.get('success'):
-        messages = message_result['data']
+        message = message_result['data']
+        # 转换评论日期为台北时间
+        for msg in message:
+            if 'date' in msg:
+                try:
+                    date = datetime.fromisoformat(msg['date'].replace('Z', '+00:00'))
+                    date = date.astimezone(taipei_tz)
+                    msg['formatted_date'] = date.strftime('%Y-%m-%d %H:%M:%S')
+                except ValueError as e:
+                    print(f"Error parsing date: {e}")
+                    msg['formatted_date'] = msg['date']  # 如果解析失败，保留原始日期
     else:
-        messages = []  # 确保 messages 是一个空列表
+        message = []  # 确保 messages 是一个空列表
 
-    return render(request, 'post_detail.html', {'post': post, 'messages': messages})
+    # 将文章数据和 no 传递给模板
+    return render(request, 'post_detail.html', {'post': post, 'message': message, 'no': no})
 
 # 新增文章
 @user_login_required
@@ -106,32 +143,14 @@ def AddPost(request):
         text = request.POST.get('text')
         usermail_str = request.COOKIES.get('email')
 
-        # 确保从 POST 请求中获取的数据
-        no_str = request.POST.get('no')
-        if no_str is not None:
-            try:
-                no = int(no_str)  # 转换为整数
-            except ValueError:
-                no = None
-        else:
-            no = None
-
-        # 生成下一个流水号（如果 no 不存在）
-        if no is None:
-            try:
-                max_no = Post.objects.order_by('-no').first()
-                next_no = max_no.no + 1 if max_no else 1
-            except Exception as e:
-                print(f'Error getting max_no: {e}')
-                next_no = 1
-        else:
-            next_no = no
+        # 获取当前日期和时间
+        current_date = datetime.now().isoformat()  # 转换为 ISO 8601 字符串格式
 
         data = {
-            'no': next_no,
             'usermail': usermail_str,
             'title': title,
             'text': text,
+            'date': current_date,  # 添加日期时间到数据中，已转换为字符串
         }
 
         try:
@@ -143,10 +162,10 @@ def AddPost(request):
             response.raise_for_status()
             result = response.json()
 
-            if result.get('success', False):
-                messages.success(request, '文章已成功新增')
-            else:
-                messages.error(request, '新增文章失败')
+            # if result.get('success', False):
+            #     messages.success(request, '文章已成功新增')
+            # else:
+            #     messages.error(request, '新增文章失败')
         except requests.RequestException as e:
             messages.error(request, f'请求失败: {str(e)}')
         except ValueError as e:
@@ -155,3 +174,99 @@ def AddPost(request):
         return redirect('/post')
 
     return render(request, 'addpost.html')
+
+
+# 新增留言
+@user_login_required
+def AddMessage(request):
+    if request.method == 'GET':
+        no = request.GET.get('no')  # 从 URL 中获取帖子编号
+        email = request.COOKIES.get('email')
+        if not email:
+            messages.error(request, '未找到用户信息')
+            return redirect('/login')
+
+        # 获取用户信息
+        try:
+            response = requests.get(
+                f'{root}user/detail/',
+                params={'email': email},
+                cookies={'sessionid': request.COOKIES.get('sessionid')}
+            )
+            response.raise_for_status()
+            result = response.json()
+            user = result.get('data', {})
+        except requests.RequestException as e:
+            messages.error(request, f'获取用户信息失败: {str(e)}')
+            user = {}
+        except ValueError as e:
+            messages.error(request, f'解析响应失败: {str(e)}')
+            user = {}
+
+        # 获取文章内容并传递给模板
+        post_url = f'{root}post/post/detail/{no}/'
+        try:
+            post_response = requests.get(
+                post_url,
+                cookies={'sessionid': request.COOKIES.get('sessionid')}
+            )
+            post_response.raise_for_status()
+            post_result = post_response.json()
+            post = post_result.get('data', {})
+        except requests.RequestException as e:
+            messages.error(request, f'获取文章信息失败: {str(e)}')
+            post = {}
+        except ValueError as e:
+            messages.error(request, f'解析响应失败: {str(e)}')
+            post = {}
+
+        # 提取 nopost 的值，确保它不是 None
+        nopost = post.get('no', no)
+        if not nopost:
+            messages.error(request, '帖子编号无效')
+            return redirect('/')
+
+        return render(request, 'addmessage.html', {'user': user, 'no': no, 'post': post, 'nopost': nopost})
+
+    if request.method == 'POST':
+        nopost = request.POST.get('nopost')  # 获取关联的帖子编号
+        text = request.POST.get('text')  # 获取评论内容
+        usermail_str = request.COOKIES.get('email')
+
+        if not nopost:
+            messages.error(request, '帖子编号无效')
+            return redirect('/')
+
+        # 获取当前日期和时间，转换为 ISO 8601 字符串格式
+        taipei_tz = pytz.timezone('Asia/Taipei')
+        current_date = datetime.now(taipei_tz).isoformat()
+
+        data = {
+            'nopost': nopost,
+            'usermail': usermail_str,
+            'text': text,
+            'date': current_date,  # 添加日期时间到数据中，已转换为字符串
+        }
+
+        try:
+            response = requests.post(
+                f'{root}post/addmessage/',
+                json=data,  # 使用 json 参数传递数据
+                cookies={'sessionid': request.COOKIES.get('sessionid')}
+            )
+            response.raise_for_status()
+            result = response.json()
+
+            if result.get('success', False):
+                messages.success(request, '评论已成功新增')
+            else:
+                messages.error(request, '新增评论失败')
+        except requests.RequestException as e:
+            messages.error(request, f'请求失败: {str(e)}')
+        except ValueError as e:
+            messages.error(request, f'解析响应失败: {str(e)}')
+
+        # 从 POST 数据中获取 nopost 的值，并重定向到帖子详情页
+        return redirect(f'/post/detail/{nopost}/')
+
+    return render(request, 'addmessage.html')

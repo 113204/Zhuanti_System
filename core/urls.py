@@ -26,6 +26,7 @@ urlpatterns = [
     path('post/', post_views.Post),
     path('post/detail/<int:no>/', post_views.PostDetail, name='post_detail'),
     path('addpost/', post_views.AddPost),
+    path('addmessage/', post_views.AddMessage, name='addmessage'),
 
     # 開發團隊
     path('development/', views.development),

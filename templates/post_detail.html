@@ -128,7 +128,10 @@
                         <tbody>
                             {% for post in post %}
                             <div class="mb-3">
-                                <div style="font-size: 2em; font-weight: bold;">{{ post.title }}</div>
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <div style="font-size: 2em; font-weight: bold;">{{ post.title }}</div>
+                                    <div style="font-size: 1em; color: gray;">{{ post.formatted_date }}</div>
+                                </div>
                                 <div style="font-size: 0.8em; color: gray;">{{ post.usermail }}</div>
                                 <br>
                                 <div style="font-size: 1.2em;">{{ post.text }}</div>
@@ -145,10 +148,10 @@
         </div>
 
         <div class="messages">
-            {% if messages %}
+            {% if message %}
                 <h2>留言</h2>
                 <ul class="message-list">
-                    {% for message in messages %}
+                    {% for message in message %}
                         <li>
                             <p><strong>{{ message.usermail }}</strong> {{ message.text }}</p>
                         </li>
@@ -157,6 +160,7 @@
             {% else %}
                 <p>暫時沒有留言！</p>
             {% endif %}
+            <th><center><a href="{% url 'addmessage' %}?no={{ no }}">新增留言</a></center></th>
         </div>
         <hr class="my-4">
 

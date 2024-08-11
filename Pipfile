@@ -19,6 +19,7 @@ certifi = "*"
 requests = "*"
 utils = "*"
 pyttsx3 = "*"
+pytz = "*"
 
 [dev-packages]
 flake8 = "*"
