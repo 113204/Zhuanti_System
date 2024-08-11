@@ -257,10 +257,10 @@ def AddMessage(request):
             response.raise_for_status()
             result = response.json()
 
-            if result.get('success', False):
-                messages.success(request, '评论已成功新增')
-            else:
-                messages.error(request, '新增评论失败')
+            # if result.get('success', False):
+            #     messages.success(request, '评论已成功新增')
+            # else:
+            #     messages.error(request, '新增评论失败')
         except requests.RequestException as e:
             messages.error(request, f'请求失败: {str(e)}')
         except ValueError as e:
