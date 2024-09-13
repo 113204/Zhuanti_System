@@ -48,6 +48,84 @@
     ======================================================== -->
 </head>
 
+<style>
+    body, html {
+      height: 100%;
+    }
+
+    .messages-box {
+      flex: 1;
+      
+    }
+
+    .messages-list {
+      padding-left: 0;
+    }
+
+    .message {
+      margin-bottom: 10px;
+      list-style: none;
+    }
+
+    .message-text {
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .sent {
+      width: 600px;
+      text-align: right;
+      float: right;
+      margin-top: 10px;
+      background-color: #31b0c7;
+      color: white;
+      align-self: flex-end;
+      clear: both;
+    }
+
+    .received {
+      width: 600px;
+      text-align: left;
+      float: left;
+      margin-top: 10px;
+      background-color: #f1f0f0;
+      align-self: flex-start;
+      clear: both;
+      
+    }
+
+    .message-form {
+      display: flex;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 10px;
+      background-color: #f8f9fa;
+    }
+
+    .message-input {
+      flex: 1;
+      border-radius: 0;
+      border-right: none;
+    }
+
+    .btn-send {
+      border-radius: 10;
+      border-color: #31b0c7;
+      background-color: #31b0c7;
+    }
+
+    .chat-container {
+      height: 500px;
+      width: 1300px;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      
+    }
+</style>
+
 <body>
 <!-- ======= Header ======= -->
 <header id="header" class="header fixed-top" data-scrollto-offset="0">
@@ -89,17 +167,59 @@
 <section id="hero-animated" class="hero-animated d-flex align-items-center">
     <div class="container d-flex flex-column justify-content-center align-items-center text-center position-relative"
          data-aos="zoom-out">
-        <img src="/static/img/hero-carousel/hero-carousel-3.svg" class="img-fluid animated">
-        <h2><b> <span>智慧</span>問答</b></h2>
-<!--        <div class="hero-container" data-aos="fade-in">-->
-<!--            <h1>Alex Smith</h1>-->
-<!--            <p>I'm <span class="typed" data-typed-items="Designer, Developer, Freelancer, Photographer"></span></p>-->
-<!--        </div>-->
-        <p>with ChatGPT.</p>
-        <div class="d-flex">
-            <a href="#about" class="btn-get-started scrollto">開始詢問</a>
-            <!--        <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>-->
-        </div>
+         <div class="chat-container" >
+            <div class="card flex-grow-1" >
+              
+              
+              <div class="card-body messages-box" >
+                
+                <ul class="list-unstyled messages-list">
+                  
+                  {% for chat in chats %}
+                    {% if chat.user == request.user %}
+          
+                      <li class="message sent">
+                    <div class="message-text" >
+                      <div class="message-sender">
+                        <b>你</b>
+                      </div>
+                      <div class="message-content">
+                        {{chat.message}}
+                      </div>
+                    </div>
+                  </li>
+          
+                  <li class="message received">
+                    <div class="message-text">
+                      <div class="message-sender">
+                        <b>健身小達人</b>
+                      </div>
+                      <div class="message-content">
+                        {{chat.response}}
+                      </div>
+                    </div>
+                  </li>
+          
+                    {% endif %}
+                  {% endfor %}
+                  
+                </ul>
+                
+              </div>
+              <br><br>
+              <br><br>
+              <br><br>
+            </div>
+            <form class="message-form">
+              {%csrf_token%}
+              <div class="input-group">
+                <input type="text" class="form-control message-input" placeholder="Type your message...">
+                <div class="input-group-append">
+                  <button type="submit" class="btn btn-primary btn-send">Send</button>
+                </div>
+              </div>
+            </form>
+          </div>
     </div>
 </section>
 
@@ -202,6 +322,75 @@
 
 <!-- Template Main JS File -->
 <script src="/static/js/main.js"></script>
+
+<script>
+    const messagesList = document.querySelector('.messages-list');
+    const messageForm = document.querySelector('.message-form');
+    const messageInput = document.querySelector('.message-input');
+  
+    messageForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+  
+      const message = messageInput.value.trim();
+      if (message.length === 0) {
+        return;
+      }
+  
+      const messageItem = document.createElement('li');
+      messageItem.classList.add('message', 'sent');
+      messageItem.innerHTML = `
+          <div class="message-text">
+              <div class="message-sender">
+                  <b>You</b>
+              </div>
+              <div class="message-content">
+                  ${message}
+              </div>
+          </div>`;
+      messagesList.appendChild(messageItem);
+      scrollToBottom(); 
+  
+      messageInput.value = '';
+  
+      fetch('', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({
+          'csrfmiddlewaretoken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+          'message': message
+        })
+      })
+        .then(response => response.json())
+        .then(data => {
+          const response = data.response;
+          const messageItem = document.createElement('li');
+          messageItem.classList.add('message', 'received');
+          messageItem.innerHTML = `
+          <div class="message-text">
+              <div class="message-sender">
+                <b>AI Chatbot</b>
+              </div>
+              <div class="message-content">
+                  ${response}
+              </div>
+          </div>
+            `;
+          messagesList.appendChild(messageItem);
+          scrollToBottom(); 
+        });
+    });
+    
+    const chatBox = document.getElementById('chatbot');
+    chatBox.scrollTop = chatBox.scrollHeight;
+</script>
+
+<script>
+    function scrollToBottom() {
+    const chatBox = document.querySelector('.chat-container');
+    chatBox.scrollTop = chatBox.scrollHeight;
+  }
+
+</script>
 
 </body>
 
