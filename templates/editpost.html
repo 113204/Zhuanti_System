@@ -104,14 +104,14 @@
                                 <form action="/editpost/{{ post.no }}/" method="post" id="profile-form">
                                     {% csrf_token %}
                                     <div class="col-12">
-                                        <label for="email" class="col-md-4 col-lg-3 col-form-label">发帖者</label>
+                                        <label for="email" class="col-md-4 col-lg-3 col-form-label">發布者</label>
                                         <div class="input-group">
                                             <input type="text" class="form-control" id="email" value="{{ post.usermail }}" readonly>
                                         </div>
                                     </div>
 
                                     <div class="col-12">
-                                        <label for="title" class="form-label">标题</label>
+                                        <label for="title" class="form-label">標題</label>
                                         <div class="input-group">
                                             <input type="text" class="form-control" name="title" id="title" value="{{ post.title }}" required>
                                         </div>
@@ -123,7 +123,7 @@
                                         </div>
                                     </div>
                                     <div class="text-center">
-                                        <button type="submit" class="btn btn-primary">保存更改</button>
+                                        <button type="submit" class="btn btn-primary">儲存更改</button>
                                     </div>
                                 </form>
 
