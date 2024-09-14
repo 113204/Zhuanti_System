@@ -125,24 +125,20 @@
                 <!-- Grid row -->
                 <!-- Table -->
                 <div class="vertical-menu">
-                        <tbody>
-                            {% for post in post %}
-                            <div class="mb-3">
-                                <div style="display: flex; justify-content: space-between; align-items: center;">
-                                    <div style="font-size: 2em; font-weight: bold;">{{ post.title }}</div>
-                                    <div style="font-size: 1em; color: gray;">{{ post.formatted_date }}</div>
-                                </div>
-                                <div style="font-size: 0.8em; color: gray;">{{ post.usermail }}</div>
-                                <br>
-                                <div style="font-size: 1.2em;">{{ post.text }}</div>
-                                <hr>
-                            </div>
-                            {% empty %}
-                            <tr>
-                                <td colspan="3">No posts available</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
+                    {% for post in post %}
+                    <div class="mb-3">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div style="font-size: 2em; font-weight: bold;">{{ post.title }}</div>
+                            <div style="font-size: 1em; color: gray;">{{ post.formatted_date }}</div>
+                        </div>
+                        <div style="font-size: 0.8em; color: gray;">{{ post.usermail }}</div>
+                        <br>
+                        <div style="font-size: 1.2em;">{{ post.text|linebreaksbr }}</div>
+                        <hr>
+                    </div>
+                    {% empty %}
+                    <p>No posts available</p>
+                    {% endfor %}
                 </div>
             </div>
         </div>
@@ -153,14 +149,14 @@
                 <ul class="message-list">
                     {% for message in message %}
                         <li>
-                            <p><strong>{{ message.usermail }}</strong> {{ message.text }}</p>
+                            <p><strong>{{ message.usermail }}</strong> {{ message.text|linebreaksbr }}</p>
                         </li>
                     {% endfor %}
                 </ul>
             {% else %}
                 <p>暫時沒有留言！</p>
             {% endif %}
-            <th><center><a href="{% url 'addmessage' %}?no={{ no }}">新增留言</a></center></th>
+            <center><a href="{% url 'addmessage' %}?no={{ no }}">新增留言</a></center>
         </div>
         <hr class="my-4">
 
