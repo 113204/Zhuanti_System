@@ -269,7 +269,7 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>發布者</th>
+                                <!-- <th>發布者</th> -->
                                 <th>標題</th>
                                 <th>日期</th>
 <!--                                <th>操作</th>-->
@@ -278,18 +278,15 @@
                         <tbody>
                             {% for post in post %}
                             <tr>
+                                <!-- <td>{{ post.usermail }}</td> -->
+                                <td>{{ post.title }}</td>
+                                <td>{{ post.date }} <!-- or {{ post.formatted_date }} if you have formatted date --></td>
                                 <td>
-                                    {{ post.usermail }}
-                                </td>
-                                <td>
-                                    {{ post.title }}
-                                </td>
-                                <td>
-                                    {{ post.date }} <!-- or {{ post.formatted_date }} if you have formatted date -->
-                                </td>
-                                <td>
-                                    <center><a href="{% url 'post_detail' no=post.no %}">查看文章</a></center>
-                                    <center><a href="{% url 'editpost' no=post.no %}">编辑文章</a></center>
+                                    <div class="text-center">
+                                        <a href="{% url 'post_detail' no=post.no %}" class="btn btn-info">查看文章</a>
+                                        <a href="{% url 'editpost' no=post.no %}" class="btn btn-warning">編輯文章</a>
+                                        <a href="{% url 'deletepost' no=post.no %}" class="btn btn-danger">刪除文章</a>
+                                    </div>
                                 </td>
                             </tr>
                             {% empty %}

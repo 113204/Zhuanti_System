@@ -28,6 +28,7 @@ urlpatterns = [
     path('addpost/', post_views.AddPost),
     path('addmessage/', post_views.AddMessage, name='addmessage'),
     path('editpost/<int:no>/', post_views.EditPost, name='editpost'),
+    path('deletepost/<int:no>/', post_views.DeletePost, name='deletepost'),
 
     # 開發團隊
     path('development/', views.development),
