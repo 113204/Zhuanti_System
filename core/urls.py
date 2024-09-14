@@ -12,7 +12,7 @@ urlpatterns = [
     path('logout/', auth_views.logout),
     path('register/', auth_views.register),
     #使用者資料
-    path('profile/', user_views.Udetail),
+    path('profile/', user_views.Udetail, name='profile'),
     path('changepass/', user_views.change_password, name='change_password'),
     # path('editusers/', user_views.EditUserDetail),
 
