@@ -18,19 +18,39 @@ from django.http import HttpResponseNotAllowed
 def Udetail(request):
     if request.method == 'GET':
         email = request.COOKIES['email']
-        r = requests.get(
-            f'{root}user/detail/',
-            params={'email': email},
-            cookies={'sessionid': request.COOKIES['sessionid']}
-        )
-        result = r.json()
-        user = result['data']
-        return render(request, 'users-profile.html', {'user': user})
+
+        # 获取用户详细信息
+        try:
+            r_user = requests.get(
+                f'{root}user/detail/',
+                params={'email': email},
+                cookies={'sessionid': request.COOKIES['sessionid']}
+            )
+            result_user = r_user.json()
+            user = result_user['data']
+        except requests.exceptions.RequestException as e:
+            logger.error(f"获取用户详细信息失败: {e}")
+            user = {}  # 如果获取用户信息失败，使用空字典
+
+        # 获取用户发布的文章
+        try:
+            r_post = requests.get(
+                f'{root}post/user/posts/',  # 使用 get_user_post 的 URL
+                params={'email': email},
+                cookies={'sessionid': request.COOKIES['sessionid']}
+            )
+            result_post = r_post.json()
+            post = result_post['data']
+        except requests.exceptions.RequestException as e:
+            logger.error(f"获取用户文章失败: {e}")
+            post = []  # 如果获取文章失败，使用空列表
+
+        return render(request, 'users-profile.html', {'user': user, 'post': post})
 
     elif request.method == 'POST':
         name = request.POST.get('name', '')
         gender = request.POST.get('gender', '')
-        live = request.POST.get('live', '')
+        # live = request.POST.get('live', '')
         phone = request.POST.get('phone', '')
         about = request.POST.get('about', '')
 
@@ -41,7 +61,6 @@ def Udetail(request):
             user = {
                 'name': name,
                 'gender': gender,
-                # 'live': live,
                 'phone': phone,
                 'about': about
             }
@@ -53,7 +72,6 @@ def Udetail(request):
             user = {
                 'name': name,
                 'gender': gender,
-                # 'live': live,
                 'phone': phone,
                 'about': about
             }
@@ -63,7 +81,6 @@ def Udetail(request):
             'email': request.COOKIES['email'],
             'name': name,
             'gender': gender,
-            # 'live': live,
             'phone': phone,
             'about': about
         }

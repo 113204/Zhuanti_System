@@ -138,9 +138,9 @@
                   <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">編輯個人資料</button>
                 </li>
 
-<!--                <li class="nav-item">-->
-<!--                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings">Settings</button>-->
-<!--                </li>-->
+                <li class="nav-item">
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-post">發布過的文章</button>
+                </li>
 
 <!--                <li class="nav-item">-->
 <!--                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">修改密碼</button>-->
@@ -151,7 +151,7 @@
 
                 <div class="tab-pane fade show active profile-overview" id="profile-overview">
                   <h5 class="card-title">關於我</h5>
-                  <p class="small fst-italic">{{ user.about }}</p>
+                  <p class="small fst-italic">{{ user.about|linebreaksbr }}</p>
 
                   <h5 class="card-title">個人資料</h5>
 
@@ -263,47 +263,42 @@
 
                 </div>
 
-<!--                <div class="tab-pane fade pt-3" id="profile-settings">-->
+                <div class="tab-pane fade pt-3" id="profile-post">
 
-<!--                  &lt;!&ndash; Settings Form &ndash;&gt;-->
-<!--                  <form>-->
+                    <!-- Articles Table -->
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <!-- <th>發布者</th> -->
+                                <th>標題</th>
+                                <th>日期</th>
+<!--                                <th>操作</th>-->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for post in post %}
+                            <tr>
+                                <!-- <td>{{ post.usermail }}</td> -->
+                                <td>{{ post.title }}</td>
+                                <td>{{ post.date }} <!-- or {{ post.formatted_date }} if you have formatted date --></td>
+                                <td>
+                                    <div class="text-center">
+                                        <a href="{% url 'post_detail' no=post.no %}" class="btn btn-info">查看文章</a>
+                                        <a href="{% url 'editpost' no=post.no %}" class="btn btn-warning">編輯文章</a>
+                                        <a href="{% url 'deletepost' no=post.no %}" class="btn btn-danger">刪除文章</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="4">没有发布过的文章。</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <!-- End Articles Table -->
 
-<!--                    <div class="row mb-3">-->
-<!--                      <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Email Notifications</label>-->
-<!--                      <div class="col-md-8 col-lg-9">-->
-<!--                        <div class="form-check">-->
-<!--                          <input class="form-check-input" type="checkbox" id="changesMade" checked>-->
-<!--                          <label class="form-check-label" for="changesMade">-->
-<!--                            Changes made to your account-->
-<!--                          </label>-->
-<!--                        </div>-->
-<!--                        <div class="form-check">-->
-<!--                          <input class="form-check-input" type="checkbox" id="newProducts" checked>-->
-<!--                          <label class="form-check-label" for="newProducts">-->
-<!--                            Information on new products and services-->
-<!--                          </label>-->
-<!--                        </div>-->
-<!--                        <div class="form-check">-->
-<!--                          <input class="form-check-input" type="checkbox" id="proOffers">-->
-<!--                          <label class="form-check-label" for="proOffers">-->
-<!--                            Marketing and promo offers-->
-<!--                          </label>-->
-<!--                        </div>-->
-<!--                        <div class="form-check">-->
-<!--                          <input class="form-check-input" type="checkbox" id="securityNotify" checked disabled>-->
-<!--                          <label class="form-check-label" for="securityNotify">-->
-<!--                            Security alerts-->
-<!--                          </label>-->
-<!--                        </div>-->
-<!--                      </div>-->
-<!--                    </div>-->
-
-<!--                    <div class="text-center">-->
-<!--                      <button type="submit" class="btn btn-primary">Save Changes</button>-->
-<!--                    </div>-->
-<!--                  </form>&lt;!&ndash; End settings Form &ndash;&gt;-->
-
-<!--                </div>-->
+                </div>
 
 <!--                <div class="tab-pane fade pt-3" id="profile-change-password">-->
 <!--                  &lt;!&ndash; Change Password Form &ndash;&gt;-->

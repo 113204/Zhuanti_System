@@ -12,7 +12,7 @@ urlpatterns = [
     path('logout/', auth_views.logout),
     path('register/', auth_views.register),
     #使用者資料
-    path('profile/', user_views.Udetail),
+    path('profile/', user_views.Udetail, name='profile'),
     path('changepass/', user_views.change_password, name='change_password'),
     # path('editusers/', user_views.EditUserDetail),
 
@@ -27,6 +27,8 @@ urlpatterns = [
     path('post/detail/<int:no>/', post_views.PostDetail, name='post_detail'),
     path('addpost/', post_views.AddPost),
     path('addmessage/', post_views.AddMessage, name='addmessage'),
+    path('editpost/<int:no>/', post_views.EditPost, name='editpost'),
+    path('deletepost/<int:no>/', post_views.DeletePost, name='deletepost'),
 
     # 開發團隊
     path('development/', views.development),

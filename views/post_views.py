@@ -270,3 +270,204 @@ def AddMessage(request):
         return redirect(f'/post/detail/{nopost}/')
 
     return render(request, 'addmessage.html')
+
+# 編輯貼文
+@user_login_required
+def EditPost(request, no):
+    if not no:
+        return HttpResponseBadRequest("Missing 'no' parameter")
+
+    post_url = f'{root}post/post/detail/{no}/'
+
+    if request.method == 'GET':
+        try:
+            # 获取文章数据
+            post_response = requests.get(
+                post_url,
+                cookies={'sessionid': request.COOKIES.get('sessionid')}
+            )
+            post_response.raise_for_status()
+            post_result = post_response.json()
+
+        except requests.RequestException as e:
+            print(f'RequestException: {e}')
+            return HttpResponseServerError("Request failed")
+        except ValueError as e:
+            print(f'JSONDecodeError: {e}')
+            return HttpResponseServerError("Failed to decode JSON response")
+
+        # 处理文章数据
+        if post_result.get('success'):
+            post = post_result['data']
+            # 转换日期为台北时间（如果需要）
+            taipei_tz = pytz.timezone('Asia/Taipei')
+            if 'date' in post:
+                try:
+                    date = datetime.fromisoformat(post['date'].replace('Z', '+00:00'))
+                    date = date.astimezone(taipei_tz)
+                    post['formatted_date'] = date.strftime('%Y-%m-%d %H:%M:%S')
+                except ValueError as e:
+                    print(f"Error parsing date: {e}")
+                    post['formatted_date'] = post['date']  # 如果解析失败，保留原始日期
+        else:
+            post = {}
+
+        # 只渲染编辑表单的模板，不需要消息数据
+        return render(request, 'editpost.html', {'post': post, 'no': no})
+
+    elif request.method == 'POST':
+        title = request.POST.get('title')
+        text = request.POST.get('text')
+        usermail_str = request.COOKIES.get('email')
+
+        if not title or not text:
+            messages.error(request, '标题或内容不能为空')
+            return redirect(f'/post/editpost/{no}/')
+
+        # 获取当前日期和时间，转换为 ISO 8601 字符串格式
+        taipei_tz = pytz.timezone('Asia/Taipei')
+        current_date = datetime.now(taipei_tz).isoformat()
+
+        data = {
+            'no': no,
+            'usermail': usermail_str,
+            'title': title,
+            'text': text,
+            'date': current_date,  # 添加日期时间到数据中，已转换为字符串
+        }
+
+        try:
+            response = requests.post(
+                f'{root}post/editpost/',  # 修改为编辑帖子 URL
+                json=data,  # 使用 json 参数传递数据
+                cookies={'sessionid': request.COOKIES.get('sessionid')}
+            )
+            response.raise_for_status()
+            result = response.json()
+
+            if result.get('success', False):
+                messages.success(request, '文章已成功编辑')
+            else:
+                messages.error(request, '编辑文章失败')
+        except requests.RequestException as e:
+            messages.error(request, f'请求失败: {str(e)}')
+        except ValueError as e:
+            messages.error(request, f'解析响应失败: {str(e)}')
+
+        # 返回到帖子详情页
+        return redirect(f'/post/detail/{no}/')
+
+# 編輯留言
+# @user_login_required
+# def EditMessage(request, no):
+#     if not no:
+#         return HttpResponseBadRequest("Missing 'no' parameter")
+#
+#     post_url = f'{root}post/post/detail/{no}/'
+#
+#     if request.method == 'GET':
+#         try:
+#             # 获取文章数据
+#             post_response = requests.get(
+#                 post_url,
+#                 cookies={'sessionid': request.COOKIES.get('sessionid')}
+#             )
+#             post_response.raise_for_status()
+#             post_result = post_response.json()
+#
+#         except requests.RequestException as e:
+#             print(f'RequestException: {e}')
+#             return HttpResponseServerError("Request failed")
+#         except ValueError as e:
+#             print(f'JSONDecodeError: {e}')
+#             return HttpResponseServerError("Failed to decode JSON response")
+#
+#         # 处理文章数据
+#         if post_result.get('success'):
+#             post = post_result['data']
+#             # 转换日期为台北时间（如果需要）
+#             taipei_tz = pytz.timezone('Asia/Taipei')
+#             if 'date' in post:
+#                 try:
+#                     date = datetime.fromisoformat(post['date'].replace('Z', '+00:00'))
+#                     date = date.astimezone(taipei_tz)
+#                     post['formatted_date'] = date.strftime('%Y-%m-%d %H:%M:%S')
+#                 except ValueError as e:
+#                     print(f"Error parsing date: {e}")
+#                     post['formatted_date'] = post['date']  # 如果解析失败，保留原始日期
+#         else:
+#             post = {}
+#
+#         # 只渲染编辑表单的模板，不需要消息数据
+#         return render(request, 'editpost.html', {'post': post, 'no': no})
+#
+#     elif request.method == 'POST':
+#         title = request.POST.get('title')
+#         text = request.POST.get('text')
+#         usermail_str = request.COOKIES.get('email')
+#
+#         if not title or not text:
+#             messages.error(request, '标题或内容不能为空')
+#             return redirect(f'/post/editpost/{no}/')
+#
+#         # 获取当前日期和时间，转换为 ISO 8601 字符串格式
+#         taipei_tz = pytz.timezone('Asia/Taipei')
+#         current_date = datetime.now(taipei_tz).isoformat()
+#
+#         data = {
+#             'no': no,
+#             'usermail': usermail_str,
+#             'title': title,
+#             'text': text,
+#             'date': current_date,  # 添加日期时间到数据中，已转换为字符串
+#         }
+#
+#         try:
+#             response = requests.post(
+#                 f'{root}post/editpost/',  # 修改为编辑帖子 URL
+#                 json=data,  # 使用 json 参数传递数据
+#                 cookies={'sessionid': request.COOKIES.get('sessionid')}
+#             )
+#             response.raise_for_status()
+#             result = response.json()
+#
+#             if result.get('success', False):
+#                 messages.success(request, '文章已成功编辑')
+#             else:
+#                 messages.error(request, '编辑文章失败')
+#         except requests.RequestException as e:
+#             messages.error(request, f'请求失败: {str(e)}')
+#         except ValueError as e:
+#             messages.error(request, f'解析响应失败: {str(e)}')
+#
+#         # 返回到帖子详情页
+#         return redirect(f'/post/detail/{no}/')
+
+
+@user_login_required
+def DeletePost(request, no):
+    if not no:
+        return HttpResponseBadRequest("缺少 'no' 参数")
+
+    delete_url = f'{root}post/deletepost/{no}/'
+
+    try:
+        # 执行删除请求
+        response = requests.post(
+            delete_url,  # 使用 POST 请求
+            cookies={'sessionid': request.COOKIES.get('sessionid')}
+        )
+        response.raise_for_status()
+        result = response.json()
+
+        if result.get('success', False):
+            messages.success(request, '文章已成功删除')
+        else:
+            messages.error(request, '删除文章失败')
+    except requests.RequestException as e:
+        messages.error(request, f'请求失败: {str(e)}')
+    except ValueError as e:
+        messages.error(request, f'解析响应失败: {str(e)}')
+
+    # 返回到帖子列表页
+    return redirect('/profile')
