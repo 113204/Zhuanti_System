@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Recognition Login</title>
+</head>
+<body>
+    <h1>Login with Face Recognition</h1>
+    <input type="file" id="fileInput" accept="image/*">
+    <button onclick="submit()">Login</button>
+
+    <p id="result"></p>
+
+    <script>
+        async function submit() {
+            const fileInput = document.getElementById('fileInput');
+            const file = fileInput.files[0];
+
+            if (!file) {
+                alert("Please select an image!");
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('image', file);
+
+            const response = await fetch('http://localhost:5000/login', {
+                method: 'POST',
+                body: formData
+            });
+
+            const result = await response.json();
+            document.getElementById('result').textContent = result.message;
+        }
+    </script>
+</body>
+</html>
