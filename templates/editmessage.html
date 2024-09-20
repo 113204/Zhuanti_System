@@ -92,7 +92,7 @@
                         <ul class="nav nav-tabs nav-tabs-bordered">
 
                             <li class="nav-item">
-                                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">编辑文章</button>
+                                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">编辑留言</button>
                             </li>
 
                         </ul>
@@ -101,25 +101,21 @@
                             <div class="tab-pane fade show active profile-overview" id="profile-overview">
 
                                 <!-- Profile Edit Form -->
-                                <form action="/editpost/{{ post.no }}/" method="post" id="profile-form">
+                                <form action="/editmessage/" method="post" id="profile-form">
                                     {% csrf_token %}
-                                    <div class="col-12">
-                                        <label for="email" class="col-md-4 col-lg-3 col-form-label">發布者</label>
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" id="email" value="{{ post.usermail }}" readonly>
-                                        </div>
-                                    </div>
+                                    <input type="hidden" name="no" value="{{ message.no }}">  <!-- 留言的 ID -->
+                                    <input type="hidden" name="usermail" value="{{ request.COOKIES.email }}">  <!-- 当前用户的邮箱 -->
 
-                                    <div class="col-12">
-                                        <label for="title" class="form-label">標題</label>
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" name="title" id="title" value="{{ post.title }}" required>
-                                        </div>
-                                    </div>
                                     <div class="col-12">
                                         <label for="text" class="form-label">内容</label>
                                         <div class="input-group">
-                                            <textarea class="form-control" name="text" id="text" required>{{ post.text }}</textarea>
+                                            <textarea class="form-control" name="text" id="text" required>{{ message.text }}</textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="date" class="form-label">留言时间</label>
+                                        <div class="input-group">
+                                            <input type="datetime-local" class="form-control" name="date" id="date" value="{{ message.date|date:'Y-m-dTH:i' }}" required>
                                         </div>
                                     </div>
                                     <div class="text-center">

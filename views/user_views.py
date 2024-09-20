@@ -17,7 +17,8 @@ from django.http import HttpResponseNotAllowed
 @user_login_required
 def Udetail(request):
     if request.method == 'GET':
-        email = request.COOKIES['email']
+        # email = request.COOKIES['email']
+        email = request.COOKIES.get('email')
 
         # 获取用户详细信息
         try:

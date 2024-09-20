@@ -26,11 +26,11 @@ def login(request):
 def register(request):
     return render(request, 'pages-register.html')
 
-
+@user_login_required
 def profile(request):
     return render(request, 'users-profile.html')
 
-
+@user_login_required
 def appointment(request):
     return render(request, 'appointment.html')
 
@@ -38,7 +38,7 @@ def appointment(request):
 def record(request):
     return render(request, 'record.html')
 
-
+# @user_login_required
 def development(request):
     return render(request, 'development.html')
 
@@ -50,6 +50,7 @@ def detect(request):
     counter = pose_detect.counter
     return render(request, 'detect.html', locals())
 
+@user_login_required
 def gen(camera):
 	while True:
 		frame = camera.get_frame()
@@ -72,6 +73,7 @@ openai_api_key = ''
 openai.api_key = openai_api_key
 
 
+@user_login_required
 def ask_openai(message):
     response = openai.ChatCompletion.create(
         model = "gpt-4o",
