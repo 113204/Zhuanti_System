@@ -43,21 +43,21 @@ def development(request):
     return render(request, 'development.html')
 
 
-@user_login_required
+# @user_login_required
 def detect(request):
 
     pose_detect = Posedetect()
     counter = pose_detect.counter
     return render(request, 'detect.html', locals())
 
-@user_login_required
+# @user_login_required
 def gen(camera):
 	while True:
 		frame = camera.get_frame()
 		yield (b'--frame\r\n'
 				b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 
-@user_login_required
+# @user_login_required
 def detect1(request):
     return StreamingHttpResponse(gen(Posedetect()),
                                  content_type='multipart/x-mixed-replace; boundary=frame')
