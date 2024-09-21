@@ -189,8 +189,16 @@
     <p><span id="timer3" >00</span></p> -->
     <div class="webcam">
         <img src="{% url 'detect1' %}" width="480">
-        <p>{{counter}}</p>
+        <button id="stop-btn">Stop Camera</button>
     </div>
+    <script>
+        $('#stop-btn').on('click', function () {
+            $.get('/stop_camera/', function (data) {
+                alert(data.status);
+                $('#camera-feed').attr('src', '');
+            });
+        });
+    </script>
         <script>
             var timerElement = document.getElementById('timer');
             var timerElement2 = document.getElementById('timer2');

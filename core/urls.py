@@ -40,6 +40,7 @@ urlpatterns = [
     # 健身監測
     path('detect1/', views.detect1, name='detect1'),
     path('detect/', views.detect, name='detect'),
+    path('stop_camera/', views.stop_camera, name='stop_camera'),
     
     # 教學影片
     path('video/', views.video),

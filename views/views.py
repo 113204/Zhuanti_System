@@ -64,6 +64,10 @@ def gen(camera):
 def detect1(request):
     return StreamingHttpResponse(gen(Posedetect(request.session)),  # 將 session 傳遞到 Posedetect
                                  content_type='multipart/x-mixed-replace; boundary=frame')
+def stop_camera(request):
+    pose_detect = Posedetect()
+    pose_detect.stop() 
+    return JsonResponse({'status': '鏡頭已關閉'})
 
 
 @user_login_required

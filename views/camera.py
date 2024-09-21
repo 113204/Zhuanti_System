@@ -87,6 +87,8 @@ class Posedetect(object):
     def check_login(self):
         email = self.session.get('email')
         return email is not None  # 登入True 反之False
+    def stop(self):
+        self.video.release() 
 
     def get_frame(self):
         img = self.frame
