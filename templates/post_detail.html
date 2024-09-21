@@ -150,7 +150,6 @@
                     {% for message in message %}
                         <li>
                             <p><strong>{{ message.usermail }}</strong> {{ message.text|linebreaksbr }}</p>
-                            <a href="{% url 'edit_comment' %}">编辑留言</a>
                         </li>
                     {% endfor %}
                 </ul>
