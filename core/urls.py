@@ -7,10 +7,12 @@ urlpatterns = [
     path('test/', views.test),
     #主頁
     path('', views.index),
+
     #登入、登出、註冊
     path('login/', auth_views.login),
     path('logout/', auth_views.logout),
     path('register/', auth_views.register),
+
     #使用者資料
     path('profile/', user_views.Udetail, name='profile'),
     path('changepass/', user_views.change_password, name='change_password'),
@@ -19,7 +21,9 @@ urlpatterns = [
     # 忘記密碼
     path('forgetpass/', auth_views.forget_password),
 
-    path('appointment/', views.appointment),
+    # path('appointment/', views.appointment),
+
+    # 運動紀錄
     path('record/', views.record),
 
     # 文章列表
