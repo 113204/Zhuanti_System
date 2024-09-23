@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!--{% load static %}-->
 <html lang="en">
 
 <head>
@@ -11,8 +10,8 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <!--    <link href="/static/img/logo2.png" rel="icon">-->
-    <!--    <link href="/static/img/logo2.png" rel="apple-touch-icon">-->
+    <!-- <link href="/static/img/logo2.png" rel="icon"> -->
+    <!-- <link href="/static/img/logo2.png" rel="apple-touch-icon"> -->
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -37,18 +36,63 @@
     <!-- <link href="/static/css/variables-pink.css" rel="stylesheet"> -->
     <!-- Template Main CSS File -->
     <link href="/static/css/main.css" rel="stylesheet">
+<style>
+    .chart-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-sizing: border-box;
+        margin: 0 auto;
+    }
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="/static/js/util.js" defer></script>
-    <script src="/static/js/script.js" defer></script>
+    /* Line Chart Container */
+    .line-chart-container {
+        width: 80%; /* Adjust the width percentage as needed */
+        max-width: 600px; /* Adjust max-width if necessary */
+        height: 400px; /* Adjust height if necessary */
+    }
 
-    <!-- =======================================================
-    * Template Name: HeroBiz
-    * Template URL: https://bootstrapmade.com/herobiz-bootstrap-business-template/
-    * Updated: Mar 17 2024 with Bootstrap v5.3.3
-    * Author: BootstrapMade.com
-    * License: https://bootstrapmade.com/license/
-    ======================================================== -->
+    /* Pie Chart Container */
+    .pie-chart-container {
+        width: 70%; /* Adjust the width percentage as needed */
+        max-width: 400px; /* Adjust max-width if necessary */
+        height: auto; /* Allow height to adjust automatically */
+    }
+
+    /* Combo Chart Container */
+    .combo-chart-container {
+        width: 90%; /* Adjust the width percentage as needed */
+        max-width: 800px; /* Adjust max-width if necessary */
+        height: 400px; /* Adjust height if necessary */
+    }
+
+    .chart-container canvas {
+        width: 100% !important;
+        height: auto !important;
+    }`
+
+    .button-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center; /* 居中排列 */
+        gap: 10px; /* 按钮之间的间距 */
+        margin-bottom: 20px; /* 按钮下方的间距 */
+    }
+
+    .button-container button {
+        padding: 10px 20px; /* 按钮的内边距 */
+        border: 1px solid #ccc; /* 按钮的边框 */
+        background-color: #f8f9fa; /* 按钮的背景色 */
+        cursor: pointer; /* 鼠标悬停时的样式 */
+    }
+
+    .button-container button:hover {
+        background-color: #e2e6ea; /* 鼠标悬停时的背景色 */
+    }
+</style>
+
+
+
 </head>
 
 <body>
@@ -76,7 +120,6 @@
             <i class="bi bi-list mobile-nav-toggle d-none"></i>
         </nav><!-- .navbar -->
 
-        <!--        <a class="btn-getstarted scrollto" href="/login/">登入</a>-->
         {% if 'email' not in request.COOKIES.keys %}
         <a class="btn-getstarted scrollto" href="/login/">登入</a>
         {% endif %}
@@ -84,33 +127,39 @@
         <a class="btn-getstarted scrollto" href="/logout/">登出</a>
         {% endif %}
 
-
     </div>
 </header><!-- End Header -->
 <div class="row" style="display: flex; justify-content: space-between;">
     <section id="hero-animated" class="hero-animated d-flex align-items-center">
         <div class="container d-flex flex-column justify-content-center align-items-center text-center position-relative"
              data-aos="zoom-out">
-            <div>
+            <!-- 按鈕來切換圖表 -->
+            <div class="button-container">
+                <button onclick="showChart('lineChartContainer')">折線圖</button>
+                <button onclick="showChart('pieChartContainer')">圓餅圖</button>
+                <button onclick="showChart('comboChartContainer')">組合圖表</button>
+            </div>
+
+            <!-- 折線圖容器 -->
+            <div id="lineChartContainer" class="chart-container line-chart-container" style="display: none;">
                 <canvas id="lineChart"></canvas>
             </div>
-        </div>
-    </section>
-    <section id="hero-animaed" class="hero-animated d-flex align-items-center">
-        <div class="container d-flex flex-column justify-content-center align-items-center text-center position-relative"
-             data-aos="zoom-out">
-            <div>
+
+            <div id="pieChartContainer" class="chart-container pie-chart-container" style="display: none;">
                 <canvas id="pieChart"></canvas>
             </div>
+
+            <div id="comboChartContainer" class="chart-container combo-chart-container" style="display: none;">
+                <canvas id="comboChart"></canvas>
+            </div>
+
         </div>
     </section>
 </div>
 <footer id="footer" class="footer">
-
     <div class="footer-content">
         <div class="container">
             <div class="row">
-
                 <div class="col-lg-3 col-md-6">
                     <div class="footer-info">
                         <h3>HeroBiz</h3>
@@ -147,76 +196,60 @@
 
                 <div class="col-lg-4 col-md-6 footer-newsletter">
                     <h4>Our Newsletter</h4>
-                    <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
+                    <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna.</p>
                     <form action="" method="post">
                         <input type="email" name="email"><input type="submit" value="Subscribe">
                     </form>
-
                 </div>
-
             </div>
         </div>
     </div>
 
-    <div class="footer-legal text-center">
-        <div class="container d-flex flex-column flex-lg-row justify-content-center justify-content-lg-between align-items-center">
-
-            <div class="d-flex flex-column align-items-center align-items-lg-start">
-                <div class="copyright">
-                    &copy; Copyright <strong><span>HeroBiz</span></strong>. All Rights Reserved
-                </div>
-                <div class="credits">
-                    <!-- All the links in the footer should remain intact. -->
-                    <!-- You can delete the links only if you purchased the pro version. -->
-                    <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                    <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/herobiz-bootstrap-business-template/ -->
-                    Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-                </div>
+    <div class="footer-legal">
+        <div class="container">
+            <div class="copyright">
+                &copy; <strong><span>HeroBiz</span></strong>. All Rights Reserved
             </div>
-
-            <div class="social-links order-first order-lg-last mb-3 mb-lg-0">
-                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-                <a href="#" class="google-plus"><i class="bi bi-skype"></i></a>
-                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+            <div class="credits">
+                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
             </div>
-
         </div>
     </div>
-
 </footer><!-- End Footer -->
 
-<a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-<div id="preloader"></div>
-
 <!-- Vendor JS Files -->
-<script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="/static/vendor/aos/aos.js"></script>
+<script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="/static/vendor/glightbox/js/glightbox.min.js"></script>
-<script src="/static/vendor/isotope-layout/isotope.pkgd.min.js"></script>
 <script src="/static/vendor/swiper/swiper-bundle.min.js"></script>
-<script src="/static/vendor/php-email-form/validate.js"></script>
 
 <!-- Template Main JS File -->
 <script src="/static/js/main.js"></script>
-<!-- 第一个图表的渲染脚本 -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
+    function showChart(chartId) {
+        const charts = document.querySelectorAll('.chart-container');
+        charts.forEach(chart => chart.style.display = 'none');
+        document.getElementById(chartId).style.display = 'block';
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        showChart('lineChartContainer');
+    });
+
+    // Line Chart
     document.addEventListener('DOMContentLoaded', function () {
         const data = {
             labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6'],
-            datasets: [
-                {
-                    label: 'Dataset',
-                    data: [12, 19, 3, 5, 2, 3],
-                    borderColor: 'rgb(255, 99, 132)',
-                    backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                    pointStyle: 'circle',
-                    pointRadius: 10,
-                    pointHoverRadius: 15
-                }
-            ]
+            datasets: [{
+                label: 'Dataset',
+                data: [12, 19, 3, 5, 2, 3],
+                borderColor: 'rgb(255, 99, 132)',
+                backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                pointStyle: 'circle',
+                pointRadius: 10,
+                pointHoverRadius: 15
+            }]
         };
 
         const config = {
@@ -233,19 +266,11 @@
             }
         };
 
-        const myChart = new Chart(
-            document.getElementById('lineChart'),
-            config
-        );
+        new Chart(document.getElementById('lineChart'), config);
     });
 
-</script>
-
-<!-- 第二个图表的渲染脚本 -->
-<script>
+    // Pie Chart
     document.addEventListener('DOMContentLoaded', function () {
-        const DATA_COUNT = 5;
-        const NUMBER_CFG = { count: DATA_COUNT, min: 0, max: 100 };
         const COLORS = [
             'rgba(255, 99, 132, 0.5)',
             'rgba(54, 162, 235, 0.5)',
@@ -257,14 +282,13 @@
 
         const data = {
             labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple'],
-            datasets: [
-                {
-                    label: 'Dataset 1',
-                    data: Utils.numbers(NUMBER_CFG),
-                    backgroundColor: COLORS,
-                }
-            ]
+            datasets: [{
+                label: 'Dataset 1',
+                data: [12, 19, 3, 5, 2],
+                backgroundColor: COLORS,
+            }]
         };
+
         const config = {
             type: 'pie',
             data: data,
@@ -273,17 +297,57 @@
             }
         };
 
-        const myChart = new Chart(
-            document.getElementById('pieChart'),
-            config
-        );
+        new Chart(document.getElementById('pieChart'), config);
     });
 
+    // Combo Chart (Time Scale)
+    document.addEventListener('DOMContentLoaded', function () {
+        const labels = ['2021-09-01', '2021-09-02', '2021-09-03'];
+        const data = {
+            labels: labels,
+            datasets: [{
+                type: 'bar',
+                label: 'Dataset 1',
+                backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: [10, 20, 30],
+            }, {
+                type: 'bar',
+                label: 'Dataset 2',
+                backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                borderColor: 'rgb(54, 162, 235)',
+                data: [20, 30, 40],
+            }, {
+                type: 'line',
+                label: 'Dataset 3',
+                backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                borderColor: 'rgb(75, 192, 192)',
+                fill: false,
+                data: [15, 25, 35],
+            }]
+        };
 
+        const config = {
+            type: 'bar',
+            data: data,
+            options: {
+                plugins: {
+                    title: {
+                        text: 'Chart.js Combo Time Scale',
+                        display: true
+                    }
+                },
+                scales: {
+                    x: {
+                        type: 'category',
+                        display: true,
+                    },
+                },
+            },
+        };
+
+        new Chart(document.getElementById('comboChart'), config);
+    });
 </script>
-</div>
-</section>
-
 </body>
-
 </html>
