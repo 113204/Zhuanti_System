@@ -177,6 +177,16 @@
                 content: '\f00d';
             }
 
+        .custom-btn {
+            background: #4aa0ba;
+            color: white; /* 可選：設定字體顏色 */
+            border: none; /* 可選：去除邊框 */
+        }
+
+        .custom-btn:hover {
+            background: #65aec4	; /* 可選：設定懸停效果 */
+        }
+
     </style>
     <!-- <a id="startStopButton" onclick="startStopTimer()" class="btn-get" style="margin-bottom: 10px;">開始</a>
     <a id="fullscreenButton" class="btn-get">進入全螢幕</a>
@@ -189,7 +199,7 @@
     <p><span id="timer3" >00</span></p> -->
     <div class="webcam">
         <img src="{% url 'detect1' %}" width="480">
-        <button id="stop-btn">Stop Camera</button>
+        <button class="btn custom-btn" id="stop-btn">Stop Camera</button>
     </div>
     <script>
         $('#stop-btn').on('click', function () {

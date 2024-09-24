@@ -62,8 +62,8 @@
                 <div class="card-body">
 
                   <div class="pt-4 pb-2">
-                    <h5 class="card-title text-center pb-0 fs-4">Login to Your Account</h5>
-                    <p class="text-center small">Enter your username & password to login</p>
+                    <h5 class="card-title text-center pb-0 fs-4">登入您的帳號</h5>
+                    <p class="text-center small">請輸入您的使用者帳號以及密碼來登入</p>
                   </div>
 
                   <form class="row g-3 needs-validation" novalidate method="post">
@@ -95,27 +95,34 @@
 <!--                        <label class="form-check-label" for="rememberMe">Remember me</label>-->
 <!--                      </div>-->
 <!--                    </div>-->
+                    <style>
+                        .custom-btn {
+                            background: #4aa0ba;
+                            color: white; /* 可選：設定字體顏色 */
+                            border: none; /* 可選：去除邊框 */
+                        }
+
+                        .custom-btn:hover {
+                            background: #65aec4	; /* 可選：設定懸停效果 */
+                        }
+                    </style>
+
                     <div class="col-12 d-flex justify-content-center">
                         <div class="col-md-6">
-                           <input type="submit" name="signin" id="signin" class="btn btn-primary w-100" value="登入"/>
+                            <input type="submit" name="signin" id="signin" class="btn custom-btn w-100" value="登入"/>
                         </div>
                     </div>
 
-                    <div class="col-12">
+                    <div class="col-12"></div>
 
+                    <div class="row">
+                        <div class="col text-center">
+                            <a class="btn custom-btn w-100" href="/register/">註冊</a>
+                        </div>
+                        <div class="col text-center">
+                            <a class="btn custom-btn w-100" href="/forgetpass/">忘記密碼</a>
+                        </div>
                     </div>
-                  </form>
-
-
-                  <div class="row">
-                    <div class="col text-center">
-                        <button type="button" class="btn btn-primary" onclick="window.location.href='/register/'">註冊</button>
-                    </div>
-                    <div class="col text-center">
-                        <button type="button" class="btn btn-primary" onclick="window.location.href='/forgetpass/'">忘記密碼</button>
-                    </div>
-                  </div>
-
 
                 </div>
               </div>
