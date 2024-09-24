@@ -9,8 +9,12 @@ from utils.decorators import user_login_required
 from views.camera import Posedetect
 
 
+
 def index(request):
     return render(request, 'index.html')
+
+def privacypolicies(request):
+    return render(request, 'privacypolicies.html')
 
 
 def test(request):

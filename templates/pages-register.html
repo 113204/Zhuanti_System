@@ -10,8 +10,8 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-<!--    <link href="/static/img/logo2.png" rel="icon">-->
-<!--    <link href="/static/img/logo2.png" rel="apple-touch-icon">-->
+    <!--    <link href="/static/img/logo2.png" rel="icon">-->
+    <!--    <link href="/static/img/logo2.png" rel="apple-touch-icon">-->
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,12 +28,6 @@
 
     <!-- Variables CSS Files. Uncomment your preferred color scheme -->
     <link href="/static/css/variables.css" rel="stylesheet">
-    <!-- <link href="/static/css/variables-blue.css" rel="stylesheet"> -->
-    <!-- <link href="/static/css/variables-green.css" rel="stylesheet"> -->
-    <!-- <link href="/static/css/variables-orange.css" rel="stylesheet"> -->
-    <!-- <link href="/static/css/variables-purple.css" rel="stylesheet"> -->
-    <!-- <link href="/static/css/variables-red.css" rel="stylesheet"> -->
-    <!-- <link href="/static/css/variables-pink.css" rel="stylesheet"> -->
 
     <!-- Template Main CSS File -->
     <link href="/static/css/main.css" rel="stylesheet">
@@ -41,149 +35,131 @@
 
 <body>
 
-  <main>
+<main>
     <div class="container">
+        <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+                        <div class="d-flex justify-content-center py-4">
+                            <a href="/" class="logo d-flex align-items-center w-auto flex-column">
+                                <img src="/static/img/logo2.png" alt="" height="150" weight="150" style="display: block;">
+                                <span class="d-none d-lg-block" style="display: block;">臥推的孩子</span>
+                            </a>
+                        </div><!-- End Logo -->
 
-      <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
-        <div class="container">
-          <div class="row justify-content-center">
-            <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <div class="pt-4 pb-2">
+                                    <h5 class="card-title text-center pb-0 fs-4">創建一個新帳號</h5>
+                                    <p class="text-center small">輸入您的個人詳細資料以建立帳戶</p>
+                                </div>
 
-              <div class="d-flex justify-content-center py-4">
-                <a href="/" class="logo d-flex align-items-center w-auto flex-column">
-                  <img src="/static/img/logo2.png" alt="" height="150" weight="150" style="display: block;">
-                  <span class="d-none d-lg-block" style="display: block;">臥推的孩子</span>
-                </a>
-              </div><!-- End Logo -->
-              <div class="card mb-3">
+                                <form id="registerForm" class="row g-3 needs-validation" novalidate method="post">
+                                    {% for message in messages %}
+                                    <div class="alert alert-success">
+                                        <a class="close" href="#" data-dismiss="alert"></a>
+                                        {{ message }}
+                                    </div>
+                                    {% endfor %}
+                                    {% csrf_token %}
+                                    <div class="col-12">
+                                        <label for="email" class="form-label"></label>
+                                        <input type="email" name="email" class="form-control" id="email" placeholder="電子信箱" required="required">
+                                    </div>
 
-                <div class="card-body">
-                  <div class="pt-4 pb-2">
-                    <h5 class="card-title text-center pb-0 fs-4">Create an Account</h5>
-                    <p class="text-center small">Enter your personal details to create account</p>
-                  </div>
+                                    <div class="col-12">
+                                        <label for="name" class="form-label"></label>
+                                        <input type="text" name="name" class="form-control" id="name" placeholder="暱稱" required="required">
+                                    </div>
 
-                  <form class="row g-3 needs-validation" novalidate method="post" >
-                    {% for message in messages %}
-                        <div class="alert alert-success">
-                            <a class="close" href="#" data-dismiss="alert"></a>
-                            {{ message }}
+                                    <!-- 在合适的位置添加密码显示/隐藏按钮 -->
+                                    <div class="col-12">
+                                        <label for="pass" class="form-label">密碼須包含大小寫英文、數字、特殊符號，至少八位</label>
+                                        <div class="input-group">
+                                            <input type="password" name="pass" class="form-control" id="pass" placeholder="密碼" required="required">
+                                            <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                                <i class="bi bi-eye-slash"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="re_pass" class="form-label"></label>
+                                        <div class="input-group">
+                                            <input type="password" name="re_pass" class="form-control" id="re_pass" placeholder="確認密碼" required="required">
+                                            <button class="btn btn-outline-secondary" type="button" id="toggleRePassword">
+                                                <i class="bi bi-eye-slash"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="gender" class="form-label"></label>
+                                        <select name="gender" id="gender" class="form-select" required="required">
+                                            <option value="0" disabled selected>選擇性別</option>
+                                            <option value="男性">男性</option>
+                                            <option value="女性">女性</option>
+                                            <option value="其他">其他</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="phone" class="form-label">格式請照範例，ex: 0900-000-000</label>
+                                        <input type="text" name="phone" class="form-control" id="phone" placeholder="緊急連絡人電話" required="required">
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required>
+                                            <label class="form-check-label" for="acceptTerms">
+                                                同意並遵守<a href="/privacypolicies/">隱私權政策</a>
+                                            </label>
+                                            <div class="invalid-feedback">You must agree before submitting.</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <input type="submit" name="res" id="res" class="btn btn-primary w-100" value="註冊"/>
+                                    </div>
+                                    <div class="col-12">
+                                        <p class="small mb-0">已經有帳號了嗎? <a href="/login/">點我登入</a></p>
+                                    </div>
+                                </form>
+
+                            </div>
                         </div>
-                    {% endfor %}
-                    {% csrf_token %}
-                    <div class="col-12">
-                      <label for="email" class="form-label"></label>
-                      <input type="email" name="email" class="form-control" id="email" placeholder="電子信箱" required="required">
-<!--                      <div class="invalid-feedback">Please, enter your name!</div>-->
                     </div>
-
-                    <div class="col-12">
-                      <label for="name" class="form-label"></label>
-                      <input type="text" name="name" class="form-control" id="name" placeholder="暱稱" required="required">
-<!--                      <div class="invalid-feedback">Please enter a valid Email adddress!</div>-->
-                    </div>
-
-                    <!-- 在合适的位置添加密码显示/隐藏按钮 -->
-                    <div class="col-12">
-                        <label for="pass" class="form-label">密碼須包含大小寫英文、數字、特殊符號，至少八位</label>
-                        <div class="input-group">
-                            <input type="password" name="pass" class="form-control" id="pass" placeholder="密碼" required="required">
-                            <button class="btn btn-outline-secondary" type="button" id="togglePassword">
-                                <i class="bi bi-eye-slash"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="col-12">
-                        <label for="re_pass" class="form-label"></label>
-                        <div class="input-group">
-                            <input type="password" name="re_pass" class="form-control" id="re_pass" placeholder="確認密碼" required="required">
-                            <button class="btn btn-outline-secondary" type="button" id="toggleRePassword">
-                                <i class="bi bi-eye-slash"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="col-12">
-                        <label for="gender" class="form-label"></label>
-                        <select name="gender" id="gender" class="form-select" required="required">
-                            <option value="0" disabled selected>選擇性別</option>
-                            <option value="男性">男性</option>
-                            <option value="女性">女性</option>
-                            <option value="其他">其他</option>
-                        </select>
-                    </div>
-
-<!--                    <div class="col-12">-->
-<!--                      <label for="live" class="form-label"></label>-->
-<!--                      <input type="text" name="live" class="form-control" id="live" placeholder="居住地址" required="required">-->
-<!--&lt;!&ndash;                      <div class="invalid-feedback">Please enter your password!</div>&ndash;&gt;-->
-<!--                    </div>-->
-
-                    <div class="col-12">
-                      <label for="phone" class="form-label">格式請照範例，ex: 0900-000-000</label>
-                      <input type="text" name="phone" class="form-control" id="phone" placeholder="緊急連絡人電話" required="required">
-<!--                      <div class="invalid-feedback">Please enter your password!</div>-->
-                    </div>
-
-                    <div class="col-12">
-                      <div class="form-check">
-                        <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required>
-                        <label class="form-check-label" for="acceptTerms">同意並遵守<a href="#">隱私權政策</a></label>
-                        <div class="invalid-feedback">You must agree before submitting.</div>
-                      </div>
-                    </div>
-<!--                    <div class="col-12">-->
-<!--                      <button class="btn btn-primary w-100" type="submit">註冊帳號</button>-->
-<!--                    </div>-->
-                    <div class="col-12">
-                      <input type="submit" name="res" id="res" class="btn btn-primary w-100" value="註冊"/>
-                    </div>
-                    <div class="col-12">
-                      <p class="small mb-0">已經有帳號了嗎? <a href="/login/">點我登入</a></p>
-                    </div>
-                  </form>
-
                 </div>
-              </div>
-
             </div>
-          </div>
-        </div>
-
-      </section>
-
+        </section>
     </div>
-  </main><!-- End #main -->
+</main><!-- End #main -->
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-  <!-- Vendor JS Files -->
-  <script src="/static/vendor/apexcharts/apexcharts.min.js"></script>
-  <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="/static/vendor/chart.js/chart.umd.js"></script>
-  <script src="/static/vendor/echarts/echarts.min.js"></script>
-  <script src="/static/vendor/quill/quill.js"></script>
-  <script src="/static/vendor/simple-datatables/simple-datatables.js"></script>
-  <script src="/static/vendor/tinymce/tinymce.min.js"></script>
-  <script src="/static/vendor/php-email-form/validate.js"></script>
+<!-- Vendor JS Files -->
+<script src="/static/vendor/apexcharts/apexcharts.min.js"></script>
+<script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/static/vendor/chart.js/chart.umd.js"></script>
+<script src="/static/vendor/echarts/echarts.min.js"></script>
+<script src="/static/vendor/quill/quill.js"></script>
+<script src="/static/vendor/simple-datatables/simple-datatables.js"></script>
+<script src="/static/vendor/tinymce/tinymce.min.js"></script>
+<script src="/static/vendor/php-email-form/validate.js"></script>
 
-<!--  &lt;!&ndash; Template Main JS File &ndash;&gt;-->
-  <script src="/static/js/main.js"></script>
-
-  <!-- JavaScript代码 -->
-  <script>
+<!-- 自定义的 JavaScript代码 -->
+<script>
+    // 切换显示/隐藏密码
     const togglePassword = document.querySelector('#togglePassword');
     const password = document.querySelector('#pass');
 
     togglePassword.addEventListener('click', function (e) {
-        // 切换密码输入框的类型
         const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
         password.setAttribute('type', type);
-
-        // 根据密码输入框的类型设置按钮的图标
         togglePassword.innerHTML = type === 'password' ? '<i class="bi bi-eye-slash"></i>' : '<i class="bi bi-eye"></i>';
     });
+
     const toggleRePassword = document.querySelector('#toggleRePassword');
     const rePassword = document.querySelector('#re_pass');
 
@@ -192,7 +168,20 @@
         rePassword.setAttribute('type', type);
         toggleRePassword.innerHTML = type === 'password' ? '<i class="bi bi-eye-slash"></i>' : '<i class="bi bi-eye"></i>';
     });
-  </script>
+
+    // 检查用户是否同意隐私政策
+    document.querySelector('#registerForm').addEventListener('submit', function (event) {
+        const acceptTerms = document.querySelector('#acceptTerms');
+        if (!acceptTerms.checked) {
+            alert('請閱讀並同意隱私權政策');
+            event.preventDefault();  // 阻止表单提交
+        }
+    });
+</script>
+
+<!-- Template Main JS File -->
+<script src="/static/js/main.js"></script>
+
 </body>
 
 </html>

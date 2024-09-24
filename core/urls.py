@@ -8,6 +8,9 @@ urlpatterns = [
     #主頁
     path('', views.index),
 
+    # 隱私權政策
+    path('privacypolicies/', views.privacypolicies),
+
     #登入、登出、註冊
     path('login/', auth_views.login),
     path('logout/', auth_views.logout),
