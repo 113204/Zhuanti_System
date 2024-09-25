@@ -181,6 +181,7 @@
             background: #4aa0ba;
             color: white; /* 可選：設定字體顏色 */
             border: none; /* 可選：去除邊框 */
+            margin-top: 10px;
         }
 
         .custom-btn:hover {
@@ -197,9 +198,10 @@
     <!-- <p><span id="timer" >00</span>:</p>
     <p><span id="timer2" >00</span>:</p>
     <p><span id="timer3" >00</span></p> -->
-    <div class="webcam">
-        <img src="{% url 'detect1' %}" width="480">
-        <button class="btn custom-btn" id="stop-btn">Stop Camera</button>
+    <div class="container d-flex flex-column justify-content-center align-items-center text-center position-relative"
+         data-aos="zoom-out">
+         <img src="{% url 'detect1' %}" >
+        <button class="btn custom-btn" id="stop-btn">結束運動</button>
     </div>
     <script>
         $('#stop-btn').on('click', function () {
