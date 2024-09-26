@@ -135,9 +135,10 @@
              data-aos="zoom-out">
             <!-- 按鈕來切換圖表 -->
             <div class="button-container">
-                <button onclick="showChart('lineChartContainer')">折線圖</button>
-                <button onclick="showChart('pieChartContainer')">圓餅圖</button>
-                <button onclick="showChart('comboChartContainer')">組合圖表</button>
+                <button onclick="showChart('comboChartContainer')">臥推次數與時長分析圖</button>
+                <button onclick="showChart('lineChartContainer')">平均臥推次數分析圖</button>
+                <button onclick="showChart('pieChartContainer')">左右手錯誤率分析圖</button>
+
             </div>
 
             <!-- 折線圖容器 -->
@@ -226,29 +227,31 @@
 <!-- Template Main JS File -->
 <script src="/static/js/main.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+
 <script>
     function showChart(chartId) {
         const charts = document.querySelectorAll('.chart-container');
-        charts.forEach(chart => chart.style.display = 'none');
-        document.getElementById(chartId).style.display = 'block';
+        charts.forEach(chart => chart.style.display = 'none'); // Hide all charts
+        document.getElementById(chartId).style.display = 'block'; // Show the selected chart
     }
 
+    // Ensure combo chart is shown by default on page load
     document.addEventListener('DOMContentLoaded', function () {
-        showChart('lineChartContainer');
+        showChart('comboChartContainer'); // Show combo chart by default
     });
 
-    // Line Chart
     document.addEventListener('DOMContentLoaded', function () {
         const data = {
-            labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6'],
+            labels: ['2024-09-21', '2024-09-22', '2024-09-23', '2024-09-24', '2024-09-25'],
             datasets: [{
-                label: 'Dataset',
-                data: [12, 19, 3, 5, 2, 3],
+                label: '平均臥推秒數',
+                data: [6, 4, 4, 4, 5],
                 borderColor: 'rgb(255, 99, 132)',
                 backgroundColor: 'rgba(255, 99, 132, 0.5)',
                 pointStyle: 'circle',
-                pointRadius: 10,
-                pointHoverRadius: 15
+                pointRadius: 7, // 調整點的半徑
+                pointHoverRadius: 10 // 調整懸停時的半徑
             }]
         };
 
@@ -260,7 +263,24 @@
                 plugins: {
                     title: {
                         display: true,
-                        text: (ctx) => 'Point Style: ' + ctx.chart.data.datasets[0].pointStyle,
+                        text: '平均臥推次數分析圖' // 直接使用靜態文本
+                    }
+                },
+                scales: {
+                    x: {
+                        type: 'category', // 如果需要，可以將其改為 'time'
+                        display: true,
+                        title: {
+                            display: true,
+                            text: '日期'
+                        }
+                    },
+                    y: {
+                        beginAtZero: true, // 確保 Y 軸從 0 開始
+                        title: {
+                            display: true,
+                            text: '平均秒數'
+                        }
                     }
                 }
             }
@@ -269,61 +289,133 @@
         new Chart(document.getElementById('lineChart'), config);
     });
 
-    // Pie Chart
+    <!--    // Line Chart-->
+    <!--    document.addEventListener('DOMContentLoaded', function () {-->
+    <!--    fetch('/api/record/')  // 注意路徑應該是 /api/record/-->
+    <!--        .then(response => {-->
+    <!--            if (!response.ok) {-->
+    <!--                return response.text().then(text => {-->
+    <!--                    throw new Error(`HTTP error! Status: ${response.status}. Response: ${text}`);-->
+    <!--                });-->
+    <!--            }-->
+    <!--            return response.json();-->
+    <!--        })-->
+    <!--        .then(data => {-->
+    <!--            console.log('Received data:', data);-->
+
+    <!--            // 確保你從響應中提取 'record_data'-->
+    <!--            const reportData = data.record_data;-->
+
+    <!--            // 提取時間標籤和數據-->
+    <!--            const lineChartLabels = reportData.map(item => item.datetime);-->
+    <!--            const lineChartData = reportData.map(item => item.avg_push_time);-->
+
+    <!--            // 配置折線圖的數據-->
+    <!--            const lineChartConfig = {-->
+    <!--                labels: lineChartLabels,-->
+    <!--                datasets: [{-->
+    <!--                    label: '平均臥推時長',-->
+    <!--                    data: lineChartData,-->
+    <!--                    borderColor: 'rgb(255, 99, 132)',-->
+    <!--                    backgroundColor: 'rgba(255, 99, 132, 0.5)',-->
+    <!--                    pointStyle: 'circle',-->
+    <!--                    pointRadius: 5,-->
+    <!--                    pointHoverRadius: 7-->
+    <!--                }]-->
+    <!--            };-->
+
+    <!--            // Chart.js 配置-->
+    <!--            const config = {-->
+    <!--                type: 'line',-->
+    <!--                data: lineChartConfig,-->
+    <!--                options: {-->
+    <!--                    responsive: true,-->
+    <!--                    plugins: {-->
+    <!--                        title: {-->
+    <!--                            display: true,-->
+    <!--                            text: '平均臥推時長'-->
+    <!--                        }-->
+    <!--                    }-->
+    <!--                }-->
+    <!--            };-->
+
+    <!--            // 初始化並渲染圖表-->
+    <!--            new Chart(document.getElementById('lineChart'), config);-->
+    <!--        })-->
+    <!--        .catch(error => {-->
+    <!--            console.error('Error fetching data:', error);-->
+    <!--            alert('數據加載錯誤，請檢查控制台以獲取更多信息。');-->
+    <!--        });-->
+    <!--});-->
     document.addEventListener('DOMContentLoaded', function () {
         const COLORS = [
-            'rgba(255, 99, 132, 0.5)',
-            'rgba(54, 162, 235, 0.5)',
-            'rgba(255, 206, 86, 0.5)',
             'rgba(75, 192, 192, 0.5)',
-            'rgba(153, 102, 255, 0.5)',
-            'rgba(255, 159, 64, 0.5)'
+            'rgba(255, 99, 132, 0.5)'
         ];
 
         const data = {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple'],
+            labels: ['右手錯誤率', '左手錯誤率'],
             datasets: [{
-                label: 'Dataset 1',
-                data: [12, 19, 3, 5, 2],
+                label: '錯誤率',
+                data: [0.14, 0.19], // 正確的百分比表示法
                 backgroundColor: COLORS,
             }]
         };
 
-        const config = {
+         const config = {
             type: 'pie',
             data: data,
             options: {
                 responsive: true,
-            }
+                plugins: {
+                    title: {
+                        display: true,
+                        text: '左右手錯誤率分析圖',
+                        font: {
+                            size: 18
+                        },
+                        color: '#01a2bc',
+                        padding: {
+                            top: 10,
+                            bottom: 30
+                        }
+                    },
+                    datalabels: {  // 啟用 datalabels 插件以顯示百分比
+                        formatter: (value, context) => {
+                            const percentage = (value * 100).toFixed(2) + '%';
+                            return percentage;  // 將百分比顯示在圖表上
+                        },
+                        color: '#fff',  // 設置標籤字體顏色
+                        font: {
+                            size: 18,  // 可選：設置字體大小
+                            weight: 'bold'  // 可選：設置字體加粗
+                        }
+                    }
+                }
+            },
+            plugins: [ChartDataLabels]  // 記得註冊 datalabels 插件
         };
 
         new Chart(document.getElementById('pieChart'), config);
     });
-
     // Combo Chart (Time Scale)
     document.addEventListener('DOMContentLoaded', function () {
-        const labels = ['2021-09-01', '2021-09-02', '2021-09-03'];
+        const labels = ['2024-09-21', '2024-09-22', '2024-09-23','2024-09-24','2024-09-25'];
         const data = {
             labels: labels,
             datasets: [{
                 type: 'bar',
-                label: 'Dataset 1',
+                label: '臥推次數',
                 backgroundColor: 'rgba(255, 99, 132, 0.5)',
                 borderColor: 'rgb(255, 99, 132)',
-                data: [10, 20, 30],
-            }, {
-                type: 'bar',
-                label: 'Dataset 2',
-                backgroundColor: 'rgba(54, 162, 235, 0.5)',
-                borderColor: 'rgb(54, 162, 235)',
-                data: [20, 30, 40],
+                data: [10, 15, 20, 21, 25],
             }, {
                 type: 'line',
-                label: 'Dataset 3',
+                label: '臥推時長(秒)',
                 backgroundColor: 'rgba(75, 192, 192, 0.5)',
                 borderColor: 'rgb(75, 192, 192)',
                 fill: false,
-                data: [15, 25, 35],
+                data: [60, 60, 80, 88, 120],
             }]
         };
 
@@ -333,7 +425,7 @@
             options: {
                 plugins: {
                     title: {
-                        text: 'Chart.js Combo Time Scale',
+                        text: '臥推次數與時長分析圖',
                         display: true
                     }
                 },
