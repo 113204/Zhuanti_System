@@ -22,6 +22,7 @@ pyttsx3 = "*"
 pytz = "*"
 openai = "*"
 opencv-python-headless = "*"
+mediapipe = "*"
 
 [dev-packages]
 flake8 = "*"
