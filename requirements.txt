@@ -33,7 +33,6 @@ ml-dtypes==0.4.0
 numpy==1.26.4
 openai==1.45.0
 opencv-contrib-python==4.10.0.82
-opencv-python==4.10.0.82
 opencv-python-headless==4.10.0.82
 opt-einsum==3.3.0
 packaging==24.1
