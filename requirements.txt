@@ -1,6 +1,6 @@
 absl-py==2.1.0
 annotated-types==0.7.0
-anyio==4.4.0
+anyio==4.6.0
 asgiref==3.8.1
 attrs==23.2.0
 bcrypt==4.2.0
@@ -22,7 +22,7 @@ gunicorn==23.0.0
 h11==0.14.0
 httpcore==1.0.5
 httpx==0.27.2
-idna==3.9
+idna==3.10
 jax==0.4.28
 jaxlib==0.4.28
 jiter==0.5.0
@@ -30,9 +30,10 @@ kiwisolver==1.4.5
 matplotlib==3.9.0
 mediapipe==0.10.14
 ml-dtypes==0.4.0
-numpy==1.26.4
-openai==1.45.0
+numpy==2.1.1
+openai==1.50.0
 opencv-contrib-python==4.10.0.82
+opencv-python==4.10.0.84
 opencv-python-headless==4.10.0.82
 opt-einsum==3.3.0
 packaging==24.1
@@ -40,12 +41,12 @@ pillow==10.3.0
 protobuf==4.25.3
 psycopg2-binary==2.9.9
 pycparser==2.22
-pydantic==2.9.1
-pydantic_core==2.23.3
+pydantic==2.9.2
+pydantic_core==2.23.4
 pyparsing==3.1.2
 pypiwin32==223
 python-dateutil==2.9.0.post0
-pyttsx3==2.91
+pyttsx3==2.98
 pytz==2024.2
 pywin32==306
 requests==2.32.3
@@ -56,7 +57,7 @@ sounddevice==0.4.7
 sqlparse==0.5.1
 tqdm==4.66.5
 typing_extensions==4.12.2
-tzdata==2024.1
+tzdata==2024.2
 urllib3==2.2.3
 utils==1.0.2
 whitenoise==6.7.0
