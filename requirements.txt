@@ -31,8 +31,8 @@ matplotlib==3.9.0
 mediapipe==0.10.14
 ml-dtypes==0.4.0
 numpy==2.1.1
-openai==1.50.0
-opencv-python-headless==4.10.0.82
+openai==1.50.1
+opencv-python-headless==4.10.0.84
 opt-einsum==3.3.0
 packaging==24.1
 pillow==10.3.0

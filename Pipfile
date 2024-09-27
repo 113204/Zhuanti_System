@@ -21,7 +21,7 @@ utils = "*"
 pyttsx3 = "*"
 pytz = "*"
 openai = "*"
-opencv-python = "*"
+opencv-python-headless = "*"
 
 [dev-packages]
 flake8 = "*"
