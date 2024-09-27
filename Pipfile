@@ -28,6 +28,7 @@ numpy = "*"
 jax = "*"
 jaxlib = "*"
 matplotlib = "*"
+opencv-python = "*"
 
 [dev-packages]
 flake8 = "*"
