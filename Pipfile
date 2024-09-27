@@ -29,6 +29,11 @@ jax = "*"
 jaxlib = "*"
 matplotlib = "*"
 opencv-python = "*"
+absl-py = "*"
+attrs = "*"
+flatbuffers = "*"
+protobuf = "*"
+sounddevice = "*"
 
 [dev-packages]
 flake8 = "*"

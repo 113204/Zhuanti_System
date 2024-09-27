@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "47fb036fc9b0721919e8e5d65e4ff2ad39fd2d7c11d8d6d9182390832cb1dc2a"
+            "sha256": "2155146c0025d07fa7c66559758990bae28d23db8f3804ca25bbe9a11e64b9dd"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -21,6 +21,7 @@
                 "sha256:526a04eadab8b4ee719ce68f204172ead1027549089702d99b9059f129ff1308",
                 "sha256:7820790efbb316739cde8b4e19357243fc3608a152024288513dd968d7d959ff"
             ],
+            "index": "pypi",
             "markers": "python_version >= '3.7'",
             "version": "==2.1.0"
         },
@@ -53,6 +54,7 @@
                 "sha256:5cfb1b9148b5b086569baec03f20d7b6bf3bcacc9a42bebf87ffaaca362f6346",
                 "sha256:81921eb96de3191c8258c199618104dd27ac608d9366f5e35d011eae1867ede2"
             ],
+            "index": "pypi",
             "markers": "python_version >= '3.7'",
             "version": "==24.2.0"
         },
@@ -410,6 +412,7 @@
                 "sha256:8dbdec58f935f3765e4f7f3cf635ac3a77f83568138d6a2311f524ec96364812",
                 "sha256:de2ec5b203f21441716617f38443e0a8ebf3d25bf0d9c0bb0ce68fa00ad546a4"
             ],
+            "index": "pypi",
             "version": "==24.3.25"
         },
         "fonttools": {
@@ -1053,6 +1056,7 @@
                 "sha256:b2fde3d805354df675ea4c7c6338c1aecd254dfc9925e88c6d31a2bcb97eb173",
                 "sha256:fe14e16c22be926d3abfcb500e60cab068baf10b542b8c858fa27e098123e331"
             ],
+            "index": "pypi",
             "markers": "python_version >= '3.8'",
             "version": "==4.25.5"
         },
@@ -1378,6 +1382,7 @@
                 "sha256:919de43040e8737258370ddf929a9cd1a3d6c493ca173bab70a3c7cb15c71e97",
                 "sha256:f28b7ef16f293d7b048a614dd087dfe39c3e313d94a50539bb52022b7ef27ece"
             ],
+            "index": "pypi",
             "markers": "python_version >= '3.7'",
             "version": "==0.5.0"
         },
