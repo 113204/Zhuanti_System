@@ -23,6 +23,11 @@ pytz = "*"
 openai = "*"
 opencv-python-headless = "*"
 mediapipe = "*"
+opencv-contrib-python = "*"
+numpy = "*"
+jax = "*"
+jaxlib = "*"
+matplotlib = "*"
 
 [dev-packages]
 flake8 = "*"
