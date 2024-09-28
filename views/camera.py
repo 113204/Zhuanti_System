@@ -68,7 +68,7 @@ class Posedetect(object):
 
     def __init__(self, session):
         self.session = session
-        self.video = cv2.VideoCapture(0)
+        self.video = cv2.VideoCapture(1)
         (self.grabbed, self.frame) = self.video.read()
         self.pose = mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5)
         self.started_time = 0
@@ -170,7 +170,7 @@ class Posedetect(object):
             if self.started_time > 3:
                 if right_elbow_angle < 30 and left_elbow_angle < 30:
 
-                    self.warning_message = '請將雙手向內握一點'
+                    self.warning_message = '請將雙手向外握一點'
                     self.joint_color = (0, 255, 255)
                     self.color = (0, 255, 255)
 
