@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 gunicorn = "*"
+waitress = "*"
 django = "*"
 djangorestframework = "*"
 bootstrap4 = "*"
@@ -34,7 +35,6 @@ attrs = "*"
 flatbuffers = "*"
 protobuf = "*"
 sounddevice = "*"
-waitress = "*"
 
 [dev-packages]
 flake8 = "*"
