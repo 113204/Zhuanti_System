@@ -26,13 +26,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-e+8c72#il&o#l6-d@8xh16m+8nht4l+q@xl%$7q58((t^9xgew'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
+# DEBUG = True
+#
+# ALLOWED_HOSTS = []
 
 # 在Heroku連線時用
-# DEBUG = False
-# ALLOWED_HOSTS = ['bench-press-916ec34de159.herokuapp.com']
+DEBUG = False
+ALLOWED_HOSTS = ['bench-press-916ec34de159.herokuapp.com']
 
 
 # Application definition
@@ -138,9 +138,9 @@ STATICFILES_DIRS = (
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-API_URL = 'http://localhost:9001/api/'
+# API_URL = 'http://localhost:9001/api/'
 
-# API_URL = 'https://bench-press-api-3be6059af902.herokuapp.com/api/'
+API_URL = 'https://bench-press-api-3be6059af902.herokuapp.com/api/'
 
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # 使用数据库后端存储会话
