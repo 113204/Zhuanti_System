@@ -8,3 +8,4 @@ libxext6
 libxrender-dev
 tesseract-ocr
 tesseract-ocr-eng
+gunicorn
