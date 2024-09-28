@@ -32,7 +32,7 @@ SECRET_KEY = 'django-insecure-e+8c72#il&o#l6-d@8xh16m+8nht4l+q@xl%$7q58((t^9xgew
 
 # 在Heroku連線時用
 DEBUG = False
-ALLOWED_HOSTS = ['bench-press-916ec34de159.herokuapp.com']
+ALLOWED_HOSTS = ['https://bench-press-916ec34de159.herokuapp.com/']
 
 
 # Application definition
