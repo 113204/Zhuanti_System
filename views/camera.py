@@ -189,7 +189,7 @@ class Posedetect(object):
                         if die_time > 10.5:
                             winsound.Beep(freq, duration)
                             # cap.release()
-                            cv2.destroyAllWindows()
+                            # cv2.destroyAllWindows()
 
                     elif die_time > 10:
                         self.joint_color = (0, 0, 255)
