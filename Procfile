@@ -1,1 +1,1 @@
-web: gunicorn --chdir core wsig:app
+web: gunicorn --chdir core wsig:application
