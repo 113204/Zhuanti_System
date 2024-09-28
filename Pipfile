@@ -4,10 +4,10 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+gunicorn = "*"
 django = "*"
 djangorestframework = "*"
 bootstrap4 = "*"
-gunicorn = "*"
 whitenoise = "*"
 dj-database-url = "*"
 psycopg2-binary = "*"
