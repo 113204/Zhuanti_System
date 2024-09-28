@@ -9,10 +9,6 @@
     <meta content="" name="description">
     <meta content="" name="keywords">
 
-    <!-- Favicons -->
-<!--    <link href="/static/img/logo2.png" rel="icon">-->
-<!--    <link href="/static/img/logo2.png" rel="apple-touch-icon">-->
-
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,23 +24,10 @@
 
     <!-- Variables CSS Files. Uncomment your preferred color scheme -->
     <link href="/static/css/variables.css" rel="stylesheet">
-    <!-- <link href="/static/css/variables-blue.css" rel="stylesheet"> -->
-    <!-- <link href="/static/css/variables-green.css" rel="stylesheet"> -->
-    <!-- <link href="/static/css/variables-orange.css" rel="stylesheet"> -->
-    <!-- <link href="/static/css/variables-purple.css" rel="stylesheet"> -->
-    <!-- <link href="/static/css/variables-red.css" rel="stylesheet"> -->
-    <!-- <link href="/static/css/variables-pink.css" rel="stylesheet"> -->
 
     <!-- Template Main CSS File -->
     <link href="/static/css/main.css" rel="stylesheet">
 
-    <!-- =======================================================
-    * Template Name: HeroBiz
-    * Template URL: https://bootstrapmade.com/herobiz-bootstrap-business-template/
-    * Updated: Mar 17 2024 with Bootstrap v5.3.3
-    * Author: BootstrapMade.com
-    * License: https://bootstrapmade.com/license/
-    ======================================================== -->
 </head>
 
 <body>
@@ -54,7 +37,6 @@
     <div class="container-fluid d-flex align-items-center justify-content-between">
 
         <a href="/" class="logo d-flex align-items-center scrollto me-auto me-lg-0">
-            <!-- Uncomment the line below if you also wish to use an image logo -->
              <img src="/static/img/logo2.png" alt="">
             <h1><span><b>臥推</b></span><b>的孩子</b></h1>
         </a>
@@ -71,9 +53,8 @@
                 <li><a class="nav-link scrollto" href="/development/">開發團隊</a></li>
             </ul>
             <i class="bi bi-list mobile-nav-toggle d-none"></i>
-        </nav><!-- .navbar -->
+        </nav>
 
-<!--        <a class="btn-getstarted scrollto" href="/login/">登入</a>-->
         {% if 'email' not in request.COOKIES.keys %}
         <a class="btn-getstarted scrollto" href="/login/">登入</a>
         {% endif %}
@@ -107,12 +88,7 @@
 
               <img src="/static/img/logo2.png" alt="Profile" height="150" weight="150" class="rounded-circle">
               <h2>{{ user.name }}</h2>
-<!--              <h3>Web Designer</h3>-->
               <div class="social-links mt-2">
-<!--                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>-->
-<!--                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>-->
-<!--                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>-->
-<!--                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>-->
 
                 {% for message in messages %}
                 <div class="alert alert-success">
@@ -124,9 +100,6 @@
                     <div class="col text-center">
                         <button type="button" class="btn custom-btn w-100" onclick="redirectToChangePassword()">變更密碼</button>
                     </div>
-<!--                    <div class="col text-center">-->
-<!--                        <button type="button" class="btn btn-primary" onclick="redirectToChangeUser()">修改資料</button>-->
-<!--                    </div>-->
                 </div>
 
               </div>
@@ -154,10 +127,6 @@
                   <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-post">發布過的文章</button>
                 </li>
 
-<!--                <li class="nav-item">-->
-<!--                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">修改密碼</button>-->
-<!--                </li>-->
-
               </ul>
               <div class="tab-content pt-2">
 
@@ -181,11 +150,6 @@
                     <div class="col-lg-3 col-md-4 label">緊急連絡人電話</div>
                     <div class="col-lg-9 col-md-8">{{ user.phone }}</div>
                   </div>
-
-<!--                  <div class="row">-->
-<!--                    <div class="col-lg-3 col-md-4 label">居住地</div>-->
-<!--                    <div class="col-lg-9 col-md-8">{{ user.live }}</div>-->
-<!--                  </div>-->
 
                 </div>
 
@@ -224,12 +188,6 @@
                       <div class="invalid-feedback">請輸入有效的電話號碼。</div>
                     </div>
                   </div>
-<!--                  <div class="row mb-3">-->
-<!--                    <label for="live" class="col-md-4 col-lg-3 col-form-label">居住地</label>-->
-<!--                    <div class="col-md-8 col-lg-9">-->
-<!--                      <input name="live" type="text" class="form-control" id="live" value="{{ user.live }}">-->
-<!--                    </div>-->
-<!--                  </div>-->
                   <div class="text-center">
                     <button type="submit" class="btn custom-btn">儲存變更</button>
                   </div>
@@ -243,7 +201,7 @@
                         var phonePattern = /^\d{4}-\d{3}-\d{3}$/;
                         var genderInput = document.getElementById('gender');
 
-                        // 驗證電話
+                        // 電話驗證
                         if (!phonePattern.test(phoneInput.value)) {
                             event.preventDefault();
                             phoneInput.classList.add('is-invalid');
@@ -252,7 +210,7 @@
                             phoneInput.classList.remove('is-invalid');
                         }
 
-                        // 驗證性別
+                        // 性別驗證
                         if (genderInput.value === "" || genderInput.value === null) {
                             event.preventDefault();
                             genderInput.classList.add('is-invalid');
@@ -281,18 +239,15 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <!-- <th>發布者</th> -->
                                 <th>標題</th>
                                 <th>日期</th>
-<!--                                <th>操作</th>-->
                             </tr>
                         </thead>
                         <tbody>
                             {% for post in post %}
                             <tr>
-                                <!-- <td>{{ post.usermail }}</td> -->
                                 <td>{{ post.title }}</td>
-                                <td>{{ post.date }} <!-- or {{ post.formatted_date }} if you have formatted date --></td>
+                                <td>{{ post.date }}</td>
                                 <td>
                                     <div class="text-center">
                                         <a href="{% url 'post_detail' no=post.no %}" class="btn btn-info">查看文章</a>
@@ -312,38 +267,6 @@
 
                 </div>
 
-<!--                <div class="tab-pane fade pt-3" id="profile-change-password">-->
-<!--                  &lt;!&ndash; Change Password Form &ndash;&gt;-->
-<!--                  <form>-->
-
-<!--                    <div class="row mb-3">-->
-<!--                      <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>-->
-<!--                      <div class="col-md-8 col-lg-9">-->
-<!--                        <input name="password" type="password" class="form-control" id="currentPassword">-->
-<!--                      </div>-->
-<!--                    </div>-->
-
-<!--                    <div class="row mb-3">-->
-<!--                      <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>-->
-<!--                      <div class="col-md-8 col-lg-9">-->
-<!--                        <input name="newpassword" type="password" class="form-control" id="newPassword">-->
-<!--                      </div>-->
-<!--                    </div>-->
-
-<!--                    <div class="row mb-3">-->
-<!--                      <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>-->
-<!--                      <div class="col-md-8 col-lg-9">-->
-<!--                        <input name="renewpassword" type="password" class="form-control" id="renewPassword">-->
-<!--                      </div>-->
-<!--                    </div>-->
-
-<!--                    <div class="text-center">-->
-<!--                      <button type="submit" class="btn btn-primary">Change Password</button>-->
-<!--                    </div>-->
-<!--                  </form>&lt;!&ndash; End Change Password Form &ndash;&gt;-->
-
-<!--                </div>-->
-
               </div><!-- End Bordered Tabs -->
 
             </div>
@@ -354,89 +277,6 @@
     </section>
 
   </main><!-- End #main -->
-
-<!-- ======= Footer ======= -->
-<footer id="footer" class="footer">
-
-    <div class="footer-content">
-        <div class="container">
-            <div class="row">
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="footer-info">
-                        <h3>HeroBiz</h3>
-                        <p>
-                            A108 Adam Street <br>
-                            NY 535022, USA<br><br>
-                            <strong>Phone:</strong> +1 5589 55488 55<br>
-                            <strong>Email:</strong> info@example.com<br>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="col-lg-2 col-md-6 footer-links">
-                    <h4>Useful Links</h4>
-                    <ul>
-                        <li><i class="bi bi-chevron-right"></i> <a href="#">Home</a></li>
-                        <li><i class="bi bi-chevron-right"></i> <a href="#">About us</a></li>
-                        <li><i class="bi bi-chevron-right"></i> <a href="#">Services</a></li>
-                        <li><i class="bi bi-chevron-right"></i> <a href="#">Terms of service</a></li>
-                        <li><i class="bi bi-chevron-right"></i> <a href="#">Privacy policy</a></li>
-                    </ul>
-                </div>
-
-                <div class="col-lg-3 col-md-6 footer-links">
-                    <h4>Our Services</h4>
-                    <ul>
-                        <li><i class="bi bi-chevron-right"></i> <a href="#">Web Design</a></li>
-                        <li><i class="bi bi-chevron-right"></i> <a href="#">Web Development</a></li>
-                        <li><i class="bi bi-chevron-right"></i> <a href="#">Product Management</a></li>
-                        <li><i class="bi bi-chevron-right"></i> <a href="#">Marketing</a></li>
-                        <li><i class="bi bi-chevron-right"></i> <a href="#">Graphic Design</a></li>
-                    </ul>
-                </div>
-
-                <div class="col-lg-4 col-md-6 footer-newsletter">
-                    <h4>Our Newsletter</h4>
-                    <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
-                    <form action="" method="post">
-                        <input type="email" name="email"><input type="submit" value="Subscribe">
-                    </form>
-
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <div class="footer-legal text-center">
-        <div class="container d-flex flex-column flex-lg-row justify-content-center justify-content-lg-between align-items-center">
-
-            <div class="d-flex flex-column align-items-center align-items-lg-start">
-                <div class="copyright">
-                    &copy; Copyright <strong><span>HeroBiz</span></strong>. All Rights Reserved
-                </div>
-                <div class="credits">
-                    <!-- All the links in the footer should remain intact. -->
-                    <!-- You can delete the links only if you purchased the pro version. -->
-                    <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                    <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/herobiz-bootstrap-business-template/ -->
-                    Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-                </div>
-            </div>
-
-            <div class="social-links order-first order-lg-last mb-3 mb-lg-0">
-                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-                <a href="#" class="google-plus"><i class="bi bi-skype"></i></a>
-                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
-            </div>
-
-        </div>
-    </div>
-
-</footer><!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 

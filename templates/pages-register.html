@@ -9,10 +9,6 @@
     <meta content="" name="description">
     <meta content="" name="keywords">
 
-    <!-- Favicons -->
-    <!--    <link href="/static/img/logo2.png" rel="icon">-->
-    <!--    <link href="/static/img/logo2.png" rel="apple-touch-icon">-->
-
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -73,7 +69,6 @@
                                         <input type="text" name="name" class="form-control" id="name" placeholder="暱稱" required="required">
                                     </div>
 
-                                    <!-- 在合适的位置添加密码显示/隐藏按钮 -->
                                     <div class="col-12">
                                         <label for="pass" class="form-label">密碼須包含大小寫英文、數字、特殊符號，至少八位</label>
                                         <div class="input-group">
@@ -123,12 +118,12 @@
                                     <style>
                                         .custom-btn {
                                             background: #4aa0ba;
-                                            color: white; /* 可選：設定字體顏色 */
-                                            border: none; /* 可選：去除邊框 */
+                                            color: white; /* 設定字體顏色 */
+                                            border: none; /* 去除邊框 */
                                         }
 
                                         .custom-btn:hover {
-                                            background: #65aec4	; /* 可選：設定懸停效果 */
+                                            background: #65aec4	; /* 設定懸停效果 */
                                         }
                                     </style>
                                     <div class="col-12">
@@ -162,7 +157,7 @@
 
 <!-- 自定义的 JavaScript代码 -->
 <script>
-    // 切换显示/隐藏密码
+    // 切換顯示隱藏密碼
     const togglePassword = document.querySelector('#togglePassword');
     const password = document.querySelector('#pass');
 
@@ -181,12 +176,12 @@
         toggleRePassword.innerHTML = type === 'password' ? '<i class="bi bi-eye-slash"></i>' : '<i class="bi bi-eye"></i>';
     });
 
-    // 检查用户是否同意隐私政策
+    // 檢查使用者是否同意隱私權政策
     document.querySelector('#registerForm').addEventListener('submit', function (event) {
         const acceptTerms = document.querySelector('#acceptTerms');
         if (!acceptTerms.checked) {
             alert('請閱讀並同意隱私權政策');
-            event.preventDefault();  // 阻止表单提交
+            event.preventDefault();  // 阻止表單提交
         }
     });
 </script>

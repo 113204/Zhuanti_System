@@ -10,10 +10,6 @@
     <meta content="" name="description">
     <meta content="" name="keywords">
 
-    <!-- Favicons -->
-<!--    <link href="/static/img/logo2.png" rel="icon">-->
-<!--    <link href="/static/img/logo2.png" rel="apple-touch-icon">-->
-
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,12 +25,6 @@
 
     <!-- Variables CSS Files. Uncomment your preferred color scheme -->
     <link href="/static/css/variables.css" rel="stylesheet">
-    <!-- <link href="/static/css/variables-blue.css" rel="stylesheet"> -->
-    <!-- <link href="/static/css/variables-green.css" rel="stylesheet"> -->
-    <!-- <link href="/static/css/variables-orange.css" rel="stylesheet"> -->
-    <!-- <link href="/static/css/variables-purple.css" rel="stylesheet"> -->
-    <!-- <link href="/static/css/variables-red.css" rel="stylesheet"> -->
-    <!-- <link href="/static/css/variables-pink.css" rel="stylesheet"> -->
 
     <!-- Template Main CSS File -->
     <link href="/static/css/main.css" rel="stylesheet">
@@ -60,53 +50,7 @@
             border-radius: 5px;
             animation: flip 1s infinite;
         }
-
-
-    </style>
-</head>
-
-<body>
-<!-- ======= Header ======= -->
-<header id="header" class="header fixed-top" data-scrollto-offset="0">
-    <div class="container-fluid d-flex align-items-center justify-content-between">
-
-        <a href="/" class="logo d-flex align-items-center scrollto me-auto me-lg-0">
-            <!-- Uncomment the line below if you also wish to use an image logo -->
-            <img src="/static/img/logo2.png" alt="">
-            <h1><span><b>臥推</b></span><b>的孩子</b></h1>
-        </a>
-
-        <nav id="navbar" class="navbar">
-            <ul>
-                <li><a class="nav-link scrollto" href="/">首頁</a></li>
-                <li><a class="nav-link scrollto" href="/profile/">個人資料</a></li>
-                <li><a class="nav-link scrollto" href="/detect">健身監測</a></li>
-                <li><a class="nav-link scrollto" href="/video/">教學影片</a></li>
-                <li><a class="nav-link scrollto" href="/record/">運動紀錄</a></li>
-                <li><a class="nav-link scrollto" href="/wisdomQA/">智慧問答</a></li>
-                <li><a class="nav-link scrollto" href="/post/">文章列表</a></li>
-                <li><a class="nav-link scrollto" href="/development/">開發團隊</a></li>
-            </ul>
-            <i class="bi bi-list mobile-nav-toggle d-none"></i>
-        </nav><!-- .navbar -->
-
-        {% if 'email' not in request.COOKIES.keys %}
-        <a class="btn-getstarted scrollto" href="/login/">登入</a>
-        {% endif %}
-        {% if 'email' in request.COOKIES.keys %}
-        <a class="btn-getstarted scrollto" href="/logout/">登出</a>
-        {% endif %}
-
-    </div>
-</header><!-- End Header -->
-
-<!-- 伸縮bar -->
-<div class="sidebar-contact" style="z-index:2;">
-    <!-- <div class="toggle"></div> -->
-    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script src="/static/js/studyroomtitle.js"></script>
-    <style>
-            .sidebar-contact {
+        .sidebar-contact {
                 position: fixed;
                 top: 20%;
                 left: -270px;
@@ -188,16 +132,51 @@
             background: #65aec4	; /* 可選：設定懸停效果 */
         }
 
+
     </style>
-    <!-- <a id="startStopButton" onclick="startStopTimer()" class="btn-get" style="margin-bottom: 10px;">開始</a>
-    <a id="fullscreenButton" class="btn-get">進入全螢幕</a>
-    <a id="exitFullscreenButton" style="display:none;" class="btn-get">退出全螢幕</a> -->
+</head>
+
+<body>
+<!-- ======= Header ======= -->
+<header id="header" class="header fixed-top" data-scrollto-offset="0">
+    <div class="container-fluid d-flex align-items-center justify-content-between">
+
+        <a href="/" class="logo d-flex align-items-center scrollto me-auto me-lg-0">
+            <img src="/static/img/logo2.png" alt="">
+            <h1><span><b>臥推</b></span><b>的孩子</b></h1>
+        </a>
+
+        <nav id="navbar" class="navbar">
+            <ul>
+                <li><a class="nav-link scrollto" href="/">首頁</a></li>
+                <li><a class="nav-link scrollto" href="/profile/">個人資料</a></li>
+                <li><a class="nav-link scrollto" href="/detect">健身監測</a></li>
+                <li><a class="nav-link scrollto" href="/video/">教學影片</a></li>
+                <li><a class="nav-link scrollto" href="/record/">運動紀錄</a></li>
+                <li><a class="nav-link scrollto" href="/wisdomQA/">智慧問答</a></li>
+                <li><a class="nav-link scrollto" href="/post/">文章列表</a></li>
+                <li><a class="nav-link scrollto" href="/development/">開發團隊</a></li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle d-none"></i>
+        </nav><!-- .navbar -->
+
+        {% if 'email' not in request.COOKIES.keys %}
+        <a class="btn-getstarted scrollto" href="/login/">登入</a>
+        {% endif %}
+        {% if 'email' in request.COOKIES.keys %}
+        <a class="btn-getstarted scrollto" href="/logout/">登出</a>
+        {% endif %}
+
+    </div>
+</header><!-- End Header -->
+
+<!-- 伸縮bar -->
+<div class="sidebar-contact" style="z-index:2;">
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="/static/js/studyroomtitle.js"></script>
 </div>
 
 <section id="hero-animated" class="hero-animated d-flex align-items-center">
-    <!-- <p><span id="timer" >00</span>:</p>
-    <p><span id="timer2" >00</span>:</p>
-    <p><span id="timer3" >00</span></p> -->
     <div class="container d-flex flex-column justify-content-center align-items-center text-center position-relative"
          data-aos="zoom-out">
          <img src="{% url 'detect1' %}" >
@@ -235,7 +214,7 @@
                 var displayMinutes = minutes < 10 ? "0" + minutes : minutes;
                 var displayHours = hours < 10 ? "0" + hours : hours;
 
-                // 添加动画类
+                // 增加動畫
                 timerElement.textContent = displayHours;
                 timerElement.classList.add('flip-animation');
                 timerElement2.textContent = displayMinutes;
@@ -243,7 +222,7 @@
                 timerElement3.textContent = displaySeconds;
                 timerElement3.classList.add('flip-animation');
 
-                // 移除动画类，以便下一次触发动画
+                // 移除動畫
                 setTimeout(() => {
                     timerElement.classList.remove('flip-animation');
                     timerElement2.classList.remove('flip-animation');
@@ -304,90 +283,6 @@
 </section>
 
 <main id="main">
-
-
-    <!-- ======= Footer ======= -->
-    <footer id="footer" class="footer">
-
-        <div class="footer-content">
-            <div class="container">
-                <div class="row">
-
-                    <div class="col-lg-3 col-md-6">
-                        <div class="footer-info">
-                            <h3>HeroBiz</h3>
-                            <p>
-                                A108 Adam Street <br>
-                                NY 535022, USA<br><br>
-                                <strong>Phone:</strong> +1 5589 55488 55<br>
-                                <strong>Email:</strong> info@example.com<br>
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-2 col-md-6 footer-links">
-                        <h4>Useful Links</h4>
-                        <ul>
-                            <li><i class="bi bi-chevron-right"></i> <a href="#">Home</a></li>
-                            <li><i class="bi bi-chevron-right"></i> <a href="#">About us</a></li>
-                            <li><i class="bi bi-chevron-right"></i> <a href="#">Services</a></li>
-                            <li><i class="bi bi-chevron-right"></i> <a href="#">Terms of service</a></li>
-                            <li><i class="bi bi-chevron-right"></i> <a href="#">Privacy policy</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="col-lg-3 col-md-6 footer-links">
-                        <h4>Our Services</h4>
-                        <ul>
-                            <li><i class="bi bi-chevron-right"></i> <a href="#">Web Design</a></li>
-                            <li><i class="bi bi-chevron-right"></i> <a href="#">Web Development</a></li>
-                            <li><i class="bi bi-chevron-right"></i> <a href="#">Product Management</a></li>
-                            <li><i class="bi bi-chevron-right"></i> <a href="#">Marketing</a></li>
-                            <li><i class="bi bi-chevron-right"></i> <a href="#">Graphic Design</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 footer-newsletter">
-                        <h4>Our Newsletter</h4>
-                        <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
-                        <form action="" method="post">
-                            <input type="email" name="email"><input type="submit" value="Subscribe">
-                        </form>
-
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <div class="footer-legal text-center">
-            <div class="container d-flex flex-column flex-lg-row justify-content-center justify-content-lg-between align-items-center">
-
-                <div class="d-flex flex-column align-items-center align-items-lg-start">
-                    <div class="copyright">
-                        &copy; Copyright <strong><span>HeroBiz</span></strong>. All Rights Reserved
-                    </div>
-                    <div class="credits">
-                        <!-- All the links in the footer should remain intact. -->
-                        <!-- You can delete the links only if you purchased the pro version. -->
-                        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/herobiz-bootstrap-business-template/ -->
-                        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-                    </div>
-                </div>
-
-                <div class="social-links order-first order-lg-last mb-3 mb-lg-0">
-                    <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-                    <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-                    <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-                    <a href="#" class="google-plus"><i class="bi bi-skype"></i></a>
-                    <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
-                </div>
-
-            </div>
-        </div>
-
-    </footer><!-- End Footer -->
 
     <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 

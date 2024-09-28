@@ -74,7 +74,7 @@ def stop_camera(request):
     return JsonResponse({'status': '鏡頭已關閉'})
 
 
-@user_login_required
+# @user_login_required
 def video(request):
     return render(request, 'video.html')
 
@@ -86,7 +86,7 @@ openai_api_key = ''
 openai.api_key = openai_api_key
 
 
-@user_login_required
+# @user_login_required
 def ask_openai(message):
     response = openai.ChatCompletion.create(
         model="gpt-4o",
@@ -101,7 +101,7 @@ def ask_openai(message):
     return answer
 
 
-@user_login_required
+# @user_login_required
 def wisdomQA(request):
     if request.method == 'POST':
         message = request.POST.get('message')

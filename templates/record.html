@@ -9,10 +9,6 @@
     <meta content="" name="description">
     <meta content="" name="keywords">
 
-    <!-- Favicons -->
-    <!-- <link href="/static/img/logo2.png" rel="icon"> -->
-    <!-- <link href="/static/img/logo2.png" rel="apple-touch-icon"> -->
-
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,12 +24,7 @@
 
     <!-- Variables CSS Files. Uncomment your preferred color scheme -->
     <link href="/static/css/variables.css" rel="stylesheet">
-    <!-- <link href="/static/css/variables-blue.css" rel="stylesheet"> -->
-    <!-- <link href="/static/css/variables-green.css" rel="stylesheet"> -->
-    <!-- <link href="/static/css/variables-orange.css" rel="stylesheet"> -->
-    <!-- <link href="/static/css/variables-purple.css" rel="stylesheet"> -->
-    <!-- <link href="/static/css/variables-red.css" rel="stylesheet"> -->
-    <!-- <link href="/static/css/variables-pink.css" rel="stylesheet"> -->
+
     <!-- Template Main CSS File -->
     <link href="/static/css/main.css" rel="stylesheet">
 <style>
@@ -74,20 +65,20 @@
     .button-container {
         display: flex;
         flex-direction: row;
-        justify-content: center; /* 居中排列 */
-        gap: 10px; /* 按钮之间的间距 */
-        margin-bottom: 20px; /* 按钮下方的间距 */
+        justify-content: center; /* 置中 */
+        gap: 10px; /* 按鈕間距離 */
+        margin-bottom: 20px; /* 按鈕下方距離 */
     }
 
     .button-container button {
-        padding: 10px 20px; /* 按钮的内边距 */
-        border: 1px solid #ccc; /* 按钮的边框 */
-        background-color: #f8f9fa; /* 按钮的背景色 */
-        cursor: pointer; /* 鼠标悬停时的样式 */
+        padding: 10px 20px; /* 按鈕內邊距 */
+        border: 1px solid #ccc; /* 按鈕邊框 */
+        background-color: #f8f9fa; /* 按鈕的背景色 */
+        cursor: pointer; /* 懸停樣式 */
     }
 
     .button-container button:hover {
-        background-color: #e2e6ea; /* 鼠标悬停时的背景色 */
+        background-color: #e2e6ea; /* 懸停背景色 */
     }
 </style>
 
@@ -101,7 +92,6 @@
     <div class="container-fluid d-flex align-items-center justify-content-between">
 
         <a href="/" class="logo d-flex align-items-center scrollto me-auto me-lg-0">
-            <!-- Uncomment the line below if you also wish to use an image logo -->
             <img src="/static/img/logo2.png" alt="">
             <h1><span><b>臥推</b></span><b>的孩子</b></h1>
         </a>
@@ -118,7 +108,7 @@
                 <li><a class="nav-link scrollto" href="/development/">開發團隊</a></li>
             </ul>
             <i class="bi bi-list mobile-nav-toggle d-none"></i>
-        </nav><!-- .navbar -->
+        </nav>
 
         {% if 'email' not in request.COOKIES.keys %}
         <a class="btn-getstarted scrollto" href="/login/">登入</a>
@@ -141,7 +131,7 @@
 
             </div>
 
-            <!-- 折線圖容器 -->
+            <!-- 折線圖 -->
             <div id="lineChartContainer" class="chart-container line-chart-container" style="display: none;">
                 <canvas id="lineChart"></canvas>
             </div>
@@ -157,66 +147,6 @@
         </div>
     </section>
 </div>
-<footer id="footer" class="footer">
-    <div class="footer-content">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-6">
-                    <div class="footer-info">
-                        <h3>HeroBiz</h3>
-                        <p>
-                            A108 Adam Street <br>
-                            NY 535022, USA<br><br>
-                            <strong>Phone:</strong> +1 5589 55488 55<br>
-                            <strong>Email:</strong> info@example.com<br>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="col-lg-2 col-md-6 footer-links">
-                    <h4>Useful Links</h4>
-                    <ul>
-                        <li><i class="bi bi-chevron-right"></i> <a href="#">Home</a></li>
-                        <li><i class="bi bi-chevron-right"></i> <a href="#">About us</a></li>
-                        <li><i class="bi bi-chevron-right"></i> <a href="#">Services</a></li>
-                        <li><i class="bi bi-chevron-right"></i> <a href="#">Terms of service</a></li>
-                        <li><i class="bi bi-chevron-right"></i> <a href="#">Privacy policy</a></li>
-                    </ul>
-                </div>
-
-                <div class="col-lg-3 col-md-6 footer-links">
-                    <h4>Our Services</h4>
-                    <ul>
-                        <li><i class="bi bi-chevron-right"></i> <a href="#">Web Design</a></li>
-                        <li><i class="bi bi-chevron-right"></i> <a href="#">Web Development</a></li>
-                        <li><i class="bi bi-chevron-right"></i> <a href="#">Product Management</a></li>
-                        <li><i class="bi bi-chevron-right"></i> <a href="#">Marketing</a></li>
-                        <li><i class="bi bi-chevron-right"></i> <a href="#">Graphic Design</a></li>
-                    </ul>
-                </div>
-
-                <div class="col-lg-4 col-md-6 footer-newsletter">
-                    <h4>Our Newsletter</h4>
-                    <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna.</p>
-                    <form action="" method="post">
-                        <input type="email" name="email"><input type="submit" value="Subscribe">
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="footer-legal">
-        <div class="container">
-            <div class="copyright">
-                &copy; <strong><span>HeroBiz</span></strong>. All Rights Reserved
-            </div>
-            <div class="credits">
-                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-            </div>
-        </div>
-    </div>
-</footer><!-- End Footer -->
 
 <!-- Vendor JS Files -->
 <script src="/static/vendor/aos/aos.js"></script>
