@@ -1,1 +1,1 @@
-web: gunicorn Zhuanti_System.core.wsgi
+web: gunicorn core.wsgi
