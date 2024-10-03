@@ -1,4 +1,4 @@
-import requests
+import requests,re
 from django.forms import models
 from django import forms
 from django.shortcuts import render
@@ -98,6 +98,7 @@ def ask_openai(message):
         ]
     )
     answer = response.choices[0].message.content.strip()
+    answer = re.sub(r'\*', '', answer)
     return answer
 
 
