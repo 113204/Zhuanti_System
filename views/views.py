@@ -97,8 +97,7 @@ def ask_openai(message):
             {"role": "user", "content": message},
         ]
     )
-    answer = response.choices[0].message.content.strip()
-    answer = re.sub(r'\*', '', answer)
+    answer = response.choices[0].message.content.strip().replace('**', '').replace('###', '').replace('。', '。<br>').replace('：', '：<br>').replace('-', '&nbsp&nbsp●&nbsp')
     return answer
 
 
