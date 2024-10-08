@@ -29,6 +29,19 @@
     <!-- Template Main CSS File -->
     <link href="/static/css/main.css" rel="stylesheet">
 
+    <style>
+        .custom-btn {
+            background: #4aa0ba;
+            color: white; /* 可選：設定字體顏色 */
+            border: none; /* 可選：去除邊框 */
+            margin-top: 10px;
+        }
+
+        .custom-btn:hover {
+            background: #65aec4	; /* 可選：設定懸停效果 */
+        }
+    </style>
+
 </head>
 
 <body>
@@ -160,8 +173,8 @@
             <br><br>
             <!-- 返回註冊按鈕 -->
             <div style="text-align: center;">
-                <a href="/register" style="text-decoration: none;">
-                    <button style="padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                <a href="/register" >
+                    <button class="btn custom-btn">
                         返回註冊
                     </button>
                 </a>
