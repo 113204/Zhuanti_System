@@ -96,7 +96,9 @@ def ask_openai(message):
              "content": "You are a professional fitness coach in Taiwan and are proficient in various fitness-related questions, so you can only reply to fitness-related questions in Traditional Chinese."},
             {"role": "user", "content": message},
         ],
-        temperature=1
+        temperature=1,
+        top_p=0.9
+
     )
     answer = response.choices[0].message.content.strip().replace('**', '').replace('###', '').replace('。', '。<br>').replace('：', '：<br>').replace('-', '&nbsp&nbsp●&nbsp')
     return answer
