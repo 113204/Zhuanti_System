@@ -30,6 +30,27 @@
     <!-- Template Main CSS File -->
     <link href="/static/css/main.css" rel="stylesheet">
 
+    <style>
+    .features {
+        display: flex;
+        flex-direction: column;
+        gap: 10px; /* 增加項目間的間距 */
+    }
+
+    .feature-item {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        background-color: #f9f9f9;
+        transition: transform 0.3s ease; /* 使變化平滑 */
+    }
+
+    .feature-item:hover {
+        transform: scale(1.05); /* 放大效果 */
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* 添加陰影效果 */
+    }
+    </style>
+
 </head>
 
 <body>
@@ -82,21 +103,33 @@
         <h2>臥推的孩子 <span>Bench No Ko</span></h2>
         <h3 class="mb-4" style="color: #555;">上半身力量訓練的王牌動作！</h3>
         <!-- 說明段落 -->
-        <p class="lead" style="max-width: 800px; line-height: 1.8;">
-            臥推是一種重量訓練的動作，被譽為上半身力量訓練的王牌✨你可以把它想像成肌肉界的經典絕技，
-            因為它能有效鍛鍊<strong>胸肌、三頭肌</strong>和<strong>肩膀</strong>，讓你在健身房展現健壯的上身線條💪
-        </p>
-<!--        <p class="text-muted" style="max-width: 800px; line-height: 1.8;">-->
-<!--            臥推的姿勢簡單明瞭：你躺在臥推椅上，雙手握住槓鈴，慢慢地將槓鈴從胸口推起，再緩緩放回原位。-->
-<!--            這聽起來好像很輕鬆，但其實是考驗力量和控制力的好機會，因為稍微一不注意就可能讓動作變形，影響訓練效果哦！-->
-<!--        </p>-->
-<!--        <p class="text-muted" style="max-width: 800px; line-height: 1.8;">-->
-<!--            臥推不僅能提升力量，還能帶給你無比的成就感！每次成功推起比之前更重的重量，就像是為自己的人生加碼挑戰一樣🎯-->
-<!--            不論是剛開始接觸健身的新手，還是追求極限的老手，臥推都是一個能讓你不斷進步、突破自我的好夥伴🏆-->
-<!--        </p>-->
-        <p class="text-muted" style="max-width: 800px; line-height: 1.8;">
-            所以下一次走進健身房時，不妨試一試這項經典動作，看看自己能不能夠一步步突破極限，挑戰自我、創造新紀錄，成為真正的臥推高手吧！💪😎
-        </p>
+        <div class="features">
+            <div class="feature-item">
+                <p class="lead" style="max-width: 800px; line-height: 1.8; margin: 0;">
+                    <strong>安全第一🛡️✨：</strong>我們的AI隨時監測你的臥推姿勢，讓你在訓練時安全無虞，還能即時通知工作人員支援，守護你的健康👩‍⚕️💪
+                </p>
+            </div>
+            <div class="feature-item">
+                <p class="text-muted" style="max-width: 800px; line-height: 1.8; margin: 0;">
+                    <strong>專注學習👀📚：</strong>眼球動態追蹤確保你在開始之前能專心看教學影片，輕鬆掌握正確動作，降低受傷風險🎥👍
+                </p>
+            </div>
+            <div class="feature-item">
+                <p class="text-muted" style="max-width: 800px; line-height: 1.8; margin: 0;">
+                    <strong>即時糾正⚡🛠️：</strong>AI會識別不正確的臥推姿勢，提供專業建議，幫你調整動作，讓每一推都更有效率🔥🏋️‍♂️
+                </p>
+            </div>
+            <div class="feature-item">
+                <p class="text-muted" style="max-width: 800px; line-height: 1.8; margin: 0;">
+                    <strong>隨時提問❓💬：</strong>有問題？聊天機器人隨時在線，解答你的健身疑惑，使運動更安心🤖✨
+                </p>
+            </div>
+            <div class="feature-item">
+                <p class="text-muted" style="max-width: 800px; line-height: 1.8; margin: 0;">
+                    <strong>輕鬆記錄進度📊📝：</strong>自動記錄你的運動數據，讓你隨時查詢進展，輕鬆達成目標，享受每一步的成就感🏅🎯
+                </p>
+            </div>
+        </div>
     </div>
 </section>
 
