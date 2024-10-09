@@ -5,14 +5,14 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>臥推的孩子</title>
+    <title>忘記密碼 - 臥推的孩子</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=Source+Sans+Pro:wght@300;400;600;700&display=swap"
           rel="stylesheet">
 
     <!-- Vendor CSS Files -->
@@ -22,7 +22,7 @@
     <link href="/static/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
     <link href="/static/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
-    <!-- Variables CSS Files. Uncomment your preferred color scheme -->
+    <!-- Variables CSS Files -->
     <link href="/static/css/variables.css" rel="stylesheet">
 
     <!-- Template Main CSS File -->
@@ -42,7 +42,7 @@
 
               <div class="d-flex justify-content-center py-4">
                   <a href="/" class="logo d-flex align-items-center w-auto flex-column">
-<!--                    <img src="/static/img/logo2.png" alt="" height="150" weight="150" style="display: block;">-->
+                    <img src="/static/img/logo3.png" alt="" height="150" weight="150" style="display: block;">
                     <span class="d-none d-lg-block" style="display: block;">臥推的孩子</span>
                   </a>
               </div><!-- End Logo -->
@@ -52,41 +52,37 @@
                 <div class="card-body">
 
                   <div class="pt-4 pb-2">
-                    <h5 class="card-title text-center pb-0 fs-4">Login to Your Account</h5>
-                    <p class="text-center small">Enter your username & password to login</p>
+                    <h5 class="card-title text-center pb-0 fs-4">忘記密碼</h5>
+                    <p class="text-center small">請輸入您的電子郵件以重設密碼</p>
                   </div>
 
                   <form class="row g-3 needs-validation" novalidate method="post">
-                     {% for message in messages %}
-                        <div class="alert alert-success">
-                            <a class="close" href="#" data-dismiss="alert"></a>
-                            {{ message }}
-                        </div>
-                    {% endfor %}
                     {% csrf_token %}
+                    {% for message in messages %}
+                      <div class="alert alert-danger">{{ message }}</div>
+                    {% endfor %}
                     <div class="col-12">
-                      <label for="your_name" class="form-label"></label>
+                      <label for="email" class="form-label">電子郵件</label>
                       <div class="input-group has-validation">
-                        <input type="text" name="your_name" class="form-control" id="your_name"placeholder="請輸入電子郵件" required="required">
+                        <input type="email" name="email" class="form-control" id="email" placeholder="請輸入電子郵件" required>
                       </div>
                     </div>
+                    <style>
+                        .custom-btn {
+                            background: #4aa0ba;
+                            color: white; /* 設定字體顏色 */
+                            border: none; /* 去除邊框 */
+                        }
 
-                    <div class="col-12">
-                      <label for="your_pass" class="form-label"></label>
-                      <input type="password" name="your_pass" class="form-control" id="your_pass" placeholder="請輸入密碼" required="required">
-                    </div>
-
-                    <div class="col-12">
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="remember" value="true" id="rememberMe">
-                        <label class="form-check-label" for="rememberMe">Remember me</label>
-                      </div>
+                        .custom-btn:hover {
+                            background: #65aec4	; /* 設定懸停效果 */
+                        }
+                    </style>
+                    <div class="col-12 d-flex justify-content-center">
+                      <input type="submit" name="submit" class="btn custom-btn w-100" value="重設密碼"/>
                     </div>
                     <div class="col-12">
-                      <input type="submit" name="signin" id="signin" class="btn btn-primary w-100" value="登入"/>
-                    </div>
-                    <div class="col-12">
-                      <p class="small mb-0">Don't have account? <a href="/register/">Create an account</a></p>
+                      <p class="small mb-0">已經有帳號？ <a href="/login/">登入</a></p>
                     </div>
                   </form>
 

@@ -12,7 +12,7 @@ urlpatterns = [
     path('privacypolicies/', views.privacypolicies),
 
     #登入、登出、註冊
-    path('login/', auth_views.login),
+    path('login/', auth_views.login, name='login'),
     path('logout/', auth_views.logout),
     path('register/', auth_views.register),
 
@@ -22,9 +22,9 @@ urlpatterns = [
     # path('editusers/', user_views.EditUserDetail),
 
     # 忘記密碼
-    path('forgetpass/', auth_views.forget_password),
-
-    # path('appointment/', views.appointment),
+    path('forgot-password/', auth_views.ForgotPassword, name='forgot_password'),
+    # 重設密碼，包含 uid 和 token 參數
+    path('reset-password/<uidb64>/<token>/', auth_views.PasswordReset, name='reset_password'),
 
     # 運動紀錄
     path('record/', views.record),
