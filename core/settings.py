@@ -145,3 +145,10 @@ API_URL = 'https://bench-press-api-3be6059af902.herokuapp.com/api/'
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # 使用数据库后端存储会话
 SESSION_COOKIE_SECURE = True  # 仅在 HTTPS 连接下发送会话 cookie
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  # Gmail的郵件服務地址
+EMAIL_PORT = 587  # 587是Gmail的TLS端口
+EMAIL_USE_TLS = True  # 啟用TLS
+EMAIL_HOST_USER = 'benchnoko@gmail.com'  # 您的Gmail地址
+EMAIL_HOST_PASSWORD = 'vyuc hukn nljx lgqs'  # 使用應用專用密碼
