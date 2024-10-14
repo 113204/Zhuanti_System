@@ -144,23 +144,22 @@
                     <canvas id="comboChart"></canvas>
                 </div>
 
-                <!-- Display Records -->
-                <div class="record-container">
-                    {% if record %}
-                        {% for r in record %}
-                            <div>
-                                <p>次数: {{ r.count }}</p>
-                                <p>时间: {{ r.datetime }}</p>
-                                <p>左侧错误: {{ r.left_errors }}</p>
-                                <p>右侧错误: {{ r.right_errors }}</p>
-                                <p>运动时长: {{ r.sport_time }}</p>
-                            </div>
-                        {% endfor %}
-                    {% else %}
-                        <p>没有找到运动记录。</p>
-                    {% endif %}
-                    <pre>{{ record|default:"未找到记录" }}</pre>  <!-- Debugging line -->
-                </div>
+<!--                &lt;!&ndash; Display Records &ndash;&gt;-->
+<!--                <div class="record-container">-->
+<!--                    {% if record %}-->
+<!--                        {% for r in record %}-->
+<!--                            <div>-->
+<!--                                <p>次数: {{ r.count }}</p>-->
+<!--                                <p>时间: {{ r.datetime }}</p>-->
+<!--                                <p>左侧错误: {{ r.left_errors }}</p>-->
+<!--                                <p>右侧错误: {{ r.right_errors }}</p>-->
+<!--                                <p>运动时长: {{ r.sport_time }}</p>-->
+<!--                            </div>-->
+<!--                        {% endfor %}-->
+<!--                    {% else %}-->
+<!--                        <p>没有找到运动记录。</p>-->
+<!--                    {% endif %}-->
+<!--                </div>-->
             </div>
         </section>
     </div>
@@ -187,115 +186,112 @@
         document.addEventListener('DOMContentLoaded', function () {
             showChart('comboChartContainer'); // 默认显示组合图表
 
-            // 从API获取数据
-            fetch('/api/record/')
-                .then(response => {
-                    if (!response.ok) {
-                        return response.text().then(text => {
-                            throw new Error(`HTTP错误！状态: ${response.status}. 响应: ${text}`);
-                        });
+            // 获取从后端传递的记录数据
+            const records = {{ record|safe }}; // 使用 Django 的 safe 过滤器确保数据格式正确
+
+            const dates = records.map(item => item.datetime);
+            const counts = records.map(item => item.count);
+            const sportTimes = records.map(item => item.sport_time);
+            const leftErrors = records.map(item => item.left_errors);
+            const rightErrors = records.map(item => item.right_errors);
+
+            // 线性图表数据（臥推次数）
+            const lineCtx = document.getElementById('lineChart').getContext('2d');
+            const lineChart = new Chart(lineCtx, {
+                type: 'line',
+                data: {
+                    labels: dates,
+                    datasets: [{
+                        label: '臥推次数',
+                        data: counts,
+                        fill: false,
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: true,
+                        },
+                        datalabels: {
+                            align: 'end',
+                            anchor: 'end',
+                        }
                     }
-                    return response.json();
-                })
-                .then(data => {
-                    console.log('收到的数据:', data);
-                    const dates = data.map(item => item.datetime);
-                    const counts = data.map(item => item.count);
-                    const sportTimes = data.map(item => item.sport_time);
-                    const leftErrors = data.map(item => item.left_errors);
-                    const rightErrors = data.map(item => item.right_errors);
+                }
+            });
 
-                    // 线性图表数据（臥推次数）
-                    const lineChartConfig = {
-                        type: 'line',
-                        data: {
-                            labels: dates,
-                            datasets: [{
-                                label: '臥推次數',
-                                data: counts,
-                                borderColor: 'rgb(75, 192, 192)',
-                                backgroundColor: 'rgba(75, 192, 192, 0.5)',
-                                pointStyle: 'circle',
-                                pointRadius: 5,
-                                pointHoverRadius: 7
-                            }]
+            // 饼图数据（左右手错误率）
+            const pieCtx = document.getElementById('pieChart').getContext('2d');
+            const pieChart = new Chart(pieCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['左侧错误', '右侧错误'],
+                    datasets: [{
+                        label: '错误率',
+                        data: [leftErrors.reduce((a, b) => a + b, 0), rightErrors.reduce((a, b) => a + b, 0)],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: true,
                         },
-                        options: {
-                            responsive: true,
-                            plugins: {
-                                title: {
-                                    display: true,
-                                    text: '臥推次數分析圖'
-                                }
+                        datalabels: {
+                            formatter: (value, context) => {
+                                const total = context.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+                                const percentage = Math.round((value / total) * 100) + '%';
+                                return percentage;
                             }
                         }
-                    };
-                    new Chart(document.getElementById('lineChart'), lineChartConfig);
+                    }
+                }
+            });
 
-                    // 饼状图数据（左右手错误率）
-                    const pieChartConfig = {
-                        type: 'pie',
-                        data: {
-                            labels: ['左侧错误', '右侧错误'],
-                            datasets: [{
-                                data: [leftErrors.reduce((a, b) => a + b, 0), rightErrors.reduce((a, b) => a + b, 0)],
-                                backgroundColor: ['rgba(75, 192, 192, 0.6)', 'rgba(255, 99, 132, 0.6)']
-                            }]
-                        },
-                        options: {
-                            responsive: true,
-                            plugins: {
-                                title: {
-                                    display: true,
-                                    text: '左右手錯誤率分析圖'
-                                }
-                            }
-                        }
-                    };
-                    new Chart(document.getElementById('pieChart'), pieChartConfig);
-
-                    // 组合图表数据（臥推次数与运动时长）
-                    const comboChartConfig = {
+            // 组合图表数据
+            const comboCtx = document.getElementById('comboChart').getContext('2d');
+            const comboChart = new Chart(comboCtx, {
+                type: 'bar',
+                data: {
+                    labels: dates,
+                    datasets: [{
+                        label: '臥推次数',
+                        data: counts,
                         type: 'bar',
-                        data: {
-                            labels: dates,
-                            datasets: [{
-                                label: '臥推次數',
-                                data: counts,
-                                backgroundColor: 'rgba(75, 192, 192, 0.5)',
-                                borderColor: 'rgba(75, 192, 192, 1)',
-                                borderWidth: 1
-                            }, {
-                                label: '運動時長',
-                                type: 'line',
-                                data: sportTimes,
-                                borderColor: 'rgba(255, 99, 132, 1)',
-                                backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                                fill: false,
-                            }]
+                        backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                    }, {
+                        label: '运动时长',
+                        data: sportTimes,
+                        type: 'line',
+                        borderColor: 'rgba(153, 102, 255, 1)',
+                        fill: false,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: true,
                         },
-                        options: {
-                            responsive: true,
-                            scales: {
-                                y: {
-                                    beginAtZero: true,
-                                    title: {
-                                        display: true,
-                                        text: '次數 / 時間 (秒)'
-                                    }
-                                }
-                            },
-                            plugins: {
-                                title: {
-                                    display: true,
-                                    text: '臥推次數與運動時長分析圖'
-                                }
-                            }
+                        datalabels: {
+                            align: 'end',
+                            anchor: 'end',
                         }
-                    };
-                    new Chart(document.getElementById('comboChart'), comboChartConfig);
-                })
-                .catch(error => console.error('获取数据时出错:', error));
+                    }
+                }
+            });
         });
     </script>
 </body>
