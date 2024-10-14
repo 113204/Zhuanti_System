@@ -142,7 +142,7 @@ def register(request):
         return redirect('/register')
 
 
-# 忘記密碼頁面視圖
+# 忘記密碼頁面
 def ForgotPassword(request):
     if request.method == 'POST':
         email = request.POST.get('email')
@@ -164,7 +164,7 @@ def ForgotPassword(request):
     return render(request, 'forget-pass.html')
 
 
-# 密碼重設頁面視圖
+# 密碼重設頁面
 def PasswordReset(request, uidb64, token):
     if request.method == 'POST':
         new_password = request.POST.get('password')

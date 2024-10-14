@@ -27,7 +27,7 @@ urlpatterns = [
     path('reset-password/<uidb64>/<token>/', auth_views.PasswordReset, name='reset_password'),
 
     # 運動紀錄
-    path('record/', views.record),
+    path('record/', user_views.getrecord, name='getrecord'),
 
     # 文章列表
     path('post/', post_views.Post),

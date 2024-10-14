@@ -167,3 +167,27 @@ def change_password(request):
                 messages.error(request, '密碼格式填寫錯誤，請重新修改')
                 return redirect('/changepass')
 
+
+@user_login_required
+def getrecord(request):
+    if request.method == 'GET':
+        email = request.COOKIES.get('email')
+
+        try:
+            r_record = requests.get(
+                f'{root}record/getrecord/',  # 确保这里的 URL 是正确的
+                params={'email': email},
+            )
+            r_record.raise_for_status()  # 检查请求是否成功
+
+            result_record = r_record.json()
+            record = result_record.get('records', [])  # 使用 .get() 方法，避免 KeyError
+
+        except requests.exceptions.RequestException as e:
+            logger.error(f"获取用户运动记录失败: {e}")
+            record = []  # 请求失败时记录为空
+
+        return render(request, 'record.html', {'record': record})
+
+
+

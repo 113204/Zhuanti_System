@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
 
 <head>
     <meta charset="utf-8">
@@ -12,8 +12,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&display=swap"
-          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
 
     <!-- Vendor CSS Files -->
     <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -22,354 +21,283 @@
     <link href="/static/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
     <link href="/static/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
-    <!-- Variables CSS Files. Uncomment your preferred color scheme -->
+    <!-- Variables CSS Files -->
     <link href="/static/css/variables.css" rel="stylesheet">
 
     <!-- Template Main CSS File -->
     <link href="/static/css/main.css" rel="stylesheet">
-<style>
-    .chart-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        box-sizing: border-box;
-        margin: 0 auto;
-    }
+    <style>
+        .chart-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto;
+        }
 
-    /* Line Chart Container */
-    .line-chart-container {
-        width: 80%; /* Adjust the width percentage as needed */
-        max-width: 600px; /* Adjust max-width if necessary */
-        height: 400px; /* Adjust height if necessary */
-    }
+        /* Chart Containers */
+        .line-chart-container {
+            width: 80%;
+            max-width: 600px;
+            height: 400px;
+        }
 
-    /* Pie Chart Container */
-    .pie-chart-container {
-        width: 70%; /* Adjust the width percentage as needed */
-        max-width: 400px; /* Adjust max-width if necessary */
-        height: auto; /* Allow height to adjust automatically */
-    }
+        .pie-chart-container {
+            width: 70%;
+            max-width: 400px;
+            height: auto;
+        }
 
-    /* Combo Chart Container */
-    .combo-chart-container {
-        width: 90%; /* Adjust the width percentage as needed */
-        max-width: 800px; /* Adjust max-width if necessary */
-        height: 400px; /* Adjust height if necessary */
-    }
+        .combo-chart-container {
+            width: 90%;
+            max-width: 800px;
+            height: 400px;
+        }
 
-    .chart-container canvas {
-        width: 100% !important;
-        height: auto !important;
-    }`
+        .chart-container canvas {
+            width: 100% !important;
+            height: auto !important;
+        }
 
-    .button-container {
-        display: flex;
-        flex-direction: row;
-        justify-content: center; /* 置中 */
-        gap: 10px; /* 按鈕間距離 */
-        margin-bottom: 20px; /* 按鈕下方距離 */
-    }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
 
-    .button-container button {
-        padding: 10px 20px; /* 按鈕內邊距 */
-        border: 1px solid #ccc; /* 按鈕邊框 */
-        background-color: #f8f9fa; /* 按鈕的背景色 */
-        cursor: pointer; /* 懸停樣式 */
-    }
+        .button-container button {
+            padding: 10px 20px;
+            border: 1px solid #ccc;
+            background-color: #f8f9fa;
+            cursor: pointer;
+        }
 
-    .button-container button:hover {
-        background-color: #e2e6ea; /* 懸停背景色 */
-    }
-</style>
+        .button-container button:hover {
+            background-color: #e2e6ea;
+        }
 
+        /* Record Display Styles */
+        .record-container {
+            margin: 20px 0;
+            text-align: left;
+        }
 
-
+        .record-container div {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 
 <body>
-<!-- ======= Header ======= -->
-<header id="header" class="header fixed-top" data-scrollto-offset="0">
-    <div class="container-fluid d-flex align-items-center justify-content-between">
+    <!-- ======= Header ======= -->
+    <header id="header" class="header fixed-top" data-scrollto-offset="0">
+        <div class="container-fluid d-flex align-items-center justify-content-between">
+            <a href="/" class="logo d-flex align-items-center scrollto me-auto me-lg-0">
+                <h1><span><b>臥推</b></span><b>的孩子</b></h1>
+            </a>
 
-        <a href="/" class="logo d-flex align-items-center scrollto me-auto me-lg-0">
-<!--            <img src="/static/img/logo2.png" alt="">-->
-            <h1><span><b>臥推</b></span><b>的孩子</b></h1>
-        </a>
+            <nav id="navbar" class="navbar">
+                <ul>
+                    <li><a class="nav-link scrollto" href="/">首頁</a></li>
+                    <li><a class="nav-link scrollto" href="/profile/">個人資料</a></li>
+                    <li><a class="nav-link scrollto" href="/detect">健身監測</a></li>
+                    <li><a class="nav-link scrollto" href="/video/">教學影片</a></li>
+                    <li><a class="nav-link scrollto" href="/record/">運動紀錄</a></li>
+                    <li><a class="nav-link scrollto" href="/wisdomQA/">智慧問答</a></li>
+                    <li><a class="nav-link scrollto" href="/post/">文章列表</a></li>
+                    <li><a class="nav-link scrollto" href="/development/">開發團隊</a></li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle d-none"></i>
+            </nav>
 
-        <nav id="navbar" class="navbar">
-            <ul>
-                <li><a class="nav-link scrollto" href="/">首頁</a></li>
-                <li><a class="nav-link scrollto" href="/profile/">個人資料</a></li>
-                <li><a class="nav-link scrollto" href="/detect">健身監測</a></li>
-                <li><a class="nav-link scrollto" href="/video/">教學影片</a></li>
-                <li><a class="nav-link scrollto" href="/record/">運動紀錄</a></li>
-                <li><a class="nav-link scrollto" href="/wisdomQA/">智慧問答</a></li>
-                <li><a class="nav-link scrollto" href="/post/">文章列表</a></li>
-                <li><a class="nav-link scrollto" href="/development/">開發團隊</a></li>
-            </ul>
-            <i class="bi bi-list mobile-nav-toggle d-none"></i>
-        </nav>
-
-        {% if 'email' not in request.COOKIES.keys %}
-        <a class="btn-getstarted scrollto" href="/login/">登入</a>
-        {% endif %}
-        {% if 'email' in request.COOKIES.keys %}
-        <a class="btn-getstarted scrollto" href="/logout/">登出</a>
-        {% endif %}
-
-    </div>
-</header><!-- End Header -->
-<div class="row" style="display: flex; justify-content: space-between;">
-    <section id="hero-animated" class="hero-animated d-flex align-items-center">
-        <div class="container d-flex flex-column justify-content-center align-items-center text-center position-relative"
-             data-aos="zoom-out">
-            <!-- 按鈕來切換圖表 -->
-            <div class="button-container">
-                <button onclick="showChart('comboChartContainer')">臥推次數與時長分析圖</button>
-                <button onclick="showChart('lineChartContainer')">平均臥推次數分析圖</button>
-                <button onclick="showChart('pieChartContainer')">左右手錯誤率分析圖</button>
-
-            </div>
-
-            <!-- 折線圖 -->
-            <div id="lineChartContainer" class="chart-container line-chart-container" style="display: none;">
-                <canvas id="lineChart"></canvas>
-            </div>
-
-            <div id="pieChartContainer" class="chart-container pie-chart-container" style="display: none;">
-                <canvas id="pieChart"></canvas>
-            </div>
-
-            <div id="comboChartContainer" class="chart-container combo-chart-container" style="display: none;">
-                <canvas id="comboChart"></canvas>
-            </div>
-
+            {% if 'email' not in request.COOKIES.keys %}
+            <a class="btn-getstarted scrollto" href="/login/">登入</a>
+            {% else %}
+            <a class="btn-getstarted scrollto" href="/logout/">登出</a>
+            {% endif %}
         </div>
-    </section>
-</div>
+    </header><!-- End Header -->
 
-<!-- Vendor JS Files -->
-<script src="/static/vendor/aos/aos.js"></script>
-<script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="/static/vendor/glightbox/js/glightbox.min.js"></script>
-<script src="/static/vendor/swiper/swiper-bundle.min.js"></script>
+    <div class="row" style="display: flex; justify-content: space-between;">
+        <section id="hero-animated" class="hero-animated d-flex align-items-center">
+            <div class="container d-flex flex-column justify-content-center align-items-center text-center position-relative" data-aos="zoom-out">
+                <!-- Buttons to switch charts -->
+                <div class="button-container">
+                    <button onclick="showChart('comboChartContainer')">臥推次數與時長分析圖</button>
+                    <button onclick="showChart('lineChartContainer')">平均臥推次數分析圖</button>
+                    <button onclick="showChart('pieChartContainer')">左右手錯誤率分析圖</button>
+                </div>
 
-<!-- Template Main JS File -->
-<script src="/static/js/main.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+                <!-- Charts -->
+                <div id="lineChartContainer" class="chart-container line-chart-container" style="display: none;">
+                    <canvas id="lineChart"></canvas>
+                </div>
 
-<script>
-    function showChart(chartId) {
-        const charts = document.querySelectorAll('.chart-container');
-        charts.forEach(chart => chart.style.display = 'none'); // Hide all charts
-        document.getElementById(chartId).style.display = 'block'; // Show the selected chart
-    }
+                <div id="pieChartContainer" class="chart-container pie-chart-container" style="display: none;">
+                    <canvas id="pieChart"></canvas>
+                </div>
 
-    // Ensure combo chart is shown by default on page load
-    document.addEventListener('DOMContentLoaded', function () {
-        showChart('comboChartContainer'); // Show combo chart by default
-    });
+                <div id="comboChartContainer" class="chart-container combo-chart-container" style="display: none;">
+                    <canvas id="comboChart"></canvas>
+                </div>
 
-    document.addEventListener('DOMContentLoaded', function () {
-        const data = {
-            labels: ['2024-09-21', '2024-09-22', '2024-09-23', '2024-09-24', '2024-09-25'],
-            datasets: [{
-                label: '平均臥推秒數',
-                data: [6, 4, 4, 4, 5],
-                borderColor: 'rgb(255, 99, 132)',
-                backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                pointStyle: 'circle',
-                pointRadius: 7, // 調整點的半徑
-                pointHoverRadius: 10 // 調整懸停時的半徑
-            }]
-        };
+                <!-- Display Records -->
+                <div class="record-container">
+                    {% if record %}
+                        {% for r in record %}
+                            <div>
+                                <p>次数: {{ r.count }}</p>
+                                <p>时间: {{ r.datetime }}</p>
+                                <p>左侧错误: {{ r.left_errors }}</p>
+                                <p>右侧错误: {{ r.right_errors }}</p>
+                                <p>运动时长: {{ r.sport_time }}</p>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p>没有找到运动记录。</p>
+                    {% endif %}
+                    <pre>{{ record|default:"未找到记录" }}</pre>  <!-- Debugging line -->
+                </div>
+            </div>
+        </section>
+    </div>
 
-        const config = {
-            type: 'line',
-            data: data,
-            options: {
-                responsive: true,
-                plugins: {
-                    title: {
-                        display: true,
-                        text: '平均臥推次數分析圖' // 直接使用靜態文本
+    <!-- Vendor JS Files -->
+    <script src="/static/vendor/aos/aos.js"></script>
+    <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="/static/vendor/swiper/swiper-bundle.min.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="/static/js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+
+    <script>
+        function showChart(chartId) {
+            const charts = document.querySelectorAll('.chart-container');
+            charts.forEach(chart => chart.style.display = 'none'); // 隐藏所有图表
+            document.getElementById(chartId).style.display = 'block'; // 显示所选图表
+        }
+
+        // 页面加载时默认显示组合图表
+        document.addEventListener('DOMContentLoaded', function () {
+            showChart('comboChartContainer'); // 默认显示组合图表
+
+            // 从API获取数据
+            fetch('/api/record/')
+                .then(response => {
+                    if (!response.ok) {
+                        return response.text().then(text => {
+                            throw new Error(`HTTP错误！状态: ${response.status}. 响应: ${text}`);
+                        });
                     }
-                },
-                scales: {
-                    x: {
-                        type: 'category', // 如果需要，可以將其改為 'time'
-                        display: true,
-                        title: {
-                            display: true,
-                            text: '日期'
-                        }
-                    },
-                    y: {
-                        beginAtZero: true, // 確保 Y 軸從 0 開始
-                        title: {
-                            display: true,
-                            text: '平均秒數'
-                        }
-                    }
-                }
-            }
-        };
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('收到的数据:', data);
+                    const dates = data.map(item => item.datetime);
+                    const counts = data.map(item => item.count);
+                    const sportTimes = data.map(item => item.sport_time);
+                    const leftErrors = data.map(item => item.left_errors);
+                    const rightErrors = data.map(item => item.right_errors);
 
-        new Chart(document.getElementById('lineChart'), config);
-    });
-
-    <!--    // Line Chart-->
-    <!--    document.addEventListener('DOMContentLoaded', function () {-->
-    <!--    fetch('/api/record/')  // 注意路徑應該是 /api/record/-->
-    <!--        .then(response => {-->
-    <!--            if (!response.ok) {-->
-    <!--                return response.text().then(text => {-->
-    <!--                    throw new Error(`HTTP error! Status: ${response.status}. Response: ${text}`);-->
-    <!--                });-->
-    <!--            }-->
-    <!--            return response.json();-->
-    <!--        })-->
-    <!--        .then(data => {-->
-    <!--            console.log('Received data:', data);-->
-
-    <!--            // 確保你從響應中提取 'record_data'-->
-    <!--            const reportData = data.record_data;-->
-
-    <!--            // 提取時間標籤和數據-->
-    <!--            const lineChartLabels = reportData.map(item => item.datetime);-->
-    <!--            const lineChartData = reportData.map(item => item.avg_push_time);-->
-
-    <!--            // 配置折線圖的數據-->
-    <!--            const lineChartConfig = {-->
-    <!--                labels: lineChartLabels,-->
-    <!--                datasets: [{-->
-    <!--                    label: '平均臥推時長',-->
-    <!--                    data: lineChartData,-->
-    <!--                    borderColor: 'rgb(255, 99, 132)',-->
-    <!--                    backgroundColor: 'rgba(255, 99, 132, 0.5)',-->
-    <!--                    pointStyle: 'circle',-->
-    <!--                    pointRadius: 5,-->
-    <!--                    pointHoverRadius: 7-->
-    <!--                }]-->
-    <!--            };-->
-
-    <!--            // Chart.js 配置-->
-    <!--            const config = {-->
-    <!--                type: 'line',-->
-    <!--                data: lineChartConfig,-->
-    <!--                options: {-->
-    <!--                    responsive: true,-->
-    <!--                    plugins: {-->
-    <!--                        title: {-->
-    <!--                            display: true,-->
-    <!--                            text: '平均臥推時長'-->
-    <!--                        }-->
-    <!--                    }-->
-    <!--                }-->
-    <!--            };-->
-
-    <!--            // 初始化並渲染圖表-->
-    <!--            new Chart(document.getElementById('lineChart'), config);-->
-    <!--        })-->
-    <!--        .catch(error => {-->
-    <!--            console.error('Error fetching data:', error);-->
-    <!--            alert('數據加載錯誤，請檢查控制台以獲取更多信息。');-->
-    <!--        });-->
-    <!--});-->
-    document.addEventListener('DOMContentLoaded', function () {
-        const COLORS = [
-            'rgba(75, 192, 192, 0.5)',
-            'rgba(255, 99, 132, 0.5)'
-        ];
-
-        const data = {
-            labels: ['右手錯誤率', '左手錯誤率'],
-            datasets: [{
-                label: '錯誤率',
-                data: [0.14, 0.19], // 正確的百分比表示法
-                backgroundColor: COLORS,
-            }]
-        };
-
-         const config = {
-            type: 'pie',
-            data: data,
-            options: {
-                responsive: true,
-                plugins: {
-                    title: {
-                        display: true,
-                        text: '左右手錯誤率分析圖',
-                        font: {
-                            size: 18
+                    // 线性图表数据（臥推次数）
+                    const lineChartConfig = {
+                        type: 'line',
+                        data: {
+                            labels: dates,
+                            datasets: [{
+                                label: '臥推次數',
+                                data: counts,
+                                borderColor: 'rgb(75, 192, 192)',
+                                backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                                pointStyle: 'circle',
+                                pointRadius: 5,
+                                pointHoverRadius: 7
+                            }]
                         },
-                        color: '#01a2bc',
-                        padding: {
-                            top: 10,
-                            bottom: 30
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                title: {
+                                    display: true,
+                                    text: '臥推次數分析圖'
+                                }
+                            }
                         }
-                    },
-                    datalabels: {  // 啟用 datalabels 插件以顯示百分比
-                        formatter: (value, context) => {
-                            const percentage = (value * 100).toFixed(2) + '%';
-                            return percentage;  // 將百分比顯示在圖表上
+                    };
+                    new Chart(document.getElementById('lineChart'), lineChartConfig);
+
+                    // 饼状图数据（左右手错误率）
+                    const pieChartConfig = {
+                        type: 'pie',
+                        data: {
+                            labels: ['左侧错误', '右侧错误'],
+                            datasets: [{
+                                data: [leftErrors.reduce((a, b) => a + b, 0), rightErrors.reduce((a, b) => a + b, 0)],
+                                backgroundColor: ['rgba(75, 192, 192, 0.6)', 'rgba(255, 99, 132, 0.6)']
+                            }]
                         },
-                        color: '#fff',  // 設置標籤字體顏色
-                        font: {
-                            size: 18,  // 可選：設置字體大小
-                            weight: 'bold'  // 可選：設置字體加粗
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                title: {
+                                    display: true,
+                                    text: '左右手錯誤率分析圖'
+                                }
+                            }
                         }
-                    }
-                }
-            },
-            plugins: [ChartDataLabels]  // 記得註冊 datalabels 插件
-        };
+                    };
+                    new Chart(document.getElementById('pieChart'), pieChartConfig);
 
-        new Chart(document.getElementById('pieChart'), config);
-    });
-    // Combo Chart (Time Scale)
-    document.addEventListener('DOMContentLoaded', function () {
-        const labels = ['2024-09-21', '2024-09-22', '2024-09-23','2024-09-24','2024-09-25'];
-        const data = {
-            labels: labels,
-            datasets: [{
-                type: 'bar',
-                label: '臥推次數',
-                backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                borderColor: 'rgb(255, 99, 132)',
-                data: [10, 15, 20, 21, 25],
-            }, {
-                type: 'line',
-                label: '臥推時長(秒)',
-                backgroundColor: 'rgba(75, 192, 192, 0.5)',
-                borderColor: 'rgb(75, 192, 192)',
-                fill: false,
-                data: [60, 60, 80, 88, 120],
-            }]
-        };
-
-        const config = {
-            type: 'bar',
-            data: data,
-            options: {
-                plugins: {
-                    title: {
-                        text: '臥推次數與時長分析圖',
-                        display: true
-                    }
-                },
-                scales: {
-                    x: {
-                        type: 'category',
-                        display: true,
-                    },
-                },
-            },
-        };
-
-        new Chart(document.getElementById('comboChart'), config);
-    });
-</script>
+                    // 组合图表数据（臥推次数与运动时长）
+                    const comboChartConfig = {
+                        type: 'bar',
+                        data: {
+                            labels: dates,
+                            datasets: [{
+                                label: '臥推次數',
+                                data: counts,
+                                backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                                borderColor: 'rgba(75, 192, 192, 1)',
+                                borderWidth: 1
+                            }, {
+                                label: '運動時長',
+                                type: 'line',
+                                data: sportTimes,
+                                borderColor: 'rgba(255, 99, 132, 1)',
+                                backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                                fill: false,
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    title: {
+                                        display: true,
+                                        text: '次數 / 時間 (秒)'
+                                    }
+                                }
+                            },
+                            plugins: {
+                                title: {
+                                    display: true,
+                                    text: '臥推次數與運動時長分析圖'
+                                }
+                            }
+                        }
+                    };
+                    new Chart(document.getElementById('comboChart'), comboChartConfig);
+                })
+                .catch(error => console.error('获取数据时出错:', error));
+        });
+    </script>
 </body>
+
 </html>
