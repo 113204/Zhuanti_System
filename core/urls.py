@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from views import views, auth_views, user_views, post_views
+from views import views, auth_views, user_views, post_views, record_views
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
@@ -44,6 +44,7 @@ urlpatterns = [
     path('detect1/', views.detect1, name='detect1'),
     path('detect/', views.detect, name='detect'),
     path('stop_camera/', views.stop_camera, name='stop_camera'),
+    path('addrecord/', record_views.addrecord, name='addrecord'),
     
     # 教學影片
     path('video/', views.video),

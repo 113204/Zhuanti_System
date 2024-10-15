@@ -136,6 +136,13 @@
     </style>
 </head>
 
+<script>
+    // 在頁面載入時顯示提示視窗
+    window.onload = function() {
+        alert("運動完記得按下結束運動以及確認運動紀錄按鈕，以確保該次運動有新增紀錄成功！");
+    };
+</script>
+
 <body>
 <!-- ======= Header ======= -->
 <header id="header" class="header fixed-top" data-scrollto-offset="0">
@@ -176,20 +183,121 @@
     <script src="/static/js/studyroomtitle.js"></script>
 </div>
 
+
 <section id="hero-animated" class="hero-animated d-flex align-items-center">
+<!--    <div class="container d-flex flex-column justify-content-center align-items-center text-center position-relative" data-aos="zoom-out">-->
+<!--        <h2>當前臥推次數: {{ counter }}</h2>-->
+<!--        <div>{{ counter }}</div>  &lt;!&ndash; 调试输出 &ndash;&gt;-->
+<!--    </div>-->
     <div class="container d-flex flex-column justify-content-center align-items-center text-center position-relative"
-         data-aos="zoom-out">
-         <img src="{% url 'detect1' %}" >
+     data-aos="zoom-out">
+        <img src="{% url 'detect1' %}">
         <button class="btn custom-btn" id="stop-btn">結束運動</button>
+        <button class="btn custom-btn mt-2" id="record-btn">確認運動紀錄</button>
     </div>
-    <script>
+
+    <!-- 確認運動紀錄的模態視窗 -->
+<div class="modal fade" id="recordModal" tabindex="-1" aria-labelledby="recordModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="recordModalLabel">運動紀錄</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="record-form" action="{% url 'addrecord' %}" method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="left_errors" class="form-label">左側錯誤次數</label>
+                        <input type="number" class="form-control" id="left_errors" value="0" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="right_errors" class="form-label">右側錯誤次數</label>
+                        <input type="number" class="form-control" id="right_errors" value="0" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="sport_time" class="form-label">運動時間</label>
+                        <input type="text" class="form-control" id="sport_time" required>
+                    </div>
+                    <div>
+                        <label for="count" class="form-label">臥推次數</label>
+                        <input type="number" class="form-control" id="count" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-2">提交運動紀錄</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        // 獲取 CSRF token
+        function getCSRFToken() {
+            return document.querySelector('[name=csrfmiddlewaretoken]').value;
+        }
+
+        // 停止按鈕的點擊事件
         $('#stop-btn').on('click', function () {
             $.get('/stop_camera/', function (data) {
-                alert(data.status);
-                $('#camera-feed').attr('src', '');
+                alert(data.status);  // 顯示停止消息
+                $('#camera-feed').attr('src', '');  // 清空攝像頭畫面
             });
         });
-    </script>
+
+        // 點擊「確認運動紀錄」按鈕時顯示運動紀錄的模態視窗
+        $('#record-btn').on('click', function () {
+            $('#recordModal').modal('show');
+        });
+
+        // 處理表單提交
+        $('#record-form').on('submit', function (e) {
+            e.preventDefault(); // 阻止預設表單提交
+
+            // 獲取表單的action屬性作為URL
+            const url = $(this).attr('action');
+
+            // 獲取表單資料
+            const leftErrors = $('#left_errors').val();
+            const rightErrors = $('#right_errors').val();
+            const sportTime = $('#sport_time').val();
+            const count = $('#count').val();
+
+            // 發送 POST 請求
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: {
+                    count: count,
+                    left_errors: leftErrors,
+                    right_errors: rightErrors,
+                    sport_time: sportTime,
+                    csrfmiddlewaretoken: getCSRFToken()  // 確保 CSRF token 包含在請求中
+                },
+                success: function (response) {
+                    // 處理成功響應
+                    alert(response.message || '運動紀錄新增成功');
+
+                    // 如果後端返回了重定向的 URL，則進行跳轉
+                    if (response.redirect_url) {
+                        window.location.href = response.redirect_url; // 跳轉至運動紀錄頁面
+                    } else {
+                        $('#recordModal').modal('hide'); // 隱藏模態窗口
+                    }
+                },
+                error: function (xhr) {
+                    // 處理失敗響應
+                    const errorMsg = xhr.responseJSON ? xhr.responseJSON.error : '新增紀錄時發生錯誤';
+                    alert(errorMsg);
+                }
+            });
+        });
+    });
+</script>
+
         <script>
             var timerElement = document.getElementById('timer');
             var timerElement2 = document.getElementById('timer2');
@@ -269,7 +377,7 @@
                 document.exitFullscreen();
             } else if (document.mozCancelFullScreen) { // Firefox
                 document.mozCancelFullScreen();
-            } else if (document.webkitExitFullscreen) { // Chrome, Safari and Opera
+            } else if (document.webkitExitFullscreen) {mer // Chrome, Safari and Opera
                 document.webkitExitFullscreen();
             } else if (document.msExitFullscreen) { // IE/Edge
                 document.msExitFullscreen();
