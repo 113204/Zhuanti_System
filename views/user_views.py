@@ -1,6 +1,8 @@
 import logging
+from datetime import datetime
 
 import bcrypt
+import pytz
 import requests
 import re
 
@@ -182,6 +184,21 @@ def getrecord(request):
 
             result_record = r_record.json()
             record = result_record.get('records', [])  # 使用 .get() 方法，避免 KeyError
+
+            # 获取台湾时区
+            taiwan_tz = pytz.timezone('Asia/Taipei')
+
+            for rec in record:
+                if 'datetime' in rec:  # 确保字典中有 datetime 字段
+                    # 将字符串格式的 datetime 转换为 datetime 对象
+                    # 使用适合当前日期格式的 strptime
+                    naive_datetime = datetime.strptime(rec['datetime'], "%Y-%m-%d %H:%M:%S")
+                    # 设置为 UTC 时间
+                    naive_datetime = naive_datetime.replace(tzinfo=pytz.utc)
+                    # 转换为台湾时间
+                    taiwan_time = naive_datetime.astimezone(taiwan_tz)
+                    # 更新记录中的时间格式
+                    rec['datetime'] = taiwan_time.strftime("%Y-%m-%d %H:%M:%S")  # 格式化为字符串显示
 
         except requests.exceptions.RequestException as e:
             logger.error(f"获取用户运动记录失败: {e}")
