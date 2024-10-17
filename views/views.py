@@ -100,7 +100,22 @@ def ask_openai(message):
         top_p=0.9
 
     )
-    answer = response.choices[0].message.content.strip().replace('**', '').replace('###', '').replace('。', '。<br>').replace('：', '：<br>').replace('-', '&nbsp&nbsp●&nbsp')
+    # 獲取回覆內容
+    answer = response.choices[0].message.content.strip()
+
+    # 使用正則表達式替換所有的粗體和三級標題
+    answer = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', answer)  # 替換粗體
+    answer = re.sub(r'### (.*?)\n', r'<h3>\1</h3>\n', answer)  # 替換三級標題
+
+    # 判斷 '-' 是否在數字之間，若是則替換為 '~'
+    answer = re.sub(r'(?<=\d)-(?=\d)', '~', answer)  # 將數字之間的 '-' 替換為 '~'
+
+    # 將文字行最前面的 '-' 替換為 '●'，表示項目符號
+    answer = re.sub(r'(?m)^-\s*', '● ', answer)  # 使用多行模式，匹配行首的 '-'
+
+    # 替換其他標點符號
+    answer = answer.replace('。', '。<br>').replace('：', '：<br>')
+
     return answer
 
 
