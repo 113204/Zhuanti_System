@@ -127,8 +127,8 @@
                 <!-- Buttons to switch charts -->
                 <div class="button-container">
                     <button onclick="showChart('comboChartContainer')">臥推次數與時長分析圖</button>
-                    <button onclick="showChart('lineChartContainer')">平均臥推次數分析圖</button>
-                    <button onclick="showChart('pieChartContainer')">左右手錯誤率分析圖</button>
+                    <button onclick="showChart('lineChartContainer')">平均臥推時長分析圖</button>
+<!--                    <button onclick="showChart('pieChartContainer')">左右手錯誤率分析圖</button>-->
                 </div>
 
                 <!-- Charts -->
@@ -202,8 +202,8 @@
                 data: {
                     labels: dates,
                     datasets: [{
-                        label: '臥推次數',
-                        data: counts,
+                        label: '平均臥推時長(秒)',
+                        data: sportTimes.map((sportTime, index) => sportTime / counts[index]),
                         fill: false,
                         borderColor: 'rgba(75, 192, 192, 1)',
                         tension: 0.1
