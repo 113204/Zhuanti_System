@@ -207,14 +207,14 @@
             <div class="modal-body">
                 <form id="record-form" action="{% url 'addrecord' %}" method="post">
                     {% csrf_token %}
-                    <div class="mb-3">
-                        <label for="left_errors" class="form-label">左側錯誤次數</label>
-                        <input type="number" class="form-control" id="left_errors" value="0" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="right_errors" class="form-label">右側錯誤次數</label>
-                        <input type="number" class="form-control" id="right_errors" value="0" required>
-                    </div>
+<!--                    <div class="mb-3">-->
+<!--                        <label for="left_errors" class="form-label">左側錯誤次數</label>-->
+<!--                        <input type="number" class="form-control" id="left_errors" value="0" required>-->
+<!--                    </div>-->
+<!--                    <div class="mb-3">-->
+<!--                        <label for="right_errors" class="form-label">右側錯誤次數</label>-->
+<!--                        <input type="number" class="form-control" id="right_errors" value="0" required>-->
+<!--                    </div>-->
                     <div class="mb-3">
                         <label for="sport_time" class="form-label">運動時間</label>
                         <input type="text" class="form-control" id="sport_time" required>
@@ -245,6 +245,9 @@
             $.get('/stop_camera/', function (data) {
                 alert(data.status);  // 顯示停止消息
                 $('#camera-feed').attr('src', '');  // 清空攝像頭畫面
+
+                // 顯示計數器值
+                $('#counter-display').text(data.counter);  // 確保有一個元素顯示計數器
             });
         });
 

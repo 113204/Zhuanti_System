@@ -16,6 +16,12 @@ def addrecord(request):
         # 轉換日期時間格式
         current_date = datetime.now().strftime("%Y-%m-%dT%H:%M:%S")  # ISO 8601 格式
 
+        # 檢查並替換 `None` 為 0
+        count = count if count is not None else 0
+        left_errors = left_errors if left_errors is not None else 0
+        right_errors = right_errors if right_errors is not None else 0
+        sport_time = sport_time if sport_time is not None else 0
+
         data = {
             'user_email': user_email,
             'count': count,
